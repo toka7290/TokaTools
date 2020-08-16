@@ -1,0 +1,23 @@
+{
+  "name": "とかさんのBlockGenelator",
+  "short_name": "BlockGenelator",
+  "description": "Minecraft Bedrock Edition 向けのアドオン作成補助ツールです。block jsonを簡単に作ることができます。",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "https://toka7290.github.io/TokaBlockGenelator/img/icon_256.png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "https://toka7290.github.io/TokaBlockGenelator/img/icon_512.png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "https://toka7290.github.io/TokaBlockGenelator/img/icon_2000.png",
+      "sizes": "2000x2000"
+    }
+  ],
+  "start_url": "/TokaBlockGenelator/index.html",
+  "theme_color": "#60ad5e",
+  "background_color": "#e8f5e9"
+} 
