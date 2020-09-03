@@ -5,16 +5,16 @@
   "display": "standalone",
   "icons": [
     {
-      "src": "https://toka7290.github.io/TokaItemGenelator/img/icon_256.png",
+      "src": "https://toka7290.github.io/TokaTools/TokaItemGenelator/img/icon_256.png",
       "sizes": "256x256",
       "purpose": "any maskable"
     },
     {
-      "src": "https://toka7290.github.io/TokaItemGenelator/img/icon_512.png",
+      "src": "https://toka7290.github.io/TokaTools/TokaItemGenelator/img/icon_512.png",
       "sizes": "512x512"
     },
     {
-      "src": "https://toka7290.github.io/TokaItemGenelator/img/icon_2000.png",
+      "src": "https://toka7290.github.io/TokaTools/TokaItemGenelator/img/icon_2000.png",
       "sizes": "2000x2000"
     }
   ],
