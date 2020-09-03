@@ -3,6 +3,10 @@ $(function(){
     var isChanged = false;
     var format_version = "1.16.0";
     var is_separator_drag = false;
+    var is_components_food_enable = false;
+    var is_components_seed_enable = false;
+    var is_components_camera_enable = false;
+    var help_page_num = 0;
     onChangedJSON();
     // ページ離脱時に警告表示
     $(window).bind("beforeunload", function() {
@@ -57,6 +61,14 @@ $(function(){
     $("#input_file").on("change",function(){
         importFile();
     });
+    // ヘルプを表示
+    $("#show_help").on("click",function(){
+        $("#page_help").fadeIn("fast");
+        toggle_help();
+    });
+    $("#page_help").on("click",function(){
+        toggle_help();
+    });
     // ファイルドラッグ&ドロップ
     $(window).on("dragover",function(event){
         event.preventDefault();
@@ -87,17 +99,21 @@ $(function(){
         importFile();
     });
     // プレビュー表示切替
-    $("p#show_preview").on("click",function(){
+    $("div#show_preview").on("click",function(){
         $("div.preview").slideToggle();
-        if($("p#show_preview").attr("class")=="active"){
-            $("p#show_preview").removeClass('active');
+        if($("div#show_preview").attr("class")=="active"){
+            $("div#show_preview").removeClass('active');
         }else{
-            $("p#show_preview").addClass('active');
+            $("div#show_preview").addClass('active');
         }
     });
     // ウィンドウワイズ変更時にcss削除
     $(window).resize(function(){
         $("div.preview").removeAttr("style",'');
+        $("div.editor").removeAttr("style",'');
+        $("div.data_check").removeAttr("style",'');
+        help_page_num = 5;
+        toggle_help();
     });
     // about開く
     $("p#open_about").on("click",function(){
@@ -149,66 +165,137 @@ $(function(){
     $('#format_version').on("change",function(){
         format_version = $('#format_version').val();
     });
-    //Food Effects tab変更
-    $(document).on("click",".components_food_effects_controls_tab li",function(){
-        selectedindex = $(".components_food_effects_controls_tab li").index(this);
-        $(".components_food_effects_controls_tab li").removeClass('selected_tab');
-        $(".components_food_effects_controls_tab li").eq(selectedindex).addClass('selected_tab');
-        $(".components_food_effects_contents > div").removeClass('selected_tab_content');
-        $(".components_food_effects_contents > div").eq(selectedindex).addClass('selected_tab_content');
+    // //Food Effects tab変更
+    // $(document).on("click",".components_food_effects_controls_tab li",function(){
+    //     selectedindex = $(".components_food_effects_controls_tab li").index(this);
+    //     $(".components_food_effects_controls_tab li").removeClass('selected_tab');
+    //     $(".components_food_effects_controls_tab li").eq(selectedindex).addClass('selected_tab');
+    //     $(".components_food_effects_contents > div").removeClass('selected_tab_content');
+    //     $(".components_food_effects_contents > div").eq(selectedindex).addClass('selected_tab_content');
+    // });
+    // // Food Effects tab削除
+    // $(document).on("click",".components_food_effects_controls_tab li span.delete_tab",function(event){
+    //     selectedindex = $(this).parent().index();
+    //     if($(".components_food_effects_controls_tab li").eq(selectedindex).hasClass('selected_tab')){
+    //         $(".components_food_effects_controls_tab li").eq(selectedindex-1).addClass('selected_tab');
+    //         $(".components_food_effects_contents > div").eq(selectedindex-1).addClass('selected_tab_content');
+    //     }
+    //     $(this).parent().remove();
+    //     $(".components_food_effects_contents > div").eq(selectedindex).remove();
+    //     for(i=0;i<$(".components_food_effects_controls_tab li").length;i++){
+    //         $(".components_food_effects_controls_tab li").eq(i).html(i+'<span class="delete_tab">×</span>');
+    //     }
+    //     if($(".components_food_effects_controls_tab li").length<=1){
+    //         $(".components_food_effects_controls_addtab").show();
+    //     }
+    //     onChangedJSON();
+    //     event.stopPropagation();
+    // });
+    // //Food Effects tab追加
+    // $(".components_food_effects_controls_addtab").on("click",function(){
+    //     components_food_effects_addtab();
+    //     onChangedJSON();
+    // });
+    //tab変更
+    $(document).on("click",".tab_controls_bar_tab li",function(){
+        if(
+            (is_components_food_enable&&$(this).parents('.tab_controls').hasClass("components_food_effects"))
+        ){
+            selectedindex = $(this).index();
+            controls_tab = $(this).parent();
+            controls_tabs = controls_tab.children("li");
+            controls_tabs.removeClass('selected_tab');
+            controls_tabs.eq(selectedindex).addClass('selected_tab');
+            tab_content = controls_tab.parents('.tab_controls').next().children("div");
+            tab_content.removeClass('selected_tab_content');
+            tab_content.eq(selectedindex).addClass('selected_tab_content');
+        }
+        
     });
-    // Food Effects tab削除
-    $(document).on("click",".components_food_effects_controls_tab li span.delete_tab",function(event){
-        selectedindex = $(this).parent().index();
-        if($(".components_food_effects_controls_tab li").eq(selectedindex).hasClass('selected_tab')){
-            $(".components_food_effects_controls_tab li").eq(selectedindex-1).addClass('selected_tab');
-            $(".components_food_effects_contents > div").eq(selectedindex-1).addClass('selected_tab_content');
+    //tab削除
+    $(document).on("click",".tab_controls_bar_tab li span.delete_tab",function(event){
+        if(
+            (is_components_food_enable&&$(this).parents('.tab_controls').hasClass("components_food_effects"))
+        ){
+            selected_tab = $(this).parent();
+            controls_tab = selected_tab.parent();
+            controls_tabs = controls_tab.children("li");
+            selectedindex = selected_tab.index();
+            tab_content_list = controls_tab.parents('.tab_controls').next().children("div");
+            selected_tab.hide(
+                150,
+                function(){
+                    tab_content_list.eq(selectedindex).remove();
+                    if(selected_tab.hasClass('selected_tab')){
+                        if(selectedindex-1<0) selectedindex=2;
+                        controls_tabs.eq(selectedindex-1).addClass('selected_tab');
+                        tab_content_list.eq(selectedindex-1).addClass('selected_tab_content');
+                    }
+                    selected_tab.remove();
+                    controls_tabs = controls_tab.children("li");
+                    for(i=0;i<controls_tabs.length;i++){
+                        controls_tabs.eq(i).html(i+'<span class="delete_tab">×</span>');
+                    }
+                    onChangedJSON();
+                }
+            );
         }
-        $(this).parent().remove();
-        $(".components_food_effects_contents > div").eq(selectedindex).remove();
-        for(i=0;i<$(".components_food_effects_controls_tab li").length;i++){
-            $(".components_food_effects_controls_tab li").eq(i).html(i+'<span class="delete_tab">×</span>');
-        }
-        if($(".components_food_effects_controls_tab li").length<=1){
-            $(".components_food_effects_controls_addtab").show();
-        }
-        onChangedJSON();
         event.stopPropagation();
     });
-    //Food Effects tab追加
-    $(".components_food_effects_controls_addtab").on("click",function(){
-        components_food_effects_addtab();
+    //tab追加
+    $(".tab_controls_addtab").on("click",function(){
+        if(
+            (is_components_food_enable&&$(this).hasClass("components_food_effects"))
+        ){
+            add_tab($(this).prev());
+        }
         onChangedJSON();
+
     });
     //Remove effect追加
     $("#components_food_remove_effect_add").on("click",function(){
-        // if(is_metadata_enable){
-            add_author($("#components_food_remove_effect").val());
-        // }
+        add_author($("#components_food_remove_effect").val());
         $("#components_food_remove_effect").val("");
         onChangedJSON();
     });
     //Remove effect削除
     $(document).on("click",".components_food_remove_effect_delete",function(){
-        // if(is_metadata_enable){
-            $(this).parent().remove();
-        // }
-        onChangedJSON();
+        remove_effect = $(this).parent();
+        remove_effect.hide(
+            150,
+            function (){
+                remove_effect.remove();
+                onChangedJSON();
+            }
+        );
     });
 
-    // Food Effects タブ追加
-    function components_food_effects_addtab(){
-        num = $(".components_food_effects_controls_tab li").length;
+    // // Food Effects タブ追加
+    // function components_food_effects_addtab(){
+    //     num = $(".components_food_effects_controls_tab li").length;
+    //     addtab = '<li>'+num+'<span class="delete_tab">×</span></li>';
+    //     $(".components_food_effects_controls_tab").append(addtab);
+    //     content = $(".components_food_effects_contents > div:first-child").clone();
+    //     content.removeClass('selected_tab_content');
+    //     $(".components_food_effects_contents").append(content);
+    // }
+    //タブ追加
+    function add_tab(controls_tab){
+        num = controls_tab.children('li').length;
         addtab = '<li>'+num+'<span class="delete_tab">×</span></li>';
-        $(".components_food_effects_controls_tab").append(addtab);
-        content = $(".components_food_effects_contents > div:first-child").clone();
+        controls_tab.append(addtab)
+        controls_tab.children('li:last-child').hide().show(150);
+        tab_content_list = controls_tab.parents('.tab_controls').next();
+        content = tab_content_list.children("div:first-child").clone();
         content.removeClass('selected_tab_content');
-        $(".components_food_effects_contents").append(content);
+        tab_content_list.append(content);
     }
     // Remove effect 追加
     function add_author(name){
-        author_list_child = '<div><span class="name">'+name+'</span><span class="components_food_remove_effect_delete">×</span></div>';
-        $(".components_food_remove_effect_list").append(author_list_child);
+        remove_effect_list = $(".components_food_remove_effect_list");
+        remove_effect_list_child = '<div><span class="name">'+name+'</span><span class="components_food_remove_effect_delete">×</span></div>';
+        remove_effect_list.append(remove_effect_list_child);
+        remove_effect_list.children('div:last-child').hide().show(150);
     }
     // インポート処理
     function importFile(){
@@ -224,11 +311,41 @@ $(function(){
             console.error("error:"+e);
         }
     }
+    // ヘルプ切換
+    function toggle_help(){
+        switch(help_page_num){
+            default:
+            case 0:
+                $("#help_content_1").fadeIn("fast");
+                help_page_num++;
+                return;
+            case 1:
+                $("#help_content_1").fadeOut("fast");
+                $("#help_content_2").slideToggle("fast");
+                help_page_num++;
+                return;
+            case 2:
+                $("#help_content_2").slideToggle("fast");
+                $("#help_content_3").fadeIn("fast");
+                help_page_num++;
+                return;
+            case 3:
+                $("#help_content_3").fadeOut("fast");
+                $("#page_help").hide();
+                help_page_num = 0;
+                return;
+            case 5:
+                $("#help_content_1").hide();
+                $("#help_content_2").hide();
+                $("#help_content_3").hide();
+                $("#page_help").hide();
+                help_page_num = 0;
+                return;
+        }
+    }
     // 更新処理
     function onChangedJSON(){
-        onChangedflammable();
-        onChangedColor();
-        onChangedItemLightEmission();
+        changed_checkbox();
 
         checkIssue();
         json_code = exportJSON();
@@ -238,23 +355,36 @@ $(function(){
         $("textarea#code_buffer").val(json_code);
         Prism.highlightAll();
     }
-    // 燃焼コンポーネント変更
-    function onChangedflammable() {
-        if($('#components_flame_odds').val()!="0"){
-            $("#components_burn_odds").prop('disabled', false);
-            $("#components_burn_odds").parent().removeClass('disabled');
+    // チェックボックス変更
+    function changed_checkbox(){
+        is_components_food_enable = $('#components_food_enable').is(':checked');
+        is_components_seed_enable = $('#components_seed_enable').is(':checked');
+        is_components_camera_enable = $('#components_camera_enable').is(':checked');
+        if(is_components_food_enable){
+            $("div.components_food_list").removeClass('disabled');
+            $('div.components_food_list input').prop('disabled', false);
+            $('div.components_food_list select').prop('disabled', false);
+            $('div.components_food_list .tab_controls_bar').removeClass('disabled');
         }else{
-            $("#components_burn_odds").prop('disabled', true);
-            $("#components_burn_odds").parent().addClass('disabled');
+            $("div.components_food_list").addClass('disabled');
+            $('div.components_food_list input').prop('disabled', true);
+            $('div.components_food_list select').prop('disabled', true);
+            $('div.components_food_list .tab_controls_bar').addClass('disabled');
         }
-    }
-    // 色変更
-    function onChangedColor(){
-        $("#components_map_color").val($("#components_map_color_pick").val());
-    }
-    // 発光量変更
-    function onChangedItemLightEmission() {
-        $("#components_Item_light_emission_eq").text(Math.round(parseFloat($('#components_Item_light_emission').val())*15),);
+        if(is_components_seed_enable){
+            $("div.components_seed_list").removeClass('disabled');
+            $('div.components_seed_list input').prop('disabled', false);
+        }else{
+            $("div.components_seed_list").addClass('disabled');
+            $('div.components_seed_list input').prop('disabled', true);
+        }
+        if(is_components_camera_enable){
+            $("div.components_camera_list").removeClass('disabled');
+            $('div.components_camera_list input').prop('disabled', false);
+        }else{
+            $("div.components_camera_list").addClass('disabled');
+            $('div.components_camera_list input').prop('disabled', true);
+        }
     }
     // イシューチェック
     function checkIssue(){
@@ -278,19 +408,18 @@ $(function(){
         error_num = 0;
 
         Item_ID = $('#description_item_name').val();
-        ID = Item_ID.split(/:/);
+        Item_ID_split = Item_ID.split(/:/);
         if(Item_ID==""){
-            //ブロックIDが空です
-            addIssue('error',"[Description:identifier] ブロックIDが空です。\"名前空間:ブロックID\"を入力してください。");
+            //アイテムIDが空です
+            addIssue('error',"[Description:identifier] アイテムIDが空です。アイテムIDを入力してください。アイテムIDは\"名前空間:アイテムID\"を入力してください。");
             error_num++;
         }else if(Item_ID.indexOf('\:')<0){
-
-            //ブロックIDが:で区切られていません
-            addIssue('error',"[Description:identifier] ブロックIDが \":\" で区切られていません。\"名前空間:ブロックID\"の形式になっている必要があります。");
+            //アイテムIDが:で区切られていません
+            addIssue('error',"[Description:identifier] アイテムIDが \":\" で区切られていません。\"名前空間:アイテムID\"の形式になっている必要があります。");
             error_num++;
-        }else if(ID[1] == ""){
-            //ブロックIDがありません
-            addIssue('error',"[Description:identifier] ブロックIDがありません。\"名前空間:ブロックID\"を入力してください。");
+        }else if(Item_ID_split[1] == ""){
+            //アイテムIDがありません
+            addIssue('error',"[Description:identifier] アイテムIDがありません。\"名前空間:アイテムID\"を入力してください。");
             error_num++;
         }
         return error_num;
@@ -430,56 +559,78 @@ $(function(){
 
         components = new Object();
 
-        components["minecraft:foil"] = $('#components_foil').is(':checked');
-        components["minecraft:hand_equipped"] = $('#components_hand_equipped').is(':checked');
+        if($('#components_foil').is(':checked'))components["minecraft:foil"] = $('#components_foil').is(':checked');
+        if($('#components_hand_equipped').is(':checked'))components["minecraft:hand_equipped"] = $('#components_hand_equipped').is(':checked');
         components["minecraft:max_damage"] = parseInt($('#components_max_damage').val(), 10);
-        components["minecraft:block"] = $('#components_block').val();
+        if($('#components_block').val()!="")components["minecraft:block"] = $('#components_block').val();
         components["minecraft:max_stack_size"] = parseInt($('#components_max_stack_size').val(), 10);
-        components["minecraft:stacked_by_data"] = $('#components_stacked_by_data').is(':checked');
+        if($('#components_stacked_by_data').is(':checked')!="")components["minecraft:stacked_by_data"] = $('#components_stacked_by_data').is(':checked');
         components["minecraft:use_duration"] = parseInt($('#components_use_duration').val(), 10);
 
-        food = new Object();
-        food.nutrition = parseInt($('#components_food_nutrition').val(), 10);
-        food.food_can_always_eat = $('#components_food_can_always_eat').is(':checked');
-        food.using_converts_to = $('#components_food_using_converts_to').val();
-
-        food.effects = new Array();
-        for(i=0;i<$(".components_food_effects_controls_tab li").length;i++){
-            child_num = i + 1;
-            food.effects[i] = new Object();
-            food.effects[i].name = $('#components_food_effects_name').val();
-            food.effects[i].chance = parseFloat($('#components_food_effects_chance').val());
-            food.effects[i].duration = parseInt($('#components_food_effects_duration').val(), 10);
-            food.effects[i].amplifier = parseInt($('#components_food_effects_amplifier').val(), 10);
+        if(is_components_food_enable){
+            food = new Object();
+            food.nutrition = Number($('#components_food_nutrition').val());
+            if($('#components_food_can_always_eat').is(':checked')){
+                food.food_can_always_eat = $('#components_food_can_always_eat').is(':checked');
+            }
+            if($('#components_food_using_converts_to').val()!=""){
+                food.using_converts_to = $('#components_food_using_converts_to').val();
+            }
+            food.saturation_modifier = $('#components_food_saturation_modifier').val();
+            tab_content = $('div.components_food_effects.tab_content_list > div:first-child');
+            if(
+                tab_content.find('#components_food_effects_name').val()!=""&&
+                Number(tab_content.find('#components_food_effects_chance').val())!=0&&
+                Number(tab_content.find('#components_food_effects_duration').val()!=0&&
+                Number(tab_content.find('#components_food_effects_amplifier').val())!=0)
+            ){
+                food.effects = new Array();
+                for(i=0;i<$(".components_food_effects.tab_controls_bar_tab li").length;i++){
+                    child_num = i + 1;
+                    food.effects[i] = new Object();
+                    tab_content = $('div.components_food_effects.tab_content_list > div:nth-child('+child_num+')');
+                    food.effects[i].name = tab_content.find('#components_food_effects_name').val();
+                    food.effects[i].chance = Number(tab_content.find('#components_food_effects_chance').val());
+                    food.effects[i].duration = Number(tab_content.find('#components_food_effects_duration').val());
+                    food.effects[i].amplifier = Number(tab_content.find('#components_food_effects_amplifier').val());
+                }
+            }
+            if($("div.components_food_remove_effect_list > div").length>0){
+                food.remove_effect = new Array();
+                for(i=1;i<=$("div.components_food_remove_effect_list > div").length;i++){
+                    food.remove_effect.push($('div.components_food_remove_effect_list > div:nth-child('+i+') > span.name').text());
+                }
+            }
+            if($('#components_food_is_meat').is(':checked')){
+                food.is_meat = $('#components_food_is_meat').is(':checked');
+            }
+            if($('#components_food_on_use_action').val()!=""){
+                food.on_use_action = $('#components_food_on_use_action').val();
+                food.on_use_range = "replace_on_use_range";
+            }
+            if($('#components_food_cooldown_type').val()!=""){
+                food.cooldown_type = $('#components_food_cooldown_type').val();
+                food.cooldown_time = Number($('#components_food_cooldown_time').val());
+            }
+            components["minecraft:food"] = food;
         }
 
-        food.remove_effect = new Array();
-        for(i=1;i<=$("div.components_food_remove_effect_list > div").length;i++){
-            food.remove_effect.push($('div.components_food_remove_effect_list > div:nth-child('+i+') > span.name').text());
+        if(is_components_seed_enable){
+            seed = new Object();
+            seed.crop_result = $('#components_seed_crop_result').val();
+            seed.plant_at = $('#components_seed_plant_at').val();
+            components["minecraft:seed"] = seed;
         }
 
-        food.is_meat = $('#components_food_is_meat').is(':checked');
-        food.on_use_action = $('#components_food_on_use_action').val();
-        
-        food.on_use_range = "replace_on_use_range";
-
-        food.cooldown_type = $('#components_food_cooldown_type').val();
-        food.cooldown_time = parseInt($('#components_food_cooldown_time').val(), 10);
-
-        components["minecraft:food"] = food;
-
-        seed = new Object();
-        seed.crop_result = $('#components_seed_crop_result').val();
-        seed.plant_at = $('#components_seed_plant_at').val();
-        components["minecraft:seed"] = seed;
-
-        camera = new Object();
-        camera.black_bars_duration = parseFloat($('#components_camera_black_bars_duration').val());
-        camera.black_bars_screen_ratio = parseFloat($('#components_camera_black_bars_screen_ratio').val());
-        camera.shutter_duration = parseFloat($('#components_camera_shutter_duration').val());
-        camera.picture_duration = parseFloat($('#components_camera_picture_duration').val());
-        camera.slide_away_duration = parseFloat($('#components_camera_slide_away_duration').val());
-        components["minecraft:camera"] = camera;
+        if(is_components_camera_enable){
+            camera = new Object();
+            camera.black_bars_duration = parseFloat($('#components_camera_black_bars_duration').val());
+            camera.black_bars_screen_ratio = parseFloat($('#components_camera_black_bars_screen_ratio').val());
+            camera.shutter_duration = parseFloat($('#components_camera_shutter_duration').val());
+            camera.picture_duration = parseFloat($('#components_camera_picture_duration').val());
+            camera.slide_away_duration = parseFloat($('#components_camera_slide_away_duration').val());
+            components["minecraft:camera"] = camera;
+        }
 
         json_raw["minecraft:item"]["components"] = components;
         

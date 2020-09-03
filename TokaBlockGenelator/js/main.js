@@ -3,6 +3,7 @@ $(function(){
     var isChanged = false;
     var format_version = "1.16.0";
     var is_separator_drag = false;
+    var help_page_num = 0;
     onChangedJSON();
     // ページ離脱時に警告表示
     $(window).bind("beforeunload", function() {
@@ -46,7 +47,7 @@ $(function(){
     $('#page_share').on("click",function(){
         const data = {
             title: "とかさんのBlockGenelator",
-            text: "アドオン作成補助ツールblock jsonを簡単に作成・編集",
+            text: "とかさんのBlockGenelator -block jsonを簡単に作成・編集-",
             url: "https://toka7290.github.io/TokaBlockGenelator/"
         }
         if (navigator.share) {
@@ -56,6 +57,14 @@ $(function(){
     // 外部インポート
     $("#input_file").on("change",function(){
         importFile();
+    });
+    // ヘルプを表示
+    $("#show_help").on("click",function(){
+        $("#page_help").fadeIn("fast");
+        toggle_help();
+    });
+    $("#page_help").on("click",function(){
+        toggle_help();
     });
     // ファイルドラッグ&ドロップ
     $(window).on("dragover",function(event){
@@ -87,17 +96,21 @@ $(function(){
         importFile();
     });
     // プレビュー表示切替
-    $("p#show_preview").on("click",function(){
+    $("div#show_preview").on("click",function(){
         $("div.preview").slideToggle();
-        if($("p#show_preview").attr("class")=="active"){
-            $("p#show_preview").removeClass('active');
+        if($("div#show_preview").attr("class")=="active"){
+            $("div#show_preview").removeClass('active');
         }else{
-            $("p#show_preview").addClass('active');
+            $("div#show_preview").addClass('active');
         }
     });
     // ウィンドウワイズ変更時にcss削除
     $(window).resize(function(){
         $("div.preview").removeAttr("style",'');
+        $("div.editor").removeAttr("style",'');
+        $("div.data_check").removeAttr("style",'');
+        help_page_num = 5;
+        toggle_help();
     });
     // about開く
     $("p#open_about").on("click",function(){
@@ -164,6 +177,38 @@ $(function(){
             console.error("error:"+e);
         }
     }
+    // ヘルプ切換
+    function toggle_help(){
+        switch(help_page_num){
+            default:
+            case 0:
+                $("#help_content_1").fadeIn("fast");
+                help_page_num++;
+                return;
+            case 1:
+                $("#help_content_1").fadeOut("fast");
+                $("#help_content_2").slideToggle("fast");
+                help_page_num++;
+                return;
+            case 2:
+                $("#help_content_2").slideToggle("fast");
+                $("#help_content_3").fadeIn("fast");
+                help_page_num++;
+                return;
+            case 3:
+                $("#help_content_3").fadeOut("fast");
+                $("#page_help").hide();
+                help_page_num = 0;
+                return;
+            case 5:
+                $("#help_content_1").hide();
+                $("#help_content_2").hide();
+                $("#help_content_3").hide();
+                $("#page_help").hide();
+                help_page_num = 0;
+                return;
+        }
+    }
     // 更新処理
     function onChangedJSON(){
         onChangedflammable();
@@ -218,17 +263,17 @@ $(function(){
         error_num = 0;
 
         block_ID = $('#description_block_name').val();
-        ID = block_ID.split(/:/);
+        block_ID_split = block_ID.split(/:/);
         if(block_ID==""){
             //ブロックIDが空です
-            addIssue('error',"[Description:identifier] ブロックIDが空です。\"名前空間:ブロックID\"を入力してください。");
+            addIssue('error',"[Description:identifier] ブロックIDが空です。ブロックIDを入力してください。ブロックIDは\"名前空間:ブロックID\"を入力してください。");
             error_num++;
         }else if(block_ID.indexOf('\:')<0){
 
             //ブロックIDが:で区切られていません
             addIssue('error',"[Description:identifier] ブロックIDが \":\" で区切られていません。\"名前空間:ブロックID\"の形式になっている必要があります。");
             error_num++;
-        }else if(ID[1] == ""){
+        }else if(block_ID_split[1] == ""){
             //ブロックIDがありません
             addIssue('error',"[Description:identifier] ブロックIDがありません。\"名前空間:ブロックID\"を入力してください。");
             error_num++;

@@ -40,8 +40,11 @@ select:focus{
 input:disabled,
 textarea:disabled,
 select:disabled{
+    color: var(--color_disabled_text);
     border: 1px solid var(--color_input_disabled);
     border-radius: 4px;
+    transition-duration: .5s;
+    transition-property: color;
 }
 input:-webkit-autofill,
 input:-internal-autofill-selected{
@@ -53,10 +56,6 @@ input[type="text"]{
 }
 input[type="number"]{
     width: 3em;
-    height: 1.5rem;
-}
-input[type="url"]{
-    width: 50%;
     height: 1.5rem;
 }
 input[type="checkbox"]{
@@ -157,6 +156,7 @@ div.header_menu{
 div.import_file{
     display: inline-block;
     padding: 0.5rem;
+    position: relative;
 }
 div.import_file label{
     margin: 0;
@@ -164,7 +164,7 @@ div.import_file label{
 div.import_file input{
     display: none;
 }
-div.header_menu p{
+div.header_menu>*{
     color: var(--color_header_text);
     display: inline-block;
     margin: 0;
@@ -173,15 +173,12 @@ div.header_menu p{
     transition-property: background-color;
 }
 div.header_menu p:hover,
-div.import_file label:hover{
+div.header_menu div:hover{
     cursor: pointer;
     background-color: var(--color_header_hover);
 }
-div.header_menu p.active{
-    background-color: var(--color_header_preview);
-}
-div.header_menu p.active:hover{
-    background-color: var(--color_header_preview_hover);
+div#show_preview{
+    position: relative;
 }
 div.header_menu_alt{
     display: inline-flex;
@@ -248,8 +245,97 @@ ul.more_info a{
 ul.more_info a:hover{
     background-color: var(--color_header_2_hover);
 }
+div#page_help{
+    display: none;
+    position: fixed;
+    top: 0;
+    z-index: 20;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+div.help_content{
+    display: none;
+    position: absolute;
+    z-index: 10;
+    margin: 1.5em 0;
+    padding: 7px 10px;
+    min-width: 12rem;
+    max-width: 15rem;
+    font-size: 16px;
+    background: var(--color-help_content);
+    text-align: center;
+    border: solid 3px var(--color-help_content_border);
+    border-radius: 1rem;
+}
+div.help_content.bottom{
+    position: relative;
+    align-self: center;
+    max-width: 100%;
+    margin: 1rem 1rem 0 1rem;
+}
+div.help_content.top::before{
+    content: "";
+    position: absolute;
+    top: -24px;
+    margin-left: -15px;
+    border: 12px solid transparent;
+    border-bottom: 12px solid var(--color-help_content);
+    z-index: 12;
+}
+div.help_content.top:after {
+    content: "";
+    position: absolute;
+    top: -30px;
+    margin-left: -17px;
+    border: 14px solid transparent;
+    border-bottom: 14px solid var(--color-help_content_border);
+    z-index: 11;
+}
+div.help_content.bottom:before {
+    content: "";
+    position: absolute;
+    bottom: -24px;
+    left: 50%;
+    margin-left: -15px;
+    border: 12px solid transparent;
+    border-top: 12px solid var(--color-help_content);
+    z-index: 12;
+}
+div.help_content.bottom:after {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    margin-left: -17px;
+    border: 14px solid transparent;
+    border-top: 14px solid var(--color-help_content_border);
+    z-index: 11;
+}
+div.help_content#help_content_1{
+    left: -3rem;
+}
+div.help_content#help_content_1::before{
+    right: 8rem;
+}
+div.help_content#help_content_1:after{
+    right: 7.9rem;
+}
+div.help_content#help_content_3{
+    left: -6rem;
+}
+div.help_content#help_content_3::before{
+    right: 5rem;
+}
+div.help_content#help_content_3:after{
+    right: 4.9rem;
+}
+div.help_content p{
+    color: var(--color-help_content_text);
+}
 div.header_menu_alt img,
-div.about_external_link img{
+div.about_external_link img,
+div#page_share img{
     width: 2rem;
 }
 div.page_about{
@@ -280,18 +366,21 @@ div.about_content{
 }
 div.about_content>img{
     width: 50vw;
+    max-width: 20rem;
 }
 div.about_external_link{
     display: block;
 }
-div.about_external_link a{
+div.about_external_link a,
+div#page_share{
     display: inline-block;
     line-height: 0;
     padding: 0.5rem;
     transition: 0.5s;
     border-radius: 1em;
 }
-div.about_external_link a:hover{
+div.about_external_link a:hover,
+div#page_share:hover{
     transition: 0.5s;
     background-color: var(--color_header_hover);
 }
@@ -332,6 +421,11 @@ fieldset div{
 }
 .disabled{
     color: var(--color_disabled_text);
+    transition-duration: 1s;
+    transition-property: color;
+}
+.disabled:hover{
+    cursor: auto;
 }
 div.data_check{
     /* データチェック */

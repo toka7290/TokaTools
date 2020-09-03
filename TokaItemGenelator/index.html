@@ -29,11 +29,6 @@
                 "applicationSubCategory": "Minecraft Item json Addon",
                 "image": "img/icon_2000.png",
                 "about": "Minecraft Bedrock Edition 向けのアドオン作成補助ツールです。Item jsonを簡単に作ることができます。",
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "5",
-                    "ratingCount": "8864"
-                },
                 "creator": {
                     "@type": "Person",
                     "name": "とかさん",
@@ -51,14 +46,15 @@
         <script>
             if ('serviceWorker' in navigator) {
                 window.addEventListener("load", function() {
-                    navigator.serviceWorker.register('/TokaItemGenelator/serviceworker.js', {scope: '/TokaItemGenelator/'})
-                    .then(function(reg) {
+                    navigator.serviceWorker.register('/TokaItemGenelator/serviceworker.js')
+                    .then(function(registration) {
                         // registration worked
                         registration.onupdatefound = function() {
                             registration.update();
                         }
                     }).catch(function(error) {
                         // registration failed
+                        console.error("serviceWorker failed");
                     });
                 });
             }
@@ -85,12 +81,22 @@
                 <img src="img/icon.webp" alt="" class="title_icon" onerror="this.src='img/icon_2000.png'">
                 <div class="title">
                     <h1>とかさんのItemGenelator</h1>
-                    <p>version:0.0.1</p>
+                    <p>version:0.1.0</p>
                 </div>
                 <div class="header_menu">
-                    <div class="import_file"><label for="input_file">Import</label><input type="file" name="input_file" id="input_file" accept=".json"></div>
-                    <p id="show_preview">Preview</p>
-                    <p id="page_share">share</p>
+                    <div class="import_file">
+                        <label for="input_file">Import</label><input type="file" name="input_file" id="input_file" accept=".json">
+                        <div class="help_content top" id="help_content_1">
+                            <p>すでファイルがある場合はデータをインポートします。</p>
+                        </div>
+                    </div>
+                    <div id="show_preview">
+                        <span>Preview</span>
+                        <div class="help_content top" id="help_content_3">
+                            <p>入力・編集したデータのjsonプレビュー閲覧とダウンロード・コピーをします。</p>
+                        </div>
+                    </div>
+                    <p id="show_help">help</p>
                     <p id="open_about">About</p>
                 </div>
                 <div class="header_menu_alt">
@@ -101,13 +107,15 @@
                     <div class="open_more_info">
                         <img src="img/more.svg" alt="">
                         <ul class="more_info">
-                            <li><a href="http://tokamcwin10.blog.jp/" target="_blank" title="とかさんのホームページ" rel="noopener"><img src="img/homepage.svg" alt=""><p>Homepage</p></a></li>
-                            <li><a href="https://twitter.com/toka7290" target="_blank" title="Twitter" rel="noopener"><img src="img/twitter.svg" alt=""><p>Twitter</p></a></li>
-                            <li><a href="https://github.com/toka7290/TokaItemGenelator" target="_blank" title="Github" rel="noopener"><img src="img/github.svg" alt=""><p>GitHub</p></a></li>
-                            <li><a href="http://tokamcwin10.blog.jp/archives/37132278.html" target="_blank" title="Item.jsonの解説ページに飛びます。" rel="noopener"><img src="img/help.svg" alt=""><p>Item Help</p></a></li>
+                            <li><a href="https://tokamcwin10.blog.jp/" target="_blank" title="とかさんのホームページ" rel="noopener noreferrer"><img src="img/homepage.svg" alt=""><p>Homepage</p></a></li>
+                            <li><a href="https://twitter.com/toka7290" target="_blank" title="Twitter" rel="noopener noreferrer"><img src="img/twitter.svg" alt=""><p>Twitter</p></a></li>
+                            <li><a href="https://github.com/toka7290/TokaItemGenelator" target="_blank" title="Github" rel="noopener noreferrer"><img src="img/github.svg" alt=""><p>GitHub</p></a></li>
+                            <li><a href="https://tokamcwin10.blog.jp/article-37836639" target="_blank" title="Item.jsonの解説ページに飛びます。" rel="noopener noreferrer"><img src="img/help.svg" alt=""><p>Item Help</p></a></li>
                         </ul>
                     </div>
                 </div>
+            </div>
+            <div id="page_help">
             </div>
             <div class="page_about">
                 <div class="close_about">
@@ -116,16 +124,21 @@
                 <div class="about_content">
                     <img src="img/icon.webp" alt="" onerror="this.src='img/icon_2000.png'">
                     <h2>とかさんのItemGenelator</h2>
-                    <p>version:0.0.1</p>
+                    <p>version:0.1.0</p>
+                        <div id="page_share"><img src="img/share.svg" alt=""></div>
                     <div class="about_external_link">
-                        <a href="http://tokamcwin10.blog.jp/" target="_blank" title="とかさんのホームページ" rel="noopener"><img src="img/homepage.svg" alt=""></a>
-                        <a href="https://twitter.com/toka7290" target="_blank" title="Twitter" rel="noopener"><img src="img/twitter.svg" alt=""></a>
-                        <a href="https://github.com/toka7290/TokaItemGenelator" target="_blank" title="Github" rel="noopener"><img src="img/github.svg" alt=""></a>
-                        <a href="http://tokamcwin10.blog.jp/archives/37132278.html" target="_blank" title="Item.jsonの解説ページに飛びます。" rel="noopener"><img src="img/help.svg" alt=""></a>
+                        <a href="https://tokamcwin10.blog.jp/" target="_blank" title="とかさんのホームページ" rel="noopener noreferrer"><img src="img/homepage.svg" alt=""></a>
+                        <a href="https://twitter.com/toka7290" target="_blank" title="Twitter" rel="noopener noreferrer"><img src="img/twitter.svg" alt=""></a>
+                        <a href="https://github.com/toka7290/TokaItemGenelator" target="_blank" title="Github" rel="noopener noreferrer"><img src="img/github.svg" alt=""></a>
+                        <a href="https://tokamcwin10.blog.jp/article-37836639" target="_blank" title="Item.jsonの解説ページに飛びます。" rel="noopener noreferrer"><img src="img/help.svg" alt=""></a>
                     </div>
                 </div>
             </div>
         </header>
+        <div class="help_content bottom" id="help_content_2">
+            <p>データを編集します</p>
+            <p>エラー等は下にある[問題]タブから見ることができます。</p>
+        </div>
         <div class="content">
             <div class="editor">
                 <form name="editor_main">
@@ -173,131 +186,137 @@
                             <input type="number" min="0" name="components_use_duration" id="components_use_duration" value="32" step="1">
                         </div>
                         <fieldset>
-                            <legend>食べ物</legend>
-                            <div title="">
-                                <label for="components_food_nutrition">回復量</label>
-                                <input type="number" min="0" name="components_food_nutrition" id="components_food_nutrition" value="1" step="1">
-                            </div>
-                            <div title="">
-                                <label for="components_food_can_always_eat">いつでも食べられる</label>
-                                <input type="checkbox" name="components_food_can_always_eat" id="components_food_can_always_eat">
-                            </div>
-                            <div title="">
-                                <label for="components_food_using_converts_to">変換するアイテム</label>
-                                <input type="text" name="components_food_using_converts_to" id="components_food_using_converts_to">
-                            </div>
-                            <div title="">
-                                <label for="components_food_saturation_modifier">隠し満腹度の回復量</label>
-                                <select name="components_food_saturation_modifier" id="components_food_saturation_modifier">
-                                    <option value="poor">poor</option>
-                                    <option value="low">low</option>
-                                    <option value="normal" selected>normal</option>
-                                    <option value="good">good</option>
-                                    <option value="high">high</option>
-                                    <option value="supernatural">supernatural</option>
-                                </select>
-                            </div>
-                            <div class="components_food_effects" title="">
-                                <div class="components_food_effects_controls">
-                                    <div class="components_food_effects_controls_bar">
-                                        <ul class="components_food_effects_controls_tab">
-                                            <li class="selected_tab">0<span class="delete_tab">×</span></li>
-                                        </ul>
-                                        <span class="components_food_effects_controls_addtab">+</span>
+                            <legend><label>食べ物<input type="checkbox" name="components_food" id="components_food_enable"></label></legend>
+                            <div class="components_food_list">
+                                <div title="">
+                                    <label for="components_food_nutrition">回復量</label>
+                                    <input type="number" min="0" name="components_food_nutrition" id="components_food_nutrition" value="1" step="1" disabled>
+                                </div>
+                                <div title="">
+                                    <label for="components_food_can_always_eat">いつでも食べられる</label>
+                                    <input type="checkbox" name="components_food_can_always_eat" id="components_food_can_always_eat" disabled>
+                                </div>
+                                <div title="">
+                                    <label for="components_food_using_converts_to">変換するアイテム</label>
+                                    <input type="text" name="components_food_using_converts_to" id="components_food_using_converts_to" disabled>
+                                </div>
+                                <div title="">
+                                    <label for="components_food_saturation_modifier">隠し満腹度の回復量</label>
+                                    <select name="components_food_saturation_modifier" id="components_food_saturation_modifier" disabled>
+                                        <option value="poor">poor</option>
+                                        <option value="low">low</option>
+                                        <option value="normal" selected>normal</option>
+                                        <option value="good">good</option>
+                                        <option value="high">high</option>
+                                        <option value="supernatural">supernatural</option>
+                                    </select>
+                                </div>
+                                <div class="components_food_effects tab_contents" title="">
+                                    <div class="components_food_effects tab_controls">
+                                        <div class="components_food_effects tab_controls_bar">
+                                            <ul class="components_food_effects tab_controls_bar_tab">
+                                                <li class="selected_tab">0<span class="delete_tab">×</span></li>
+                                            </ul>
+                                            <span class="components_food_effects tab_controls_addtab">+</span>
+                                        </div>
+                                    </div>
+                                    <div class="components_food_effects tab_content_list">
+                                        <div class="selected_tab_content">
+                                            <div title="">
+                                                <label for="components_food_effects_name">エフェクト名</label>
+                                                <input type="text" name="components_food_effects_name" id="components_food_effects_name" disabled>
+                                            </div>
+                                            <div title="">
+                                                <label for="components_food_effects_chance">確率</label>
+                                                <input type="number" min="0.0" max="1.0" name="components_food_effects_chance" id="components_food_effects_chance" value="1" step="0.01" disabled>
+                                            </div>
+                                            <div title="">
+                                                <label for="components_food_effects_duration">効果時間</label>
+                                                <input type="number" min="0" name="components_food_effects_duration" id="components_food_effects_duration" value="10" step="1" disabled>
+                                            </div>
+                                            <div title="">
+                                                <label for="components_food_effects_amplifier">効果レベル</label>
+                                                <input type="number" min="0" name="components_food_effects_amplifier" id="components_food_effects_amplifier" value="1" step="1" disabled>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="components_food_effects_contents">
-                                    <div class="selected_tab_content">
-                                        <div title="">
-                                            <label for="components_food_effects_name">エフェクト名</label>
-                                            <input type="text" name="components_food_effects_name" id="components_food_effects_name">
+                                <div title="">
+                                    <label for="components_food_remove_effect">削除するエフェクト</label>
+                                    <div class="components_food_remove_effects">
+                                        <div class="components_food_remove_effect_list">
                                         </div>
-                                        <div title="">
-                                            <label for="components_food_effects_chance">確率</label>
-                                            <input type="number" min="0.0" max="1.0" name="components_food_effects_chance" id="components_food_effects_chance" value="1" step="0.01">
-                                        </div>
-                                        <div title="">
-                                            <label for="components_food_effects_duration">効果時間</label>
-                                            <input type="number" min="0" name="components_food_effects_duration" id="components_food_effects_duration" value="10" step="1">
-                                        </div>
-                                        <div title="">
-                                            <label for="components_food_effects_amplifier">効果レベル</label>
-                                            <input type="number" min="0" name="components_food_effects_amplifier" id="components_food_effects_amplifier" value="1" step="1">
+                                        <div class="components_food_remove_effect_adder">
+                                            <input type="text" name="components_food_remove_effect" id="components_food_remove_effect" disabled>
+                                            <label for="components_food_remove_effect_add"><input type="button" value="Add" id="components_food_remove_effect_add" disabled></label>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div title="">
-                                <label for="components_food_remove_effect">削除するエフェクト</label>
-                                <div class="components_food_remove_effects">
-                                    <div class="components_food_remove_effect_list">
-                                    </div>
-                                    <div class="components_food_remove_effect_adder">
-                                        <input type="text" name="components_food_remove_effect" id="components_food_remove_effect">
-                                        <label for="components_food_remove_effect_add"><input type="button" value="Add" id="components_food_remove_effect_add"></label>
-                                    </div>
+                                <div title="">
+                                    <label for="components_food_is_meat">肉</label>
+                                    <input type="checkbox" name="components_food_is_meat" id="components_food_is_meat">
                                 </div>
-                            </div>
-                            <div title="">
-                                <label for="components_food_is_meat">肉</label>
-                                <input type="checkbox" name="components_food_is_meat" id="components_food_is_meat">
-                            </div>
-                            <div title="">
-                                <label for="components_food_on_use_action">起こすアクション</label>
-                                <input type="text" name="components_food_on_use_action" id="components_food_on_use_action">
-                            </div>
-                            <div title="">
-                                <label>
-                                    <span>アクションの有効範囲</span>
-                                    <span>x=</span>
-                                    <input type="number" min="0" name="" id="components_food_on_use_range_x" value="0">
-                                    <span>y=</span>
-                                    <input type="number" min="0" name="" id="components_food_on_use_range_y" value="0">
-                                    <span>z=</span>
-                                    <input type="number" min="0" name="" id="components_food_on_use_range_z" value="0">
-                                </label>
-                            </div>
-                            <div title="">
-                                <label for="components_food_cooldown_type">クールダウンのタイプ</label>
-                                <input type="text" name="components_food_cooldown_type" id="components_food_cooldown_type">
-                            </div>
-                            <div title="">
-                                <label for="components_food_cooldown_time">クールダウンの時間</label>
-                                <input type="number" min="0" max="1" name="components_food_cooldown_time" id="components_food_cooldown_time" value="0" step="1">
+                                <div title="">
+                                    <label for="components_food_on_use_action">起こすアクション</label>
+                                    <input type="text" name="components_food_on_use_action" id="components_food_on_use_action">
+                                </div>
+                                <div title="">
+                                    <label>
+                                        <span>アクションの有効範囲</span>
+                                        <span>x=</span>
+                                        <input type="number" min="0" name="" id="components_food_on_use_range_x" value="0" disabled>
+                                        <span>y=</span>
+                                        <input type="number" min="0" name="" id="components_food_on_use_range_y" value="0" disabled>
+                                        <span>z=</span>
+                                        <input type="number" min="0" name="" id="components_food_on_use_range_z" value="0" disabled>
+                                    </label>
+                                </div>
+                                <div title="">
+                                    <label for="components_food_cooldown_type">クールダウンのタイプ</label>
+                                    <input type="text" name="components_food_cooldown_type" id="components_food_cooldown_type" disabled>
+                                </div>
+                                <div title="">
+                                    <label for="components_food_cooldown_time">クールダウンの時間</label>
+                                    <input type="number" min="0" max="1" name="components_food_cooldown_time" id="components_food_cooldown_time" value="0" step="1" disabled>
+                                </div>
                             </div>
                         </fieldset>
                         <fieldset>
-                            <legend>種</legend>
-                            <div title="">
-                                <label for="components_seed_crop_result">クールダウンの時間</label>
-                                <input type="text" name="components_seed_crop_result" id="components_seed_crop_result">
-                            </div>
-                            <div title="">
-                                <label for="components_seed_plant_at">ブロックが置けるブロック</label>
-                                <input type="text" name="components_seed_plant_at" id="components_seed_plant_at">
+                            <legend><label>種<input type="checkbox" name="components_seed" id="components_seed_enable"></label></legend>
+                            <div class="components_seed_list">
+                                <div title="">
+                                    <label for="components_seed_crop_result">置くブロック</label>
+                                    <input type="text" name="components_seed_crop_result" id="components_seed_crop_result" disabled>
+                                </div>
+                                <div title="">
+                                    <label for="components_seed_plant_at">ブロックが置けるブロック</label>
+                                    <input type="text" name="components_seed_plant_at" id="components_seed_plant_at" disabled>
+                                </div>
                             </div>
                         </fieldset>
                         <fieldset>
-                            <legend>カメラ</legend>
-                            <div title="">
-                                <label for="components_camera_black_bars_duration">black_bars_duration</label>
-                                <input type="number" min="0.0" name="components_camera_black_bars_duration" id="components_camera_black_bars_duration" value="0.2" step="0.1">
-                            </div>
-                            <div title="">
-                                <label for="components_camera_black_bars_screen_ratio">black_bars_screen_ratio</label>
-                                <input type="number" min="0.0" name="components_camera_black_bars_screen_ratio" id="components_camera_black_bars_screen_ratio" value="0.08" step="0.01">
-                            </div>
-                            <div title="">
-                                <label for="components_camera_shutter_duration">shutter_duration</label>
-                                <input type="number" min="0.0" name="components_camera_shutter_duration" id="components_camera_shutter_duration" value="0.2" step="0.1">
-                            </div>
-                            <div title="">
-                                <label for="components_camera_picture_duration">picture_duration</label>
-                                <input type="number" min="0.0" name="components_camera_picture_duration" id="components_camera_picture_duration" value="1.0" step="0.1">
-                            </div>
-                            <div title="">
-                                <label for="components_camera_slide_away_duration">slide_away_duration</label>
-                                <input type="number" min="0.0" name="components_camera_slide_away_duration" id="components_camera_slide_away_duration" value="1.0" step="0.1">
+                            <legend><label>カメラ<input type="checkbox" name="components_camera" id="components_camera_enable"></label></legend>
+                            <div class="components_camera_list">
+                                <div title="">
+                                    <label for="components_camera_black_bars_duration">black_bars_duration</label>
+                                    <input type="number" min="0.0" name="components_camera_black_bars_duration" id="components_camera_black_bars_duration" value="0.2" step="0.1" disabled>
+                                </div>
+                                <div title="">
+                                    <label for="components_camera_black_bars_screen_ratio">black_bars_screen_ratio</label>
+                                    <input type="number" min="0.0" name="components_camera_black_bars_screen_ratio" id="components_camera_black_bars_screen_ratio" value="0.08" step="0.01" disabled>
+                                </div>
+                                <div title="">
+                                    <label for="components_camera_shutter_duration">shutter_duration</label>
+                                    <input type="number" min="0.0" name="components_camera_shutter_duration" id="components_camera_shutter_duration" value="0.2" step="0.1" disabled>
+                                </div>
+                                <div title="">
+                                    <label for="components_camera_picture_duration">picture_duration</label>
+                                    <input type="number" min="0.0" name="components_camera_picture_duration" id="components_camera_picture_duration" value="1.0" step="0.1" disabled>
+                                </div>
+                                <div title="">
+                                    <label for="components_camera_slide_away_duration">slide_away_duration</label>
+                                    <input type="number" min="0.0" name="components_camera_slide_away_duration" id="components_camera_slide_away_duration" value="1.0" step="0.1" disabled>
+                                </div>
                             </div>
                         </fieldset>
                     </fieldset>
@@ -313,7 +332,9 @@
                     <pre class="language-json">
                         <code class="language-json"></code>
                     </pre>
-                    <textarea name="code_buffer" id="code_buffer"></textarea>
+                    <label>
+                        <textarea name="code_buffer" id="code_buffer"></textarea>
+                    </label>
                 </div>
                 <div class="issue">
                     <div class="issue_contlrol_bar">

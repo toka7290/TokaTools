@@ -1,4 +1,4 @@
-var CACHE_NAME = 'pwa-caches';
+var CACHE_NAME = 'toka-20200903';
 var urlsToCache = [
     '/TokaItemGenelator/',
     '/TokaItemGenelator/index.html',
@@ -19,6 +19,7 @@ var urlsToCache = [
     '/TokaItemGenelator/img/icon_apple-touch-icon.png',
     '/TokaItemGenelator/img/import.svg',
     '/TokaItemGenelator/img/more.svg',
+    "/MCAddonSetupManager/img/share.svg",
     '/TokaItemGenelator/img/twitter.svg',
     '/TokaItemGenelator/img/warning.svg',
     '/TokaItemGenelator/js/main.js',
@@ -26,26 +27,54 @@ var urlsToCache = [
     '/TokaItemGenelator/lib/prism.js',
     '/TokaItemGenelator/lib/jquery-3.5.1.min.js'
 ];
+var oldCacheKeys = [
+    'pwa-caches'
+];
 
 // インストール処理
 self.addEventListener('install', function(event) {
     event.waitUntil(
-        caches
-            .open(CACHE_NAME)
-            .then(function(cache) {
-                return cache.addAll(urlsToCache);
-            })
+        caches.open(CACHE_NAME).then(async function(cache) {
+            skipWaiting();
+            cache.addAll(urlsToCache);
+        })
     );
-    event.waitUntil(self.skipWaiting());
+});
+
+// アクティブ時
+self.addEventListener("activate", function (event) {
+    event.waitUntil(
+      (function () {
+        caches.keys().then(function (oldCacheKeys) {
+          oldCacheKeys
+            .filter(function (key) {
+                return key !== CACHE_NAME;
+            })
+            .map(function (key) {
+                return caches.delete(key);
+            });
+        });
+        clients.claim();
+      })()
+    );
 });
 
 // リソースフェッチ時のキャッシュロード処理
-self.addEventListener('fetch', function(event) {
+self.addEventListener("fetch", function (event) {
     event.respondWith(
-        caches
-            .match(event.request)
-            .then(function(response) {
-                return response ? response : fetch(event.request);
-            })
+        caches.match(event.request).then(function (response) {
+            if (response) return response;
+            var fetchRequest = event.request.clone();
+            return fetch(fetchRequest).then(function (response) {
+                if (!response || response.status !== 200 || response.type !== "basic") {
+                    return response;
+                }
+                var responseToCache = response.clone();
+                caches.open(CACHE_NAME).then(function (cache) {
+                    cache.put(event.request, responseToCache);
+                });
+                return response;
+            });
+        })
     );
 });

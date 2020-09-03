@@ -29,11 +29,6 @@
                 "applicationSubCategory": "Minecraft Block json Addon",
                 "image": "img/icon_2000.png",
                 "about": "Minecraft Bedrock Edition 向けのアドオン作成補助ツールです。block jsonを簡単に作ることができます。",
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "5",
-                    "ratingCount": "8864"
-                },
                 "creator": {
                     "@type": "Person",
                     "name": "とかさん",
@@ -51,14 +46,15 @@
         <script>
             if ('serviceWorker' in navigator) {
                 window.addEventListener("load", function() {
-                    navigator.serviceWorker.register('/TokaBlockGenelator/serviceworker.js', {scope: '/TokaBlockGenelator/'})
-                    .then(function(reg) {
+                    navigator.serviceWorker.register('/TokaBlockGenelator/serviceworker.js')
+                    .then(function(registration) {
                         // registration worked
                         registration.onupdatefound = function() {
                             registration.update();
                         }
                     }).catch(function(error) {
                         // registration failed
+                        console.error("serviceWorker failed");
                     });
                 });
             }
@@ -85,12 +81,22 @@
                 <img src="img/icon.webp" alt="" class="title_icon" onerror="this.src='img/icon_2000.png'">
                 <div class="title">
                     <h1>とかさんのBlockGenelator</h1>
-                    <p>version:0.3.0</p>
+                    <p>version:1.0.0</p>
                 </div>
                 <div class="header_menu">
-                    <div class="import_file"><label for="input_file">Import</label><input type="file" name="input_file" id="input_file" accept=".json"></div>
-                    <p id="show_preview">Preview</p>
-                    <p id="page_share">share</p>
+                    <div class="import_file">
+                        <label for="input_file">Import</label><input type="file" name="input_file" id="input_file" accept=".json">
+                        <div class="help_content top" id="help_content_1">
+                            <p>すでファイルがある場合はデータをインポートします。</p>
+                        </div>
+                    </div>
+                    <div id="show_preview">
+                        <span>Preview</span>
+                        <div class="help_content top" id="help_content_3">
+                            <p>入力・編集したデータのjsonプレビュー閲覧とダウンロード・コピーをします。</p>
+                        </div>
+                    </div>
+                    <p id="show_help">help</p>
                     <p id="open_about">About</p>
                 </div>
                 <div class="header_menu_alt">
@@ -101,13 +107,15 @@
                     <div class="open_more_info">
                         <img src="img/more.svg" alt="">
                         <ul class="more_info">
-                            <li><a href="http://tokamcwin10.blog.jp/" target="_blank" title="とかさんのホームページ" rel="noopener"><img src="img/homepage.svg" alt=""><p>Homepage</p></a></li>
-                            <li><a href="https://twitter.com/toka7290" target="_blank" title="Twitter" rel="noopener"><img src="img/twitter.svg" alt=""><p>Twitter</p></a></li>
-                            <li><a href="https://github.com/toka7290/TokaBlockGenelator" target="_blank" title="Github" rel="noopener"><img src="img/github.svg" alt=""><p>GitHub</p></a></li>
-                            <li><a href="http://tokamcwin10.blog.jp/archives/37132278.html" target="_blank" title="Block.jsonの解説ページに飛びます。" rel="noopener"><img src="img/help.svg" alt=""><p>Block Help</p></a></li>
+                            <li><a href="https://tokamcwin10.blog.jp/" target="_blank" title="とかさんのホームページ" rel="noopener noreferrer"><img src="img/homepage.svg" alt=""><p>Homepage</p></a></li>
+                            <li><a href="https://twitter.com/toka7290" target="_blank" title="Twitter" rel="noopener noreferrer"><img src="img/twitter.svg" alt=""><p>Twitter</p></a></li>
+                            <li><a href="https://github.com/toka7290/TokaBlockGenelator" target="_blank" title="Github" rel="noopener noreferrer"><img src="img/github.svg" alt=""><p>GitHub</p></a></li>
+                            <li><a href="https://tokamcwin10.blog.jp/article-37132278" target="_blank" title="Block.jsonの解説ページに飛びます。" rel="noopener noreferrer"><img src="img/help.svg" alt=""><p>Block Help</p></a></li>
                         </ul>
                     </div>
                 </div>
+            </div>
+            <div id="page_help">
             </div>
             <div class="page_about">
                 <div class="close_about">
@@ -116,16 +124,21 @@
                 <div class="about_content">
                     <img src="img/icon.webp" alt="" onerror="this.src='img/icon_2000.png'">
                     <h2>とかさんのBlockGenelator</h2>
-                    <p>version:0.3.0</p>
+                    <p>version:1.0.0</p>
+                    <div id="page_share"><img src="img/share.svg" alt=""></div>
                     <div class="about_external_link">
-                        <a href="http://tokamcwin10.blog.jp/" target="_blank" title="とかさんのホームページ" rel="noopener"><img src="img/homepage.svg" alt=""></a>
-                        <a href="https://twitter.com/toka7290" target="_blank" title="Twitter" rel="noopener"><img src="img/twitter.svg" alt=""></a>
-                        <a href="https://github.com/toka7290/TokaBlockGenelator" target="_blank" title="Github" rel="noopener"><img src="img/github.svg" alt=""></a>
-                        <a href="http://tokamcwin10.blog.jp/archives/37132278.html" target="_blank" title="Block.jsonの解説ページに飛びます。" rel="noopener"><img src="img/help.svg" alt=""></a>
+                        <a href="https://tokamcwin10.blog.jp/" target="_blank" title="とかさんのホームページ" rel="noopener noreferrer"><img src="img/homepage.svg" alt=""></a>
+                        <a href="https://twitter.com/toka7290" target="_blank" title="Twitter" rel="noopener noreferrer"><img src="img/twitter.svg" alt=""></a>
+                        <a href="https://github.com/toka7290/TokaBlockGenelator" target="_blank" title="Github" rel="noopener noreferrer"><img src="img/github.svg" alt=""></a>
+                        <a href="https://tokamcwin10.blog.jp/article-37132278" target="_blank" title="Block.jsonの解説ページに飛びます。" rel="noopener noreferrer"><img src="img/help.svg" alt=""></a>
                     </div>
                 </div>
             </div>
         </header>
+        <div class="help_content bottom" id="help_content_2">
+            <p>データを編集します</p>
+            <p>エラー等は下にある[問題]タブから見ることができます。</p>
+        </div>
         <div class="content">
             <div class="editor">
                 <form name="editor_main">
@@ -209,7 +222,9 @@
                     <pre class="language-json">
                         <code class="language-json"></code>
                     </pre>
-                    <textarea name="code_buffer" id="code_buffer"></textarea>
+                    <label>
+                        <textarea name="code_buffer" id="code_buffer"></textarea>
+                    </label>
                 </div>
                 <div class="issue">
                     <div class="issue_contlrol_bar">
