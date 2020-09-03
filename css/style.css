@@ -1,6 +1,7 @@
 :root{
     --color_text: #000000;
     --color_text-2: #808080;
+    --color_tag: #545454;
     --color_background: #ffffff;
     --color_background_2: #e2e8f0;
     --color_background_2_alt: #e2e8f0;
@@ -104,7 +105,7 @@ div.content{
     padding: 0;
 }
 .tag span{
-    background-color: var(--color_text-2);
+    background-color: var(--color_tag);
     border-radius: 1rem;
     padding: 0 0.5rem;
     color: var(--color_background);
