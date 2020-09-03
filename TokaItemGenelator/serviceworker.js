@@ -1,4 +1,4 @@
-var CACHE_NAME = 'toka-20200903';
+var CACHE_NAME = 'TokaItemGenelator-20200904';
 var urlsToCache = [
     '/TokaItemGenelator/',
     '/TokaItemGenelator/index.html',
