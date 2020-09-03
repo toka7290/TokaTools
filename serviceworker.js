@@ -1,24 +1,24 @@
-var CACHE_NAME = 'toka-20200903';
+var CACHE_NAME = 'TokaToolBox-20200904';
 var urlsToCache = [
-    '/TokaBlockGenelator/',
-    '/TokaBlockGenelator/index.html',
-    '/TokaBlockGenelator/css/style.css',
-    '/TokaBlockGenelator/css/phone.css',
-    '/TokaBlockGenelator/icons/BlockGenerator.png',
-    '/TokaBlockGenelator/icons/error.png',
-    '/TokaBlockGenelator/icons/ItemGenerator.png',
-    '/TokaBlockGenelator/icons/ManifestGenelator.png',
-    '/TokaBlockGenelator/img/github.svg',
-    '/TokaBlockGenelator/img/home.svg',
-    '/TokaBlockGenelator/img/icon.svg',
-    '/TokaBlockGenelator/img/icon.webp',
-    '/TokaBlockGenelator/img/icon_256.png',
-    '/TokaBlockGenelator/img/icon_512.png',
-    '/TokaBlockGenelator/img/icon_2000.png',
-    '/TokaBlockGenelator/img/icon_apple-touch-icon.png',
-    '/TokaBlockGenelator/img/twitter.svg',
-    '/TokaBlockGenelator/js/main.js',
-    '/TokaBlockGenelator/lib/jquery-3.5.1.min.js'
+    '/TokaToolBox/',
+    '/TokaToolBox/index.html',
+    '/TokaToolBox/css/style.css',
+    '/TokaToolBox/css/phone.css',
+    '/TokaToolBox/icons/BlockGenerator.png',
+    '/TokaToolBox/icons/error.png',
+    '/TokaToolBox/icons/ItemGenerator.png',
+    '/TokaToolBox/icons/ManifestGenelator.png',
+    '/TokaToolBox/img/github.svg',
+    '/TokaToolBox/img/home.svg',
+    '/TokaToolBox/img/icon.svg',
+    '/TokaToolBox/img/icon.webp',
+    '/TokaToolBox/img/icon_256.png',
+    '/TokaToolBox/img/icon_512.png',
+    '/TokaToolBox/img/icon_2000.png',
+    '/TokaToolBox/img/icon_apple-touch-icon.png',
+    '/TokaToolBox/img/twitter.svg',
+    '/TokaToolBox/js/main.js',
+    '/TokaToolBox/lib/jquery-3.5.1.min.js'
 ];
 var oldCacheKeys = [
     'pwa-caches'
