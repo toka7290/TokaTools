@@ -185,7 +185,7 @@ footer{
     margin-left: 1rem;
     padding-left: 1rem;
     border-left: 2px solid var(--color_text-2);
-    color: var(--color_text-2);
+    color: var(--color_tag);
 }
 .footer_title .footer_credit a{
     color: var(--color_text);

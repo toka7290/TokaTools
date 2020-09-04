@@ -37,7 +37,7 @@
         <script>
             if ('serviceWorker' in navigator) {
                 window.addEventListener("load", function() {
-                    navigator.serviceWorker.register('/serviceworker.js', {scope: '/TokaTools/'})
+                    navigator.serviceWorker.register('/TokaTools/serviceworker.js', {scope: '/TokaTools/'})
                     .then(function(registration) {
                         // registration worked
                         registration.onupdatefound = function() {
