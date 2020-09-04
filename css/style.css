@@ -81,6 +81,7 @@ header > *{
 .title_icon{
     max-width: 50vw;
     width: 20rem;
+    height: auto;
 }
 .content>div{
     margin-top: 10rem;
