@@ -1,40 +1,19 @@
-div.title{
-    /* ヘッダー */
-    display: none;
+.tool-list{
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
 }
-.title_icon{
-    display: block;
+.footer_wrapper{
+    display: grid;
+    justify-content: center;
 }
-div.header_menu_alt{
-    display: none;
+.footer_wrapper>div{
+    display: grid;
 }
-div.header_menu{
-    display: block;
+.footer_title .footer_credit{
+    border: none;
+    margin: 0;
+    padding: 0;
 }
-div.content{
-    /* コンテンツ */
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow-y: hidden;
-}
-div.data_check{
-    /* データチェック */
-    overflow-y: unset;
-    height: auto;
-    flex-basis: auto;
-}
-div.preview{
-    /* プレビュー */
-    display: none;
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-div.separator{
-    /* セパレータ */
-    display: none;
+.footer_wrapper>div{
+    display: inline-grid;
+    justify-items: center;
 }

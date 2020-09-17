@@ -1,4 +1,4 @@
-var CACHE_NAME = 'TokaTools-20200904';
+var CACHE_NAME = 'TokaTools-20200917';
 var urlsToCache = [
     '/TokaTools/',
     '/TokaTools/index.html',
@@ -21,7 +21,8 @@ var urlsToCache = [
     '/TokaTools/lib/jquery-3.5.1.min.js'
 ];
 var oldCacheKeys = [
-    'pwa-caches'
+    'pwa-caches',
+    'TokaTools-20200904'
 ];
 
 // インストール処理

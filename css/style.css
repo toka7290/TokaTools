@@ -89,9 +89,9 @@ header > *{
 div.wrapper{
     display: grid;
     grid-template-columns: 
-        minmax(2rem, 1fr) 
+        minmax(1rem, 1fr) 
         minmax(auto, 80ch)
-        minmax(2rem, 1fr);
+        minmax(1rem, 1fr);
 }
 div.content{
     display: block;
@@ -106,10 +106,13 @@ div.content{
     padding: 0;
 }
 .tag span{
+    display: inline-block;
     background-color: var(--color_tag);
     border-radius: 1rem;
     padding: 0 0.5rem;
     color: var(--color_background);
+    word-break: break-word;
+    margin: 4px 0;
 }
 .tool-list{
     display: grid;
@@ -118,6 +121,7 @@ div.content{
     transition-duration: 2s;
     transition-property: height;
     height: auto;
+    word-break: break-all;
 }
 .tool-description{
     border: 1px solid var(--color_text);
@@ -161,7 +165,7 @@ footer{
     grid-template-columns: 
         minmax(1rem, 1fr) 
         minmax(auto, 90%)
-        minmax(2rem, 1fr);
+        minmax(1rem, 1fr);
 }
 .footer_wrapper{
     grid-column: 2;
@@ -187,6 +191,10 @@ footer{
     padding-left: 1rem;
     border-left: 2px solid var(--color_text-2);
     color: var(--color_tag);
+    display: inline-block;
+}
+.footer_title .footer_credit p{
+    display: inline-block;
 }
 .footer_title .footer_credit a{
     color: var(--color_text);
