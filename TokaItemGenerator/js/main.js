@@ -256,7 +256,8 @@ $(function(){
     // Remove effect 追加
     function add_author(name){
         const remove_effect_list = $(".components_food_remove_effect_list");
-        const remove_effect_list_child = '<div><span class="name">'+name+'</span><span class="components_food_remove_effect_delete">×</span></div>';
+        let remove_effect_list_child = $('div').append($('<span>').addClass('name').text(name));
+        remove_effect_list_child.append($('<span>').addClass('components_food_remove_effect_delete').text('×'));
         remove_effect_list.append(remove_effect_list_child);
         remove_effect_list.children('div:last-child').hide().show(150);
     }
