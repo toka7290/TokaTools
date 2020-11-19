@@ -245,7 +245,8 @@ $(function(){
     //タブ追加
     function add_tab(controls_tab){
         const num = controls_tab.children('li').length;
-        const addTab = '<li>'+num+'<span class="delete_tab">×</span></li>';
+        const addTab = $('<li>').text(num).append($('<span>').addClass('delete_tab').text('×'));
+        // const addTab = '<li>'+num+'<span class="delete_tab">×</span></li>';
         controls_tab.append(addTab)
         controls_tab.children('li:last-child').hide().show(150);
         const tab_content_list = controls_tab.parents('.tab_controls').next();
@@ -256,7 +257,7 @@ $(function(){
     // Remove effect 追加
     function add_author(name){
         const remove_effect_list = $(".components_food_remove_effect_list");
-        let remove_effect_list_child = $('div').append($('<span>').addClass('name').text(name));
+        let remove_effect_list_child = $('<div>').append($('<span>').addClass('name').text(name));
         remove_effect_list_child.append($('<span>').addClass('components_food_remove_effect_delete').text('×'));
         remove_effect_list.append(remove_effect_list_child);
         remove_effect_list.children('div:last-child').hide().show(150);
