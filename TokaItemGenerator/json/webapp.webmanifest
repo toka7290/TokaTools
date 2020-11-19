@@ -1,24 +1,24 @@
 {
-  "name": "とかさんのItemGenelator",
-  "short_name": "ItemGenelator",
+  "name": "とかさんのItemGenerator",
+  "short_name": "ItemGenerator",
   "description": "Minecraft Bedrock Edition 向けのアドオン作成補助ツールです。Item jsonを簡単に作ることができます。",
   "display": "standalone",
   "icons": [
     {
-      "src": "https://toka7290.github.io/TokaTools/TokaItemGenelator/img/icon_256.png",
+      "src": "https://toka7290.github.io/TokaTools/TokaItemGenerator/img/icon_256.png",
       "sizes": "256x256",
       "purpose": "any maskable"
     },
     {
-      "src": "https://toka7290.github.io/TokaTools/TokaItemGenelator/img/icon_512.png",
+      "src": "https://toka7290.github.io/TokaTools/TokaItemGenerator/img/icon_512.png",
       "sizes": "512x512"
     },
     {
-      "src": "https://toka7290.github.io/TokaTools/TokaItemGenelator/img/icon_2000.png",
+      "src": "https://toka7290.github.io/TokaTools/TokaItemGenerator/img/icon_2000.png",
       "sizes": "2000x2000"
     }
   ],
-  "start_url": "/TokaTools/TokaItemGenelator/index.html",
+  "start_url": "/TokaTools/TokaItemGenerator/index.html",
   "theme_color": "#60ad5e",
   "background_color": "#e8f5e9"
-} 
+}

@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja">
+
     <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/websaite#">
         <meta charset="UTF-8">
         <title>とかさんのToolBox</title>
         <!-- metadata -->
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <meta name="keywords" content="とかさん,Minecraft,マインクラフト,json,Genelator,tool,ツール,Addon,アドオン">
+        <meta name="keywords" content="とかさん,Minecraft,マインクラフト,json,Generator,tool,ツール,Addon,アドオン">
         <meta name="Description" content="Minecraft Bedrock Edition 向けのアドオン作成補助ツールポータルサイトです。">
         <meta http-equiv="content-language" content="ja">
-        <meta name ="theme-color" content="#fa8b00">
+        <meta name="theme-color" content="#fa8b00">
         <meta property="og:url" content="https://toka7290.github.io/TokaTools/" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="とかさんのToolBox" />
@@ -36,16 +37,16 @@
         </script>
         <script>
             if ('serviceWorker' in navigator) {
-                window.addEventListener("load", function() {
-                    navigator.serviceWorker.register('/TokaTools/serviceworker.js', {scope: '/TokaTools/'})
-                    .then(function(registration) {
-                        // registration worked
-                        registration.onupdatefound = function() {
-                            registration.update();
-                        }
-                    }).catch(function(error) {
-                        // registration failed
-                    });
+                window.addEventListener("load", function () {
+                    navigator.serviceWorker.register('/TokaTools/serviceworker.js', { scope: '/TokaTools/' })
+                        .then(function (registration) {
+                            // registration worked
+                            registration.onupdatefound = function () {
+                                registration.update();
+                            }
+                        }).catch(function (error) {
+                            // registration failed
+                        });
                 });
             }
             let deferredPrompt;
@@ -62,6 +63,7 @@
         <link rel="stylesheet" href="css/style.css" media="all">
         <link rel="stylesheet" href="css/phone.css" media="(max-width: 35rem)">
     </head>
+
     <body>
         <header class="header">
             <div class="header_main">
@@ -104,9 +106,9 @@
                             <div class="tool-description">
                                 <a href="https://toka7290.github.io/MCAddonSetupManager/" target="_blank" rel="noopener noreferrer">
                                     <div class="tool-description-inner">
-                                        <img src="icons/ManifestGenelator.png" alt="" class="tool-description-img">
+                                        <img src="icons/ManifestGenerator.png" alt="" class="tool-description-img">
                                         <div class="tool-description-header">
-                                            <h3 class="title">とかさんのManifestGenelator</h3>
+                                            <h3 class="title">とかさんのManifestGenerator</h3>
                                             <h4 class="tag">
                                                 <span class="behavior">Behavior</span>
                                                 <span class="resource">Resource</span>
@@ -122,11 +124,11 @@
                         </div>
                         <div class="tool-card">
                             <div class="tool-description">
-                                <a href="./TokaBlockGenelator/" target="_blank" rel="noopener noreferrer">
+                                <a href="./TokaBlockGenerator/" target="_blank" rel="noopener noreferrer">
                                     <div class="tool-description-inner">
                                         <img src="icons/BlockGenerator.png" alt="" class="tool-description-img">
                                         <div class="tool-description-header">
-                                            <h3 class="title">とかさんのBlockGenelator</h3>
+                                            <h3 class="title">とかさんのBlockGenerator</h3>
                                             <h4 class="tag">
                                                 <span class="behavior">Behavior</span>
                                             </h4>
@@ -140,11 +142,11 @@
                         </div>
                         <div class="tool-card">
                             <div class="tool-description">
-                                <a href="./TokaItemGenelator/" target="_blank" rel="noopener noreferrer">
+                                <a href="./TokaItemGenerator/" target="_blank" rel="noopener noreferrer">
                                     <div class="tool-description-inner">
                                         <img src="icons/ItemGenerator.png" alt="" class="tool-description-img">
                                         <div class="tool-description-header">
-                                            <h3 class="title">とかさんのItemGenelator(Beta)</h3>
+                                            <h3 class="title">とかさんのItemGenerator(Beta)</h3>
                                             <h4 class="tag">
                                                 <span class="behavior">Behavior</span>
                                             </h4>
@@ -161,7 +163,7 @@
                                 <div class="tool-description-inner">
                                     <img src="icons/error.png" alt="" class="tool-description-img">
                                     <div class="tool-description-header">
-                                        <h3 class="title">とかさんのBiomeGenelator</h3>
+                                        <h3 class="title">とかさんのBiomeGenerator</h3>
                                         <h4 class="tag">
                                             <span class="behavior">Behavior</span>
                                         </h4>
@@ -177,7 +179,7 @@
                                 <div class="tool-description-inner">
                                     <img src="icons/error.png" alt="" class="tool-description-img">
                                     <div class="tool-description-header">
-                                        <h3 class="title">とかさんのEntityGenelator</h3>
+                                        <h3 class="title">とかさんのEntityGenerator</h3>
                                         <h4 class="tag">
                                             <span class="behavior">Behavior</span>
                                         </h4>
@@ -193,7 +195,7 @@
                                 <div class="tool-description-inner">
                                     <img src="icons/error.png" alt="" class="tool-description-img">
                                     <div class="tool-description-header">
-                                        <h3 class="title">とかさんのFeatureGenelator</h3>
+                                        <h3 class="title">とかさんのFeatureGenerator</h3>
                                         <h4 class="tag">
                                             <span class="behavior">Behavior</span>
                                         </h4>
@@ -227,4 +229,5 @@
             </div>
         </footer>
     </body>
+
 </html>

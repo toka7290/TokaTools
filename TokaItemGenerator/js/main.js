@@ -19,6 +19,10 @@ $(function(){
         onChangedJSON();
         isChanged = true;
     });
+    $(document).on("keyup",'input,textarea,select',function(){
+        onChangedJSON();
+        isChanged = true;
+    });
     // セパレータ移動
     $(".separator").on("mousedown",function(e){
         if(!is_separator_drag){
@@ -39,19 +43,19 @@ $(function(){
             $("html").css("cursor","e-resize");
             $(".separator").prev().addClass('drag_lock');
             $(".separator").next().addClass('drag_lock');
-            var maxwidth = $("html").width()-5;
-            var nextwidth = maxwidth-e.clientX;
-            var prevwidth = maxwidth-nextwidth;
-            $(".separator").prev().css("flex-basis",prevwidth);
-            $(".separator").next().css("flex-basis",nextwidth);
+            let maxwidth = $("html").width()-5;
+            let next_width = maxwidth-e.clientX;
+            let prev_width = maxwidth-next_width;
+            $(".separator").prev().css("flex-basis",prev_width);
+            $(".separator").next().css("flex-basis",next_width);
         }
     });
     // シェア
     $('#page_share').on("click",function(){
         const data = {
-            title: "とかさんのItemGenelator",
+            title: "とかさんのItemGenerator",
             text: "アドオン作成補助ツールItem jsonを簡単に作成・編集",
-            url: "https://toka7290.github.io/TokaItemGenelator/"
+            url: "https://toka7290.github.io/TokaItemGenerator/"
         }
         if (navigator.share) {
             navigator.share(data);
@@ -124,39 +128,39 @@ $(function(){
         $("div.page_about").fadeOut();
     });
     // コピー
-    $("p.preview_contlrol_copy").on("click",function(){
+    $("p.preview_control_copy").on("click",function(){
         $("textarea#code_buffer").select();
         document.execCommand("copy");
-        $("p.preview_contlrol_copy").text("Copied");
+        $("p.preview_control_copy").text("Copied");
         $("textarea#code_buffer").blur();
         setTimeout(function(){
-            $("p.preview_contlrol_copy").text("Copy");
+            $("p.preview_control_copy").text("Copy");
         },1000);
     });
     // ダウンロード
-    $("p.preview_contlrol_download").on("click",function(){
-        content = $("textarea#code_buffer").val();
-        temp = $("#description_item_name").val().split(/:/,2);
-        filename = "Item.json";
+    $("p.preview_control_download").on("click",function(){
+        const content = $("textarea#code_buffer").val();
+        const temp = $("#description_item_name").val().split(/:/,2);
+        let filename = "Item.json";
         if(temp[1]!=null)filename = temp[1]+".json";
         $("<a></a>", {href: window.URL.createObjectURL(new Blob([content])),
             download: filename,
             target: "_blank"})[0].click();
     });
     // イシューリスト開閉
-    $("div.issue_contlrol_bar").on("click",function(){
-        if($("div.issue_contlrol_bar img").attr("class")=="close"){
+    $("div.issue_control_bar").on("click",function(){
+        if($("div.issue_control_bar img").attr("class")=="close"){
             // 開く
-            $("div.issue_contlrol_bar img").attr("class","open")
+            $("div.issue_control_bar img").attr("class","open")
         }
-        else if($("div.issue_contlrol_bar img").attr("class")=="open"){
+        else if($("div.issue_control_bar img").attr("class")=="open"){
             // 閉じる
-            $("div.issue_contlrol_bar img").attr("class","close")
+            $("div.issue_control_bar img").attr("class","close")
         }
         $("div.issue_content").slideToggle();
     });
 
-    // colorchange
+    // color change
     $("#components_map_color").on("change",function(){
         $("#components_map_color_pick").val($("#components_map_color").val());
     });
@@ -165,75 +169,43 @@ $(function(){
     $('#format_version').on("change",function(){
         format_version = $('#format_version').val();
     });
-    // //Food Effects tab変更
-    // $(document).on("click",".components_food_effects_controls_tab li",function(){
-    //     selectedindex = $(".components_food_effects_controls_tab li").index(this);
-    //     $(".components_food_effects_controls_tab li").removeClass('selected_tab');
-    //     $(".components_food_effects_controls_tab li").eq(selectedindex).addClass('selected_tab');
-    //     $(".components_food_effects_contents > div").removeClass('selected_tab_content');
-    //     $(".components_food_effects_contents > div").eq(selectedindex).addClass('selected_tab_content');
-    // });
-    // // Food Effects tab削除
-    // $(document).on("click",".components_food_effects_controls_tab li span.delete_tab",function(event){
-    //     selectedindex = $(this).parent().index();
-    //     if($(".components_food_effects_controls_tab li").eq(selectedindex).hasClass('selected_tab')){
-    //         $(".components_food_effects_controls_tab li").eq(selectedindex-1).addClass('selected_tab');
-    //         $(".components_food_effects_contents > div").eq(selectedindex-1).addClass('selected_tab_content');
-    //     }
-    //     $(this).parent().remove();
-    //     $(".components_food_effects_contents > div").eq(selectedindex).remove();
-    //     for(i=0;i<$(".components_food_effects_controls_tab li").length;i++){
-    //         $(".components_food_effects_controls_tab li").eq(i).html(i+'<span class="delete_tab">×</span>');
-    //     }
-    //     if($(".components_food_effects_controls_tab li").length<=1){
-    //         $(".components_food_effects_controls_addtab").show();
-    //     }
-    //     onChangedJSON();
-    //     event.stopPropagation();
-    // });
-    // //Food Effects tab追加
-    // $(".components_food_effects_controls_addtab").on("click",function(){
-    //     components_food_effects_addtab();
-    //     onChangedJSON();
-    // });
     //tab変更
     $(document).on("click",".tab_controls_bar_tab li",function(){
         if(
             (is_components_food_enable&&$(this).parents('.tab_controls').hasClass("components_food_effects"))
         ){
-            selectedindex = $(this).index();
-            controls_tab = $(this).parent();
-            controls_tabs = controls_tab.children("li");
+            const selected_index = $(this).index();
+            const controls_tab = $(this).parent();
+            const controls_tabs = controls_tab.children("li");
             controls_tabs.removeClass('selected_tab');
-            controls_tabs.eq(selectedindex).addClass('selected_tab');
-            tab_content = controls_tab.parents('.tab_controls').next().children("div");
+            controls_tabs.eq(selected_index).addClass('selected_tab');
+            const tab_content = controls_tab.parents('.tab_controls').next().children("div");
             tab_content.removeClass('selected_tab_content');
-            tab_content.eq(selectedindex).addClass('selected_tab_content');
+            tab_content.eq(selected_index).addClass('selected_tab_content');
         }
-        
     });
     //tab削除
     $(document).on("click",".tab_controls_bar_tab li span.delete_tab",function(event){
         if(
             (is_components_food_enable&&$(this).parents('.tab_controls').hasClass("components_food_effects"))
         ){
-            selected_tab = $(this).parent();
-            controls_tab = selected_tab.parent();
-            controls_tabs = controls_tab.children("li");
-            selectedindex = selected_tab.index();
-            tab_content_list = controls_tab.parents('.tab_controls').next().children("div");
+            const selected_tab = $(this).parent();
+            const controls_tab = selected_tab.parent();
+            let controls_tabs = controls_tab.children("li");
+            let selected_index = selected_tab.index();
+            const tab_content_list = controls_tab.parents('.tab_controls').next().children("div");
             selected_tab.hide(
                 150,
                 function(){
-                    tab_content_list.eq(selectedindex).remove();
+                    tab_content_list.eq(selected_index).remove();
                     if(selected_tab.hasClass('selected_tab')){
-                        if(selectedindex-1<0) selectedindex=2;
-                        controls_tabs.eq(selectedindex-1).addClass('selected_tab');
-                        tab_content_list.eq(selectedindex-1).addClass('selected_tab_content');
+                        if(selected_index-1<0) selected_index=2;
+                        controls_tabs.eq(selected_index-1).addClass('selected_tab');
+                        tab_content_list.eq(selected_index-1).addClass('selected_tab_content');
                     }
                     selected_tab.remove();
                     controls_tabs = controls_tab.children("li");
-                    for(i=0;i<controls_tabs.length;i++){
+                    for(let i=0;i<controls_tabs.length;i++){
                         controls_tabs.eq(i).html(i+'<span class="delete_tab">×</span>');
                     }
                     onChangedJSON();
@@ -243,7 +215,7 @@ $(function(){
         event.stopPropagation();
     });
     //tab追加
-    $(".tab_controls_addtab").on("click",function(){
+    $(".tab_controls_addTab").on("click",function(){
         if(
             (is_components_food_enable&&$(this).hasClass("components_food_effects"))
         ){
@@ -260,7 +232,7 @@ $(function(){
     });
     //Remove effect削除
     $(document).on("click",".components_food_remove_effect_delete",function(){
-        remove_effect = $(this).parent();
+        const remove_effect = $(this).parent();
         remove_effect.hide(
             150,
             function (){
@@ -270,39 +242,30 @@ $(function(){
         );
     });
 
-    // // Food Effects タブ追加
-    // function components_food_effects_addtab(){
-    //     num = $(".components_food_effects_controls_tab li").length;
-    //     addtab = '<li>'+num+'<span class="delete_tab">×</span></li>';
-    //     $(".components_food_effects_controls_tab").append(addtab);
-    //     content = $(".components_food_effects_contents > div:first-child").clone();
-    //     content.removeClass('selected_tab_content');
-    //     $(".components_food_effects_contents").append(content);
-    // }
     //タブ追加
     function add_tab(controls_tab){
-        num = controls_tab.children('li').length;
-        addtab = '<li>'+num+'<span class="delete_tab">×</span></li>';
-        controls_tab.append(addtab)
+        const num = controls_tab.children('li').length;
+        const addTab = '<li>'+num+'<span class="delete_tab">×</span></li>';
+        controls_tab.append(addTab)
         controls_tab.children('li:last-child').hide().show(150);
-        tab_content_list = controls_tab.parents('.tab_controls').next();
-        content = tab_content_list.children("div:first-child").clone();
+        const tab_content_list = controls_tab.parents('.tab_controls').next();
+        const content = tab_content_list.children("div:first-child").clone();
         content.removeClass('selected_tab_content');
         tab_content_list.append(content);
     }
     // Remove effect 追加
     function add_author(name){
-        remove_effect_list = $(".components_food_remove_effect_list");
-        remove_effect_list_child = '<div><span class="name">'+name+'</span><span class="components_food_remove_effect_delete">×</span></div>';
+        const remove_effect_list = $(".components_food_remove_effect_list");
+        const remove_effect_list_child = '<div><span class="name">'+name+'</span><span class="components_food_remove_effect_delete">×</span></div>';
         remove_effect_list.append(remove_effect_list_child);
         remove_effect_list.children('div:last-child').hide().show(150);
     }
     // インポート処理
     function importFile(){
-        var data = $("#input_file").prop('files')[0]; 
+        var data = $("#input_file").prop('files')[0];
         var file_reader = new FileReader();
         file_reader.onload = function(){
-            json_text = file_reader.result;
+            const json_text = file_reader.result;
             import_data(json_text);
         };
         try{
@@ -314,11 +277,6 @@ $(function(){
     // ヘルプ切換
     function toggle_help(){
         switch(help_page_num){
-            default:
-            case 0:
-                $("#help_content_1").fadeIn("fast");
-                help_page_num++;
-                return;
             case 1:
                 $("#help_content_1").fadeOut("fast");
                 $("#help_content_2").slideToggle("fast");
@@ -341,6 +299,11 @@ $(function(){
                 $("#page_help").hide();
                 help_page_num = 0;
                 return;
+            case 0:
+            default:
+                $("#help_content_1").fadeIn("fast");
+                help_page_num++;
+                return;
         }
     }
     // 更新処理
@@ -348,9 +311,9 @@ $(function(){
         changed_checkbox();
 
         checkIssue();
-        json_code = exportJSON();
+        const json_code = exportJSON();
         $("pre.language-json code.language-json").remove();
-        content = '<code class="language-json">'+json_code+'</code>';
+        const content = '<code class="language-json">'+json_code+'</code>';
         $("pre.language-json").append(content);
         $("textarea#code_buffer").val(json_code);
         Prism.highlightAll();
@@ -390,8 +353,8 @@ $(function(){
     function checkIssue(){
         // イシュー削除
         $("ul.issue_list li").remove();
-        error_num = checkJSONError();
-        warning_num = checkJSONWarning();
+        const error_num = checkJSONError();
+        const warning_num = checkJSONWarning();
         $("span.issue_warning_num").text("警告:"+warning_num);
         $("span.issue_error_num").text("エラー:"+error_num);
         if(warning_num<=0&&error_num<=0){
@@ -400,15 +363,15 @@ $(function(){
     }
     // 警告検査
     function checkJSONWarning(){
-        warning_num = 0;
+        let warning_num = 0;
         return warning_num;
     }
     // エラー検査
     function checkJSONError(){
-        error_num = 0;
+        let error_num = 0;
 
-        Item_ID = $('#description_item_name').val();
-        Item_ID_split = Item_ID.split(/:/);
+        const Item_ID = $('#description_item_name').val();
+        const Item_ID_split = Item_ID.split(/:/);
         if(Item_ID==""){
             //アイテムIDが空です
             addIssue('error',"[Description:identifier] アイテムIDが空です。アイテムIDを入力してください。アイテムIDは\"名前空間:アイテムID\"を入力してください。");
@@ -426,7 +389,7 @@ $(function(){
     }
     // イシュー更新
     function addIssue(type,issue_content){
-        content = '';
+        let content = '';
         if(type=='warning'){
             content = '<li><img src="img/warning.svg" alt=""><p>'+issue_content+'</p></li>';
         }else if(type=='error'){
@@ -436,6 +399,7 @@ $(function(){
     }
     // jsonデータ取り出し
     function import_data(json_text){
+        let json_data;
         try{
             json_data = JSON.parse(json_text);
         }catch(e){
@@ -446,14 +410,13 @@ $(function(){
 
         format_version = json_data.format_version;
         if(format_version!=null){
-            
             switch(format_version){
                 case "1.16.0":
                     break;
                 case "1.12.0":
                     break;
                 default:
-                    temp = format_version.split(/,/);
+                    const temp = format_version.split(/,/);
                     if(temp[0] == "1"&&parseInt(temp[1]) >=16){
                         format_version = "1.16.0";
                     }else if(temp[0] == "1"&&parseInt(temp[1]) <16){
@@ -464,7 +427,7 @@ $(function(){
             $('#format_version').val(format_version);
         }
 
-        description = json_data["minecraft:item"].description;
+        const description = json_data["minecraft:item"].description;
         if(description.identifier!=null){
             $('#description_item_name').val(description.identifier)
         }
@@ -475,7 +438,7 @@ $(function(){
             $('#description_register_to_creative_menu').prop("checked",true);
         }
 
-        components = json_data["minecraft:item"].components;
+        const components = json_data["minecraft:item"].components;
         switch(format_version){
             case "1.16.0":
                 if(components["minecraft:loot"]!=null){
@@ -491,7 +454,7 @@ $(function(){
                     $('#components_friction').val(components["minecraft:friction"]);
                 }
                 if(components["minecraft:flammable"]!=null){
-                    flammable = components["minecraft:flammable"];
+                    const flammable = components["minecraft:flammable"];
                     $('#components_flame_odds').val(flammable.flame_odds);
                     if(flammable.flame_odds!=0){
                         $('#components_burn_odds').val(flammable.burn_odds);
@@ -523,7 +486,7 @@ $(function(){
                     $('#components_friction').val(components["minecraft:friction"].value);
                 }
                 if(components["minecraft:flammable"]!=null){
-                    flammable = components["minecraft:flammable"];
+                    const flammable = components["minecraft:flammable"];
                     $('#components_flame_odds').val(flammable.flame_odds);
                     if(flammable.flame_odds!=0){
                         $('#components_burn_odds').val(flammable.burn_odds);
@@ -552,12 +515,12 @@ $(function(){
         json_raw.format_version = format_version;
         json_raw["minecraft:item"] = {};
 
-        description = new Object();
+        let description = new Object();
         description.identifier = $('#description_item_name').val();
 
         json_raw["minecraft:item"]["description"] = description;
 
-        components = new Object();
+        let components = new Object();
 
         if($('#components_foil').is(':checked'))components["minecraft:foil"] = $('#components_foil').is(':checked');
         if($('#components_hand_equipped').is(':checked'))components["minecraft:hand_equipped"] = $('#components_hand_equipped').is(':checked');
@@ -568,7 +531,7 @@ $(function(){
         components["minecraft:use_duration"] = parseInt($('#components_use_duration').val(), 10);
 
         if(is_components_food_enable){
-            food = new Object();
+            let food = new Object();
             food.nutrition = Number($('#components_food_nutrition').val());
             if($('#components_food_can_always_eat').is(':checked')){
                 food.food_can_always_eat = $('#components_food_can_always_eat').is(':checked');
@@ -577,7 +540,7 @@ $(function(){
                 food.using_converts_to = $('#components_food_using_converts_to').val();
             }
             food.saturation_modifier = $('#components_food_saturation_modifier').val();
-            tab_content = $('div.components_food_effects.tab_content_list > div:first-child');
+            let tab_content = $('div.components_food_effects.tab_content_list > div:first-child');
             if(
                 tab_content.find('#components_food_effects_name').val()!=""&&
                 Number(tab_content.find('#components_food_effects_chance').val())!=0&&
@@ -585,8 +548,8 @@ $(function(){
                 Number(tab_content.find('#components_food_effects_amplifier').val())!=0)
             ){
                 food.effects = new Array();
-                for(i=0;i<$(".components_food_effects.tab_controls_bar_tab li").length;i++){
-                    child_num = i + 1;
+                for(let i=0;i<$(".components_food_effects.tab_controls_bar_tab li").length;i++){
+                    const child_num = i + 1;
                     food.effects[i] = new Object();
                     tab_content = $('div.components_food_effects.tab_content_list > div:nth-child('+child_num+')');
                     food.effects[i].name = tab_content.find('#components_food_effects_name').val();
@@ -597,7 +560,7 @@ $(function(){
             }
             if($("div.components_food_remove_effect_list > div").length>0){
                 food.remove_effect = new Array();
-                for(i=1;i<=$("div.components_food_remove_effect_list > div").length;i++){
+                for(let i=1;i<=$("div.components_food_remove_effect_list > div").length;i++){
                     food.remove_effect.push($('div.components_food_remove_effect_list > div:nth-child('+i+') > span.name').text());
                 }
             }
@@ -616,14 +579,14 @@ $(function(){
         }
 
         if(is_components_seed_enable){
-            seed = new Object();
+            let seed = new Object();
             seed.crop_result = $('#components_seed_crop_result').val();
             seed.plant_at = $('#components_seed_plant_at').val();
             components["minecraft:seed"] = seed;
         }
 
         if(is_components_camera_enable){
-            camera = new Object();
+            let camera = new Object();
             camera.black_bars_duration = parseFloat($('#components_camera_black_bars_duration').val());
             camera.black_bars_screen_ratio = parseFloat($('#components_camera_black_bars_screen_ratio').val());
             camera.shutter_duration = parseFloat($('#components_camera_shutter_duration').val());
@@ -633,13 +596,13 @@ $(function(){
         }
 
         json_raw["minecraft:item"]["components"] = components;
-        
+
         return jsonArrayReplacer(JSON.stringify(json_raw,null,'  '));
     }
     function jsonArrayReplacer(string_raw) {
-        on_use_range = JSON.stringify([
-            Number($('#components_food_on_use_range_x').val()), 
-            Number($('#components_food_on_use_range_y').val()), 
+        const on_use_range = JSON.stringify([
+            Number($('#components_food_on_use_range_x').val()),
+            Number($('#components_food_on_use_range_y').val()),
             Number($('#components_food_on_use_range_z').val())
         ]).split(/,/).join(', ');
         string_raw = string_raw.replace('"replace_on_use_range"', on_use_range);

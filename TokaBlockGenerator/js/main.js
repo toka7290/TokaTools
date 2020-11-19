@@ -16,6 +16,10 @@ $(function(){
         onChangedJSON();
         isChanged = true;
     });
+    $(document).on("keyup",'input,textarea,select',function(){
+        onChangedJSON();
+        isChanged = true;
+    });
     // セパレータ移動
     $(".separator").on("mousedown",function(e){
         if(!is_separator_drag){
@@ -36,19 +40,19 @@ $(function(){
             $("html").css("cursor","e-resize");
             $(".separator").prev().addClass('drag_lock');
             $(".separator").next().addClass('drag_lock');
-            var maxwidth = $("html").width()-5;
-            var nextwidth = maxwidth-e.clientX;
-            var prevwidth = maxwidth-nextwidth;
-            $(".separator").prev().css("flex-basis",prevwidth);
-            $(".separator").next().css("flex-basis",nextwidth);
+            let maxwidth = $("html").width()-5;
+            let next_width = maxwidth-e.clientX;
+            let prev_width = maxwidth-next_width;
+            $(".separator").prev().css("flex-basis",prev_width);
+            $(".separator").next().css("flex-basis",next_width);
         }
     });
     // シェア
     $('#page_share').on("click",function(){
         const data = {
-            title: "とかさんのBlockGenelator",
-            text: "とかさんのBlockGenelator -block jsonを簡単に作成・編集-",
-            url: "https://toka7290.github.io/TokaBlockGenelator/"
+            title: "とかさんのBlockGenerator",
+            text: "とかさんのBlockGenerator -block jsonを簡単に作成・編集-",
+            url: "https://toka7290.github.io/TokaBlockGenerator/"
         }
         if (navigator.share) {
             navigator.share(data);
@@ -86,7 +90,7 @@ $(function(){
     $(".import_file").on("drop",function(_event){
         isChanged = true;
         $(".import_file").removeClass('dragover ondrag');
-        var event = _event;
+        let event = _event;
         if( _event.originalEvent ){
             event = _event.originalEvent;
         }
@@ -121,39 +125,39 @@ $(function(){
         $("div.page_about").fadeOut();
     });
     // コピー
-    $("p.preview_contlrol_copy").on("click",function(){
+    $("p.preview_control_copy").on("click",function(){
         $("textarea#code_buffer").select();
         document.execCommand("copy");
-        $("p.preview_contlrol_copy").text("Copied");
+        $("p.preview_control_copy").text("Copied");
         $("textarea#code_buffer").blur();
         setTimeout(function(){
-            $("p.preview_contlrol_copy").text("Copy");
+            $("p.preview_control_copy").text("Copy");
         },1000);
     });
     // ダウンロード
-    $("p.preview_contlrol_download").on("click",function(){
-        content = $("textarea#code_buffer").val();
-        temp = $("#description_block_name").val().split(/:/,2);
-        filename = "block.json";
+    $("p.preview_control_download").on("click",function(){
+        const content = $("textarea#code_buffer").val();
+        const temp = $("#description_block_name").val().split(/:/,2);
+        let filename = "block.json";
         if(temp[1]!=null)filename = temp[1]+".json";
         $("<a></a>", {href: window.URL.createObjectURL(new Blob([content])),
             download: filename,
             target: "_blank"})[0].click();
     });
     // イシューリスト開閉
-    $("div.issue_contlrol_bar").on("click",function(){
-        if($("div.issue_contlrol_bar img").attr("class")=="close"){
+    $("div.issue_control_bar").on("click",function(){
+        if($("div.issue_control_bar img").attr("class")=="close"){
             // 開く
-            $("div.issue_contlrol_bar img").attr("class","open")
+            $("div.issue_control_bar img").attr("class","open")
         }
-        else if($("div.issue_contlrol_bar img").attr("class")=="open"){
+        else if($("div.issue_control_bar img").attr("class")=="open"){
             // 閉じる
-            $("div.issue_contlrol_bar img").attr("class","close")
+            $("div.issue_control_bar img").attr("class","close")
         }
         $("div.issue_content").slideToggle();
     });
 
-    // colorchange
+    // color change
     $("#components_map_color").on("change",function(){
         $("#components_map_color_pick").val($("#components_map_color").val());
     });
@@ -165,10 +169,10 @@ $(function(){
 
     // インポート処理
     function importFile(){
-        var data = $("#input_file").prop('files')[0]; 
-        var file_reader = new FileReader();
+        let data = $("#input_file").prop('files')[0];
+        let file_reader = new FileReader();
         file_reader.onload = function(){
-            json_text = file_reader.result;
+            const json_text = file_reader.result;
             import_data(json_text);
         };
         try{
@@ -180,11 +184,6 @@ $(function(){
     // ヘルプ切換
     function toggle_help(){
         switch(help_page_num){
-            default:
-            case 0:
-                $("#help_content_1").fadeIn("fast");
-                help_page_num++;
-                return;
             case 1:
                 $("#help_content_1").fadeOut("fast");
                 $("#help_content_2").slideToggle("fast");
@@ -207,24 +206,29 @@ $(function(){
                 $("#page_help").hide();
                 help_page_num = 0;
                 return;
+            case 0:
+            default:
+                $("#help_content_1").fadeIn("fast");
+                help_page_num++;
+                return;
         }
     }
     // 更新処理
     function onChangedJSON(){
-        onChangedflammable();
+        onChangedFlammable();
         onChangedColor();
         onChangedBlockLightEmission();
 
         checkIssue();
-        json_code = exportJSON();
+        const json_code = exportJSON();
         $("pre.language-json code.language-json").remove();
-        content = '<code class="language-json">'+json_code+'</code>';
+        const content = '<code class="language-json">'+json_code+'</code>';
         $("pre.language-json").append(content);
         $("textarea#code_buffer").val(json_code);
         Prism.highlightAll();
     }
     // 燃焼コンポーネント変更
-    function onChangedflammable() {
+    function onChangedFlammable() {
         if($('#components_flame_odds').val()!="0"){
             $("#components_burn_odds").prop('disabled', false);
             $("#components_burn_odds").parent().removeClass('disabled');
@@ -245,8 +249,8 @@ $(function(){
     function checkIssue(){
         // イシュー削除
         $("ul.issue_list li").remove();
-        error_num = checkJSONError();
-        warning_num = checkJSONWarning();
+        const error_num = checkJSONError();
+        const warning_num = checkJSONWarning();
         $("span.issue_warning_num").text("警告:"+warning_num);
         $("span.issue_error_num").text("エラー:"+error_num);
         if(warning_num<=0&&error_num<=0){
@@ -255,15 +259,15 @@ $(function(){
     }
     // 警告検査
     function checkJSONWarning(){
-        warning_num = 0;
+        let warning_num = 0;
         return warning_num;
     }
     // エラー検査
     function checkJSONError(){
-        error_num = 0;
+        let error_num = 0;
 
-        block_ID = $('#description_block_name').val();
-        block_ID_split = block_ID.split(/:/);
+        const block_ID = $('#description_block_name').val();
+        const block_ID_split = block_ID.split(/:/);
         if(block_ID==""){
             //ブロックIDが空です
             addIssue('error',"[Description:identifier] ブロックIDが空です。ブロックIDを入力してください。ブロックIDは\"名前空間:ブロックID\"を入力してください。");
@@ -282,7 +286,7 @@ $(function(){
     }
     // イシュー更新
     function addIssue(type,issue_content){
-        content = '';
+        let content = '';
         if(type=='warning'){
             content = '<li><img src="img/warning.svg" alt=""><p>'+issue_content+'</p></li>';
         }else if(type=='error'){
@@ -292,6 +296,7 @@ $(function(){
     }
     // jsonデータ取り出し
     function import_data(json_text){
+        let json_data;
         try{
             json_data = JSON.parse(json_text);
         }catch(e){
@@ -302,14 +307,13 @@ $(function(){
 
         format_version = json_data.format_version;
         if(format_version!=null){
-            
             switch(format_version){
                 case "1.16.0":
                     break;
                 case "1.12.0":
                     break;
                 default:
-                    temp = format_version.split(/,/);
+                    const temp = format_version.split(/,/);
                     if(temp[0] == "1"&&parseInt(temp[1]) >=16){
                         format_version = "1.16.0";
                     }else if(temp[0] == "1"&&parseInt(temp[1]) <16){
@@ -320,7 +324,7 @@ $(function(){
             $('#format_version').val(format_version);
         }
 
-        description = json_data["minecraft:block"].description;
+        const description = json_data["minecraft:block"].description;
         if(description.identifier!=null){
             $('#description_block_name').val(description.identifier)
         }
@@ -331,7 +335,7 @@ $(function(){
             $('#description_register_to_creative_menu').prop("checked",true);
         }
 
-        components = json_data["minecraft:block"].components;
+        const components = json_data["minecraft:block"].components;
         switch(format_version){
             case "1.16.0":
                 if(components["minecraft:loot"]!=null){
@@ -347,7 +351,7 @@ $(function(){
                     $('#components_friction').val(components["minecraft:friction"]);
                 }
                 if(components["minecraft:flammable"]!=null){
-                    flammable = components["minecraft:flammable"];
+                    const flammable = components["minecraft:flammable"];
                     $('#components_flame_odds').val(flammable.flame_odds);
                     if(flammable.flame_odds!=0){
                         $('#components_burn_odds').val(flammable.burn_odds);
@@ -379,7 +383,7 @@ $(function(){
                     $('#components_friction').val(components["minecraft:friction"].value);
                 }
                 if(components["minecraft:flammable"]!=null){
-                    flammable = components["minecraft:flammable"];
+                    const flammable = components["minecraft:flammable"];
                     $('#components_flame_odds').val(flammable.flame_odds);
                     if(flammable.flame_odds!=0){
                         $('#components_burn_odds').val(flammable.burn_odds);
@@ -404,18 +408,18 @@ $(function(){
     }
     // json 出力
     function exportJSON(){
-        var json_raw = {};
+        let json_raw = {};
         json_raw.format_version = format_version;
         json_raw["minecraft:block"] = {};
 
-        description = new Object();
+        let description = new Object();
         description.identifier = $('#description_block_name').val();
         description.is_experimental = $('#description_is_experimental').is(':checked');
         description.register_to_creative_menu = $('#description_register_to_creative_menu').is(':checked');
 
         json_raw["minecraft:block"]["description"] = description;
 
-        components = new Object();
+        let components = new Object();
 
         switch(format_version){
             case "1.16.0":
@@ -424,7 +428,7 @@ $(function(){
                 components["minecraft:explosion_resistance"] = parseFloat($('#components_explosion_resistance').val());
                 components["minecraft:friction"] = parseFloat($('#components_friction').val());
                 if($('#components_flame_odds').val()!="0"){
-                    flammable = new Object();
+                    let flammable = new Object();
                     flammable.flame_odds = parseInt($('#components_flame_odds').val(), 10);
                     flammable.burn_odds = parseInt($('#components_burn_odds').val(), 10);
                     components["minecraft:flammable"] = flammable;
@@ -439,7 +443,7 @@ $(function(){
                 components["minecraft:explosion_resistance"] = { value : parseFloat($('#components_explosion_resistance').val()) };
                 components["minecraft:friction"] = { value : parseFloat($('#components_friction').val()) };
                 if($('#components_flame_odds').val()!="0"){
-                    flammable = new Object();
+                    let flammable = new Object();
                     flammable.flame_odds = parseInt($('#components_flame_odds').val(), 10);
                     flammable.burn_odds = parseInt($('#components_burn_odds').val(), 10);
                     components["minecraft:flammable"] = flammable;
@@ -453,7 +457,7 @@ $(function(){
         }
 
         json_raw["minecraft:block"]["components"] = components;
-        
+
         return JSON.stringify(json_raw,null,'  ');
     }
 })

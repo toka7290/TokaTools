@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="ja">
+
     <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/websaite#">
         <meta charset="UTF-8">
-        <title>とかさんのBlockGenelator</title>
+        <title>とかさんのBlockGenerator</title>
         <!-- metadata -->
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <meta name="keywords" content="とかさん,Minecraft,マインクラフト,block,ブロック,json,Genelator,tool,ツール,Addon,アドオン">
+        <meta name="keywords" content="とかさん,Minecraft,マインクラフト,block,ブロック,json,Generator,tool,ツール,Addon,アドオン">
         <meta name="Description" content="Minecraft Bedrock Edition 向けのアドオン作成補助ツールです。block jsonを簡単に作ることができます。">
         <meta http-equiv="content-language" content="ja">
-        <meta name ="theme-color" content="#60ad5e">
-        <meta property="og:url" content="https://toka7290.github.io/TokaTools/TokaBlockGenelator/" />
+        <meta name="theme-color" content="#60ad5e">
+        <meta property="og:url" content="https://toka7290.github.io/TokaTools/TokaBlockGenerator/" />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="とかさんのBlockGenelator" />
-        <meta property="og:title" content="BlockGenelator" />
+        <meta property="og:site_name" content="とかさんのBlockGenerator" />
+        <meta property="og:title" content="BlockGenerator" />
         <meta property="og:description" content="Minecraft Bedrock Edition 向けのアドオン作成補助ツールです。block jsonを簡単に作ることができます。" />
-        <meta property="og:image" content="https://toka7290.github.io/TokaTools/TokaBlockGenelator/img/icon_2000.png" />
+        <meta property="og:image" content="https://toka7290.github.io/TokaTools/TokaBlockGenerator/img/icon_2000.png" />
         <meta name="twitter:card" content="summary">
         <meta name="twitter:site" content="@toka7290">
         <link rel="apple-touch-icon" href="img/icon_apple-touch-icon.png">
@@ -24,7 +25,7 @@
             {
                 "@context": "http://schema.org",
                 "@type": "WebApplication",
-                "name": "とかさんのBlockGenelator",
+                "name": "とかさんのBlockGenerator",
                 "applicationCategory": "DeveloperApplication",
                 "applicationSubCategory": "Minecraft Block json Addon",
                 "image": "img/icon_2000.png",
@@ -39,23 +40,23 @@
                     "price": "0",
                     "priceCurrency": "JPN"
                 },
-                "url": "https://toka7290.github.io/TokaTools/TokaBlockGenelator/",
+                "url": "https://toka7290.github.io/TokaTools/TokaBlockGenerator/",
                 "operatingSystem": "Any. It is a Web Application"
             }
         </script>
         <script>
             if ('serviceWorker' in navigator) {
-                window.addEventListener("load", function() {
-                    navigator.serviceWorker.register('/TokaTools/TokaBlockGenelator/serviceworker.js', {scope: '/TokaTools/TokaBlockGenelator/'})
-                    .then(function(registration) {
-                        // registration worked
-                        registration.onupdatefound = function() {
-                            registration.update();
-                        }
-                    }).catch(function(error) {
-                        // registration failed
-                        console.error("serviceWorker failed");
-                    });
+                window.addEventListener("load", function () {
+                    navigator.serviceWorker.register('/TokaTools/TokaBlockGenerator/serviceworker.js', { scope: '/TokaTools/TokaBlockGenerator/' })
+                        .then(function (registration) {
+                            // registration worked
+                            registration.onupdatefound = function () {
+                                registration.update();
+                            }
+                        }).catch(function (error) {
+                            // registration failed
+                            console.error("serviceWorker failed");
+                        });
                 });
             }
             let deferredPrompt;
@@ -75,12 +76,13 @@
         <link rel="stylesheet" href="css/prism.css" media="all" defer>
         <link rel="stylesheet" href="css/phone.css" media="(max-width: 35rem)" async>
     </head>
+
     <body>
         <header class="header">
             <div class="header_main">
                 <img src="img/icon.webp" alt="" class="title_icon" onerror="this.src='img/icon_2000.png'">
                 <div class="title">
-                    <h1>とかさんのBlockGenelator</h1>
+                    <h1>とかさんのBlockGenerator</h1>
                     <p>version:1.0.0</p>
                 </div>
                 <div class="header_menu">
@@ -107,10 +109,18 @@
                     <div class="open_more_info">
                         <img src="img/more.svg" alt="">
                         <ul class="more_info">
-                            <li><a href="https://tokamcwin10.blog.jp/" target="_blank" title="とかさんのホームページ" rel="noopener noreferrer"><img src="img/homepage.svg" alt=""><p>Homepage</p></a></li>
-                            <li><a href="https://twitter.com/toka7290" target="_blank" title="Twitter" rel="noopener noreferrer"><img src="img/twitter.svg" alt=""><p>Twitter</p></a></li>
-                            <li><a href="https://github.com/toka7290/TokaTools" target="_blank" title="Github" rel="noopener noreferrer"><img src="img/github.svg" alt=""><p>GitHub</p></a></li>
-                            <li><a href="https://tokamcwin10.blog.jp/article-37132278" target="_blank" title="Block.jsonの解説ページに飛びます。" rel="noopener noreferrer"><img src="img/help.svg" alt=""><p>Block Help</p></a></li>
+                            <li><a href="https://tokamcwin10.blog.jp/" target="_blank" title="とかさんのホームページ" rel="noopener noreferrer"><img src="img/homepage.svg" alt="">
+                                    <p>Homepage</p>
+                                </a></li>
+                            <li><a href="https://twitter.com/toka7290" target="_blank" title="Twitter" rel="noopener noreferrer"><img src="img/twitter.svg" alt="">
+                                    <p>Twitter</p>
+                                </a></li>
+                            <li><a href="https://github.com/toka7290/TokaTools" target="_blank" title="Github" rel="noopener noreferrer"><img src="img/github.svg" alt="">
+                                    <p>GitHub</p>
+                                </a></li>
+                            <li><a href="https://tokamcwin10.blog.jp/article-37132278" target="_blank" title="Block.jsonの解説ページに飛びます。" rel="noopener noreferrer"><img src="img/help.svg" alt="">
+                                    <p>Block Help</p>
+                                </a></li>
                         </ul>
                     </div>
                 </div>
@@ -123,7 +133,7 @@
                 </div>
                 <div class="about_content">
                     <img src="img/icon.webp" alt="" onerror="this.src='img/icon_2000.png'">
-                    <h2>とかさんのBlockGenelator</h2>
+                    <h2>とかさんのBlockGenerator</h2>
                     <p>version:1.0.0</p>
                     <div id="page_share"><img src="img/share.svg" alt=""></div>
                     <div class="about_external_link">
@@ -142,12 +152,15 @@
         <div class="content">
             <div class="editor">
                 <form name="editor_main">
-                    <fieldset class="basic" title="このブロックのフォーマットバージョンを設定します。">
-                        <label for="format_version">フォーマットバージョン</label>
-                        <select name="format_version" id="format_version">
-                            <option value="1.16.0">1.16.0</option>
-                            <option value="1.12.0">1.12.0</option>
-                        </select>
+                    <fieldset class="basic">
+                        <legend>Definition</legend>
+                        <div title="このブロック.jsonのフォーマットバージョンを設定します。">
+                            <label for="format_version">フォーマットバージョン</label>
+                            <select name="format_version" id="format_version">
+                                <option value="1.16.0">1.16.0</option>
+                                <option value="1.12.0">1.12.0</option>
+                            </select>
+                        </div>
                     </fieldset>
                     <fieldset class="description">
                         <legend>Description</legend>
@@ -215,9 +228,9 @@
             <div class="separator"></div>
             <div class="data_check">
                 <div class="preview">
-                    <div class="preview_contlrol_bar">
-                        <p class="preview_contlrol_copy">Copy</p>
-                        <p class="preview_contlrol_download">Download</p>
+                    <div class="preview_control_bar">
+                        <p class="preview_control_copy">Copy</p>
+                        <p class="preview_control_download">Download</p>
                     </div>
                     <pre class="language-json">
                         <code class="language-json"></code>
@@ -227,17 +240,17 @@
                     </label>
                 </div>
                 <div class="issue">
-                    <div class="issue_contlrol_bar">
-                        <div class="issue_contlrol_label">
+                    <div class="issue_control_bar">
+                        <div class="issue_control_label">
                             <img src="img/chevron-up.svg" alt="img" class="open">
                             <span>問題</span>
                         </div>
-                        <div class="issue_contlrol_num">
-                            <div class="issue_contlrol_warning">
+                        <div class="issue_control_num">
+                            <div class="issue_control_warning">
                                 <img src="img/warning.svg" alt="">
                                 <span class="issue_warning_num">警告:0</span>
                             </div>
-                            <div class="issue_contlrol_error">
+                            <div class="issue_control_error">
                                 <img src="img/error.svg" alt="">
                                 <span class="issue_error_num">エラー:0</span>
                             </div>
@@ -251,4 +264,5 @@
             </div>
         </div>
     </body>
+
 </html>
