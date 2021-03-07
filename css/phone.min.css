@@ -1,0 +1,1 @@
+@media screen and (max-width:22rem){.tool-list{grid-template-columns:repeat(auto-fit,minmax(10rem,1fr))}}.footer_wrapper{display:grid;justify-content:center}.footer_wrapper>div{display:grid}.footer_title .footer_credit{border:none;margin:0;padding:0}.footer_wrapper>div{display:inline-grid;justify-items:center}

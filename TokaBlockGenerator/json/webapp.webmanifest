@@ -1,5 +1,5 @@
 {
-  "name": "とかさんのBlockGenerator",
+  "name": "とかさんの Block Generator",
   "short_name": "BlockGenerator",
   "description": "Minecraft Bedrock Edition 向けのアドオン作成補助ツールです。block jsonを簡単に作ることができます。",
   "display": "standalone",

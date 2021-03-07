@@ -1,5 +1,5 @@
 {
-  "name": "とかさんのItemGenerator",
+  "name": "とかさんの Item Generator",
   "short_name": "ItemGenerator",
   "description": "Minecraft Bedrock Edition 向けのアドオン作成補助ツールです。Item jsonを簡単に作ることができます。",
   "display": "standalone",
