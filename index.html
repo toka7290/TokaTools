@@ -62,7 +62,7 @@
                 <div class="content_tools">
                     <h2>Tools</h2>
                     <div class="searcher">
-                        <div class="tagfilter">
+                        <div class="tag-filter">
                             <form>
                                 <fieldset>
                                     <legend>絞り込み</legend>
@@ -101,75 +101,6 @@
                                     </span>
                                 </fieldset>
                             </form>
-                            <style>
-                                input.invisible-Control {
-                                    /* 不可視ボタン */
-                                    width: 0;
-                                    filter: alpha(opacity=0);
-                                    -moz-opacity: 0;
-                                    opacity: 0;
-                                    -webkit-appearance: none;
-                                    appearance: none;
-                                    position: absolute;
-                                    pointer-events: none;
-                                }
-
-                                .checkbox-body {
-                                    display: grid;
-                                    grid-template-rows: 1fr;
-                                    grid-template-columns: auto 1fr;
-                                    align-items: center;
-                                    user-select: none;
-                                    -ms-user-select: none;
-                                    -moz-user-select: none;
-                                    -webkit-user-select: none;
-                                    cursor: pointer;
-                                }
-
-                                .checkbox-body-text {
-                                    margin: 0 0 0 0.5rem;
-                                    min-width: 8rem;
-                                }
-
-                                input:disabled+.checkbox-body:hover {
-                                    cursor: auto;
-                                }
-
-                                .checkbox-body-box {
-                                    /* はこ */
-                                    display: grid;
-                                    border: 3px solid #ffc67f;
-                                    background-color: #fff;
-                                    border-radius: 6px;
-                                    width: 1.5rem;
-                                    height: 1.5rem;
-                                    place-items: center;
-                                }
-
-                                input:not(:disabled):focus+.checkbox-body .checkbox-body-box,
-                                input:not(:checked)+.checkbox-body:hover .checkbox-body-box {
-                                    /* フォーカス時に枠色変更 */
-                                    border-color: #ffc67f;
-                                }
-
-                                input:not(:disabled):checked+.checkbox-body>.checkbox-body-box {
-                                    /* チェック時の色 */
-                                    background-color: #fa8b00;
-                                }
-
-                                .checkbox-body-checkMark {
-                                    /* チェックマーク */
-                                    display: block;
-                                    color: #fff;
-                                    text-align: center;
-                                }
-
-                                input:not(:disabled):not(:checked):focus+.checkbox-body .checkbox-body-checkMark,
-                                input:not(:disabled):not(:checked)+.checkbox-body:hover .checkbox-body-checkMark {
-                                    /* フォーカス、ホバー時に色変更 */
-                                    color: #888;
-                                }
-                            </style>
                         </div>
                     </div>
                     <div class="tool-list">
