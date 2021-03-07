@@ -6,11 +6,11 @@
   --color_background_2: #e2e8f0;
   --color_background_2_alt: #e2e8f0;
   --color_accent: #fa8b00;
+  --color_accent_secondary: #ffc67f;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --color_text: #ffffff;
-    --color_text-2: #808080;
     --color_tag: #cecece;
     --color_background: #000000;
     --color_background_2: #2f3235;
@@ -147,8 +147,8 @@ input:disabled + .checkbox-body:hover {
 .checkbox-body-box {
   /* はこ */
   display: grid;
-  border: 3px solid #ffc67f;
-  background-color: #fff;
+  border: 3px solid var(--color_accent_secondary);
+  background-color: var(--color_background);
   border-radius: 6px;
   width: 1.5rem;
   height: 1.5rem;
@@ -157,22 +157,22 @@ input:disabled + .checkbox-body:hover {
 input:not(:disabled):focus + .checkbox-body .checkbox-body-box,
 input:not(:checked) + .checkbox-body:hover .checkbox-body-box {
   /* フォーカス時に枠色変更 */
-  border-color: #ffc67f;
+  border-color: var(--color_accent_secondary);
 }
 input:not(:disabled):checked + .checkbox-body > .checkbox-body-box {
   /* チェック時の色 */
-  background-color: #fa8b00;
+  background-color: var(--color_accent);
 }
 .checkbox-body-checkMark {
   /* チェックマーク */
   display: block;
-  color: #fff;
+  color: var(--color_background);
   text-align: center;
 }
 input:not(:disabled):not(:checked):focus + .checkbox-body .checkbox-body-checkMark,
 input:not(:disabled):not(:checked) + .checkbox-body:hover .checkbox-body-checkMark {
   /* フォーカス、ホバー時に色変更 */
-  color: #888;
+  color: var(--color_text-2);
 }
 .tag {
   user-select: none;

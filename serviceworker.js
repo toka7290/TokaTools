@@ -1,3 +1,4 @@
+// 廃止対象
 var CACHE_NAME = "TokaTools-202003##";
 var urlsToCache = [
   "/TokaTools/",
