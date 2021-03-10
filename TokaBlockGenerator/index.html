@@ -1,27 +1,34 @@
 <!DOCTYPE html>
 <html lang="ja">
 
-    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/websaite#">
-        <meta charset="UTF-8">
-        <title>とかさんの Block Generator</title>
-        <!-- metadata -->
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <meta name="keywords" content="とかさん,Minecraft,マインクラフト,block,ブロック,json,Generator,tool,ツール,Addon,アドオン">
-        <meta name="Description" content="Minecraft Bedrock Edition 向けのアドオン作成補助ツールです。block jsonを簡単に作ることができます。">
-        <meta http-equiv="content-language" content="ja">
-        <meta name="theme-color" content="#60ad5e">
-        <meta property="og:url" content="https://toka7290.github.io/TokaTools/TokaBlockGenerator/" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="とかさんの Block Generator" />
-        <meta property="og:title" content="BlockGenerator" />
-        <meta property="og:description" content="Minecraft Bedrock Edition 向けのアドオン作成補助ツールです。block jsonを簡単に作ることができます。" />
-        <meta property="og:image" content="https://toka7290.github.io/TokaTools/TokaBlockGenerator/img/icon_2000.png" />
-        <meta name="twitter:card" content="summary">
-        <meta name="twitter:site" content="@toka7290">
-        <link rel="apple-touch-icon" href="img/icon_apple-touch-icon.png">
-        <link rel="icon" href="img/icon.webp">
-        <link rel="manifest" href="json/webapp.webmanifest">
-        <script type="application/ld+json">
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/websaite#">
+    <meta charset="UTF-8">
+    <title>とかさんの Block Generator</title>
+    <!-- metadata -->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="keywords" content="とかさん,Minecraft,マインクラフト,block,ブロック,json,Generator,tool,ツール,Addon,アドオン">
+    <meta name="Description" content="Minecraft Bedrock Edition 向けのアドオン作成補助ツールです。block jsonを簡単に作ることができます。">
+    <meta http-equiv="content-language" content="ja">
+    <meta name="theme-color" content="#3870A9">
+    <meta property="og:url" content="https://toka7290.github.io/TokaTools/TokaBlockGenerator/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="とかさんの Block Generator" />
+    <meta property="og:title" content="BlockGenerator" />
+    <meta property="og:description" content="Minecraft Bedrock Edition 向けのアドオン作成補助ツールです。block jsonを簡単に作ることができます。" />
+    <meta property="og:image" content="https://toka7290.github.io/TokaTools/TokaBlockGenerator/img/icon_2000.png" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@toka7290">
+    <!-- css -->
+    <!-- <link rel="preload" href="./css/style.min.css" as="style"> -->
+    <link rel="stylesheet" href="css/color.min.css" media="all" async>
+    <link rel="stylesheet" href="css/style.min.css" media="all" async>
+    <link rel="stylesheet" href="css/prism.min.css" media="all" async defer>
+    <link rel="stylesheet" href="css/phone.min.css" media="(max-width: 59rem)" async>
+    <!-- icon etc -->
+    <link rel="apple-touch-icon" href="img/icon_apple-touch-icon.png">
+    <link rel="icon" href="img/icon.webp">
+    <link rel="manifest" href="json/webapp.webmanifest">
+    <script type="application/ld+json">
             {
                 "@context": "http://schema.org",
                 "@type": "WebApplication",
@@ -44,225 +51,879 @@
                 "operatingSystem": "Any. It is a Web Application"
             }
         </script>
-        <script>
-            if ('serviceWorker' in navigator) {
-                window.addEventListener("load", function () {
-                    navigator.serviceWorker.register('/TokaTools/TokaBlockGenerator/serviceworker.js', { scope: '/TokaTools/TokaBlockGenerator/' })
-                        .then(function (registration) {
-                            // registration worked
-                            registration.onupdatefound = function () {
-                                registration.update();
-                            }
-                        }).catch(function (error) {
-                            // registration failed
-                            console.error("serviceWorker failed");
-                        });
-                });
-            }
-            let deferredPrompt;
-            window.addEventListener('beforeinstallprompt', (e) => {
-                e.preventDefault();
-                deferredPrompt = e;
-            });
-        </script>
-        <!-- lib -->
-        <script src="lib/jquery-3.5.1.min.js" defer></script>
-        <script src="lib/prism.js" defer></script>
-        <!-- js -->
-        <script type="text/javascript" src="js/main.js" defer></script>
-        <!-- css -->
-        <link rel="stylesheet" href="css/color.css" media="all" async>
-        <link rel="stylesheet" href="css/style.css" media="all" async>
-        <link rel="stylesheet" href="css/prism.css" media="all" defer>
-        <link rel="stylesheet" href="css/phone.css" media="(max-width: 35rem)" async>
-    </head>
+    <!-- lib -->
+    <script src="lib/jquery-3.5.1.min.js"></script>
+    <script src="lib/prism.js"></script>
+  </head>
 
-    <body>
-        <header class="header">
-            <div class="header_main">
-                <img src="img/icon.webp" alt="" class="title_icon" onerror="this.src='img/icon_2000.png'">
-                <div class="title">
-                    <h1>とかさんの Block Generator</h1>
-                    <p>version:1.0.1</p>
-                </div>
-                <div class="header_menu">
-                    <div class="import_file">
-                        <label for="input_file">Import</label><input type="file" name="input_file" id="input_file" accept=".json">
-                        <div class="help_content top" id="help_content_1">
-                            <p>すでファイルがある場合はデータをインポートします。</p>
-                        </div>
-                    </div>
-                    <div id="show_preview">
-                        <span>Preview</span>
-                        <div class="help_content top" id="help_content_3">
-                            <p>入力・編集したデータのjsonプレビュー閲覧とダウンロード・コピーをします。</p>
-                        </div>
-                    </div>
-                    <p id="show_help">help</p>
-                    <p id="open_about">About</p>
-                </div>
-                <div class="header_menu_alt">
-                    <label for="input_file" class="import_file">
-                        <img src="img/import.svg" alt="">
-                        <p>Import</p>
-                    </label>
-                    <div class="open_more_info">
-                        <img src="img/more.svg" alt="">
-                        <ul class="more_info">
-                            <li><a href="https://tokamcwin10.blog.jp/" target="_blank" title="とかさんのホームページ" rel="noopener noreferrer"><img src="img/homepage.svg" alt="">
-                                    <p>Homepage</p>
-                                </a></li>
-                            <li><a href="https://twitter.com/toka7290" target="_blank" title="Twitter" rel="noopener noreferrer"><img src="img/twitter.svg" alt="">
-                                    <p>Twitter</p>
-                                </a></li>
-                            <li><a href="https://github.com/toka7290/TokaTools" target="_blank" title="Github" rel="noopener noreferrer"><img src="img/github.svg" alt="">
-                                    <p>GitHub</p>
-                                </a></li>
-                            <li><a href="https://tokamcwin10.blog.jp/article-37132278" target="_blank" title="Block.jsonの解説ページに飛びます。" rel="noopener noreferrer"><img src="img/help.svg" alt="">
-                                    <p>Block Help</p>
-                                </a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div id="page_help">
-            </div>
-            <div class="page_about">
-                <div class="close_about">
-                    <img src="img/close.svg" alt="">
-                </div>
-                <div class="about_content">
-                    <img src="img/icon.webp" alt="" onerror="this.src='img/icon_2000.png'">
-                    <h2>とかさんの Block Generator</h2>
-                    <p>version:1.0.1</p>
-                    <div id="page_share"><img src="img/share.svg" alt=""></div>
-                    <div class="about_external_link">
-                        <a href="https://tokamcwin10.blog.jp/" target="_blank" title="とかさんのホームページ" rel="noopener noreferrer"><img src="img/homepage.svg" alt=""></a>
-                        <a href="https://twitter.com/toka7290" target="_blank" title="Twitter" rel="noopener noreferrer"><img src="img/twitter.svg" alt=""></a>
-                        <a href="https://github.com/toka7290/TokaTools" target="_blank" title="Github" rel="noopener noreferrer"><img src="img/github.svg" alt=""></a>
-                        <a href="https://tokamcwin10.blog.jp/article-37132278" target="_blank" title="Block.jsonの解説ページに飛びます。" rel="noopener noreferrer"><img src="img/help.svg" alt=""></a>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <div class="help_content bottom" id="help_content_2">
-            <p>データを編集します</p>
-            <p>エラー等は下にある[問題]タブから見ることができます。</p>
+  <body>
+    <header class="header">
+      <div class="header-main">
+        <div class="title-icon">
+          <img src="img/icon.svg" alt="" height="32px" width="32px">
         </div>
-        <div class="content">
-            <div class="editor">
-                <form name="editor_main">
-                    <fieldset class="basic">
-                        <legend>Definition</legend>
-                        <div title="このブロック.jsonのフォーマットバージョンを設定します。">
-                            <label for="format_version">フォーマットバージョン</label>
-                            <select name="format_version" id="format_version">
-                                <option value="1.16.0">1.16.0</option>
-                                <option value="1.12.0">1.12.0</option>
-                            </select>
-                        </div>
-                    </fieldset>
-                    <fieldset class="description">
-                        <legend>Description</legend>
-                        <div title="このブロックのIDを設定します。'名前空間:ブロックID'の形式で書く必要があります。">
-                            <label for="description_block_name">ブロックID</label>
-                            <input type="text" name="block_name" id="description_block_name">
-                        </div>
-                        <div title="このチェックを有効にすると、試験的なゲームプレイでのみブロックが有効化されます。">
-                            <label for="description_is_experimental">試験的なゲームプレイのみ</label>
-                            <input type="checkbox" name="description_is_experimental" id="description_is_experimental">
-                        </div>
-                        <div title="このチェックを有効にすると、ブロックがクリエイティブインベントリに追加されます。">
-                            <label for="description_register_to_creative_menu">クリエイティブメニューに追加</label>
-                            <input type="checkbox" name="description_register_to_creative_menu" id="description_register_to_creative_menu">
-                        </div>
-                    </fieldset>
-                    <fieldset class="components">
-                        <legend>Components</legend>
-                        <div title="このブロックが破壊された時に落とすアイテムが記述されたルートテーブルを指定します。">
-                            <label for="components_loot">ルートテーブル</label>
-                            <input type="text" name="components_loot" id="components_loot">
-                        </div>
-                        <div title="このブロックの破壊にかかる時間を設定します[秒]">
-                            <label for="components_destroy_time">破壊にかかる時間</label>
-                            <input type="number" min="0" name="components_destroy_time" id="components_destroy_time" value="1.0" step="0.1">
-                            <p>s</p>
-                        </div>
-                        <div title="このブロックの爆発耐性を設定します。">
-                            <label for="components_explosion_resistance">爆発耐性</label>
-                            <input type="number" min="0" name="components_explosion_resistance" id="components_explosion_resistance" value="1.0" step="0.1">
-                        </div>
-                        <div title="このブロックの上をエンティティが移動するときの止まりにくさを設定します。">
-                            <label for="components_friction">摩擦</label>
-                            <input type="number" min="0.1" name="components_friction" id="components_friction" value="0.1" step="0.1">
-                        </div>
-                        <fieldset>
-                            <legend>燃焼</legend>
-                            <div title="ブロックの燃えやすさを設定します。">
-                                <label for="components_flame_odds">発火性</label>
-                                <input type="number" min="0" name="components_flame_odds" id="components_flame_odds" value="0">
-                            </div>
-                            <div title="ブロックが燃えた後消滅する確率を設定します。">
-                                <label for="components_burn_odds">消失率</label>
-                                <input type="number" min="0" name="components_burn_odds" id="components_burn_odds" value="0" disabled>
-                                <p>%</p>
-                            </div>
-                        </fieldset>
-                        <div title="このブロックの地図での色を設定します。#000000~#ffffffまで設定できます。">
-                            <label for="components_map_color"><label for="components_map_color_pick">地図の色</label></label>
-                            <input type="text" name="components_map_color" id="components_map_color">
-                            <input type="color" name="components_map_color_pick" id="components_map_color_pick">
-                        </div>
-                        <div title="このブロックが吸収する光の量を設定します。">
-                            <label for="components_block_light_absorption">光の吸収</label>
-                            <input type="number" min="0" max="16" name="components_block_light_absorption" id="components_block_light_absorption" value="0">
-                        </div>
-                        <div title="このブロックが発する光の量を設定します。">
-                            <label for="components_block_light_emission">発光量</label>
-                            <input type="number" min="0.0" max="1.0" name="components_block_light_emission" id="components_block_light_emission" value="0.0" step="0.1">
-                            <p>=<span id="components_block_light_emission_eq"></span></p>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-            <div class="separator"></div>
-            <div class="data_check">
-                <div class="preview">
-                    <div class="preview_control_bar">
-                        <p class="preview_control_copy">Copy</p>
-                        <p class="preview_control_download">Download</p>
-                    </div>
-                    <pre class="language-json">
-                        <code class="language-json"></code>
-                    </pre>
-                    <label>
-                        <textarea name="code_buffer" id="code_buffer"></textarea>
-                    </label>
-                </div>
-                <div class="issue">
-                    <div class="issue_control_bar">
-                        <div class="issue_control_label">
-                            <img src="img/chevron-up.svg" alt="img" class="open">
-                            <span>問題</span>
-                        </div>
-                        <div class="issue_control_num">
-                            <div class="issue_control_warning">
-                                <img src="img/warning.svg" alt="">
-                                <span class="issue_warning_num">警告:0</span>
-                            </div>
-                            <div class="issue_control_error">
-                                <img src="img/error.svg" alt="">
-                                <span class="issue_error_num">エラー:0</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="issue_content">
-                        <ul class="issue_list">
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <div class="title">
+          <h1>とかさんの Block Generator</h1>
+          <p>version:1.1.0_dev</p>
         </div>
-    </body>
+        <div class="header-menu">
+          <div class="header-menu-element import-file">
+            <label for="input-file">Import</label>
+            <div class="help-content top" id="help-content-1">
+              <p>すでファイルがある場合はデータをインポートします。</p>
+            </div>
+          </div>
+          <div class="header-menu-element" id="show-preview">
+            <span>Preview</span>
+            <div class="help-content top" id="help-content-3">
+              <p>
+                入力・編集したデータの実際の表示、json閲覧とダウンロード・コピーをします。
+              </p>
+            </div>
+          </div>
+          <div class="header-menu-element">
+            <p id="show-help">help</p>
+          </div>
+          <div class="header-menu-element">
+            <label for="open-about">About</label>
+          </div>
+        </div>
+        <div class="header-menu-alt">
+          <input type="file" name="input-file" id="input-file" accept=".json" class="invisible-Control" />
+          <label for="input-file" class="import-file">
+            <img src="img/import.svg" alt="import" width="32px" height="32px" />
+            <p>Import</p>
+          </label>
+          <details class="open-more-info">
+            <summary class="more-info-icon"><img src="img/more.svg" alt="more" width="32px" height="32px" /></summary>
+            <ul class="more-info">
+              <li>
+                <a href="https://tokamcwin10.blog.jp/" target="_blank" title="とかさんのホームページ" rel="noopener noreferrer"><img src="img/homepage.svg" alt="" width="32px" height="32px" />
+                  <p>Homepage</p>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/toka7290" target="_blank" title="Twitter" rel="noopener noreferrer"><img src="img/twitter.svg" alt="" width="32px" height="32px" />
+                  <p>Twitter</p>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/toka7290/TokaTools" target="_blank" title="Github" rel="noopener noreferrer"><img src="img/github.svg" alt="" width="32px" height="32px" />
+                  <p>GitHub</p>
+                </a>
+              </li>
+              <li>
+                <a href="https://tokamcwin10.blog.jp/article-37132278" target="_blank" title="Block.jsonの解説ページに飛びます。" rel="noopener noreferrer"><img src="img/help.svg" alt="" width="32px" height="32px" />
+                  <p>Block Help</p>
+                </a>
+              </li>
+              <li>
+                <input type="button" id="open-about" class="invisible-Control">
+                <label class="open-about" for="open-about">
+                  <img src="img/icon.svg" alt="" height="32px" width="32px">
+                  <p>about</p>
+                </label>
+              </li>
+            </ul>
+          </details>
+        </div>
+      </div>
+      <div id="page-help"></div>
+      <div class="page-about about-hide">
+        <div class="about-area">
+          <div class="close-about">
+            <input type="button" id="close-about-btn" class="invisible-Control">
+            <label for="close-about-btn">
+              <img src="img/close.svg" alt="" id="close-about-image" width="50px" height="50px" />
+            </label>
+          </div>
+          <div class="about-content">
+            <img src="img/icon.svg" alt="" width="180px" height="180px">
+            <div class="about-title">
+              <h2>とかさんの Block Generator</h2>
+              <p>version:1.1.0_dev</p>
+            </div>
+            <div id="page-share"><img src="img/share.svg" alt="" width="32px" height="32px" /></div>
+            <div class="about-external-link">
+              <a href="https://tokamcwin10.blog.jp/" target="_blank" title="とかさんのホームページ" rel="noopener noreferrer"><img src="img/homepage.svg" alt="" width="32px" height="32px" /></a>
+              <a href="https://twitter.com/toka7290" target="_blank" title="Twitter" rel="noopener noreferrer"><img src="img/twitter.svg" alt="" width="32px" height="32px" /></a>
+              <a href="https://github.com/toka7290/MCAddonSetupManager" target="_blank" title="Github" rel="noopener noreferrer"><img src="img/github.svg" alt="" width="32px" height="32px" /></a>
+              <a href="https://tokamcwin10.blog.jp/article-37132278" target="_blank" title="Block.jsonの解説ページに飛びます。" rel="noopener noreferrer"><img src="img/help.svg" alt="" width="32px" height="32px" /></a>
+            </div>
+            <div class="copyright">
+              <p>Copyright (c) 2021 とかさん</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="help-content bottom" id="help-content-2">
+      <p>データを編集します</p>
+      <p>エラー等は下にある[問題]タブから見ることができます。</p>
+    </div>
+    <div class="file-drop-zone hide">
+      <div class="file-drop-zone-textarea">
+        <img src="img/import.svg" alt="import" width="50px" height="50px">
+        <p>ファイルをドロップして&NewLine;インポートします。</p>
+      </div>
+    </div>
+    <div class="content">
+      <div class="editor">
+        <div class="editor-switcher">
+          <div class="switcher-hamburger">
+            <input type="checkbox" name="hamburger-opener" id="hamburger-opener" class="invisible-Control">
+            <label for="hamburger-opener" class="switch-element-body">
+              <div class="switcher-select-mark"></div>
+              <div class="switcher-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-label="エディタタブを展開" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="3" y1="12" x2="21" y2="12"></line>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+              </div>
+            </label>
+          </div>
+          <div class="switch-element">
+            <input type="radio" name="editor-switch" id="editor-switch-main" value="main" class="invisible-Control" checked>
+            <label for="editor-switch-main" class="switch-element-body">
+              <div class="switcher-select-mark"></div>
+              <div class="switcher-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-label="Main" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2l9 4.9V17L12 22l-9-4.9V7z" />
+                </svg>
+              </div>
+              <div class="switcher-editor-name">Main</div>
+            </label>
+          </div>
+          <div class="switch-element">
+            <input type="radio" name="editor-switch" id="editor-switch-event" value="event" class="invisible-Control">
+            <label for="editor-switch-event" class="switch-element-body">
+              <div class="switcher-select-mark"></div>
+              <div class="switcher-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-label="イベント" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                  <line x1="4" y1="22" x2="4" y2="15"></line>
+                </svg>
+              </div>
+              <div class="switcher-editor-name">イベント</div>
+            </label>
+          </div>
+          <div class="switch-element">
+            <input type="radio" name="editor-switch" id="editor-switch-permutations" value="permutations" class="invisible-Control">
+            <label for="editor-switch-permutations" class="switch-element-body">
+              <div class="switcher-select-mark"></div>
+              <div class="switcher-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-label="パーミュテーション" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <path d="M21 12H3M12 3v18" />
+                </svg>
+              </div>
+              <div class="switcher-editor-name">パーミュテーション</div>
+            </label>
+          </div>
+          <div class="switch-element">
+            <input type="radio" name="editor-switch" id="editor-switch-blockState" value="blockState" class="invisible-Control">
+            <label for="editor-switch-blockState" class="switch-element-body">
+              <div class="switcher-select-mark"></div>
+              <div class="switcher-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-label="ブロック状態" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="4" y1="21" x2="4" y2="14"></line>
+                  <line x1="4" y1="10" x2="4" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12" y2="3"></line>
+                  <line x1="20" y1="21" x2="20" y2="16"></line>
+                  <line x1="20" y1="12" x2="20" y2="3"></line>
+                  <line x1="1" y1="14" x2="7" y2="14"></line>
+                  <line x1="9" y1="8" x2="15" y2="8"></line>
+                  <line x1="17" y1="16" x2="23" y2="16"></line>
+                </svg>
+              </div>
+              <div class="switcher-editor-name">ブロック状態</div>
+            </label>
+          </div>
+        </div>
+        <form name="editor-main" id="editor-main">
+          <div class="editor-element">
+            <div class="editor-element-legend">
+              <p>Definition</p>
+            </div>
+            <div class="value-element" title="このブロック.jsonのフォーマットバージョンを設定します。">
+              <div class="value-label">
+                <label for="format-version">フォーマットバージョン</label>
+              </div>
+              <div class="value-input">
+                <select name="format-version" id="format-version">
+                  <option value="1.16.100">1.16.100</option>
+                  <option value="1.16.0">1.16.0</option>
+                  <option value="1.12.0">1.12.0</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="editor-element">
+            <div class="editor-element-legend">
+              <p>Description</p>
+            </div>
+            <div class="value-element" title="このブロックのIDを設定します。'名前空間:ブロックID'の形式で書く必要があります。">
+              <div class="value-label">
+                <label for="description-block-name">ブロックID</label>
+              </div>
+              <div class="value-input">
+                <input type="text" name="block-name" id="description-block-name">
+              </div>
+            </div>
+            <div class="value-element" id="description_properties" title="-----------------">
+              <div class="value-label">
+                <label for="description-goto-blockState">ブロック状態</label>
+              </div>
+              <div class="value-input">
+                <input type="button" value="管理画面に移動する" id="description-goto-blockState">
+              </div>
+            </div>
+            <div class="value-element unsupported" id="description_is_experimental" title="このチェックを有効にすると、試験的なゲームプレイでのみブロックが有効化されます。">
+              <div class="value-checkbox">
+                <input type="checkbox" name="description-is-experimental" id="description-is-experimental" class="invisible-Control">
+                <label for="description-is-experimental" class="checkbox-body">
+                  <div class="checkbox-body-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <p class="checkbox-body-text">試験的なゲームプレイのみ</p>
+                </label>
+              </div>
+            </div>
+            <div class="value-element unsupported" id="description_register_to_creative_menu" title="このチェックを有効にすると、ブロックがクリエイティブインベントリに追加されます。">
+              <div class="value-checkbox">
+                <input type="checkbox" name="description-register-to-creative-menu" id="description-register-to-creative-menu" class="invisible-Control">
+                <label for="description-register-to-creative-menu" class="checkbox-body">
+                  <div class="checkbox-body-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <p class="checkbox-body-text">クリエイティブメニューに追加</p>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="editor-element">
+            <div class="editor-element-legend">
+              <p>Components</p>
+            </div>
+            <div class="value-element" title="このブロックが破壊された時に落とすアイテムが記述されたルートテーブルを指定します。">
+              <div class="value-label">
+                <label for="components-loot">ルートテーブル</label>
+              </div>
+              <div class="value-input">
+                <input type="text" name="components-loot" id="components-loot">
+              </div>
+            </div>
+            <div class="value-element" id="components_display_name" title="-----------------">
+              <div class="value-label">
+                <label for="components-display-name">表示名</label>
+              </div>
+              <div class="value-input">
+                <input type="text" name="components-display-name" id="components-display-name">
+              </div>
+            </div>
+            <div class="value-element" id="components_tag" title="-----------------">
+              <div class="value-label">
+                <label for="metadata-type-array">タグ</label>
+              </div>
+              <div class="value-input type-array">
+                <div class="array-list">
+                  <label class="array-data">
+                    <div class="array-num">0</div>
+                    <input type="text" class="metadata-type-array" disabled />
+                  </label>
+                </div>
+                <div class="array-list-control" title="タグ入力欄を追加します。">
+                  <div class="add-array-element">
+                    <input type="button" id="type-array-add" class="invisible-Control" disabled>
+                    <label for="type-array-add">
+                      <div class="add-array-element-text">+ タグを追加</div>
+                    </label>
+                  </div>
+                  <div class="remove-array-element" title="タグ入力欄を消します。">
+                    <input type="button" id="type-array-delete" class="invisible-Control" disabled>
+                    <label for="type-array-delete">
+                      <div class="remove-array-element-text">- タグを削除</div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- components-placement-filter -->
+            <div class="value-element" id="components_preventsjumping" title="-----------------">
+              <div class="value-checkbox">
+                <input type="checkbox" name="components-preventsJumping" id="components-preventsJumping" class="invisible-Control">
+                <label for="components-preventsJumping" class="checkbox-body">
+                  <div class="checkbox-body-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <p class="checkbox-body-text">飛び越え禁止</p>
+                </label>
+              </div>
+            </div>
+            <div class="value-element" id="components_unwalkable" title="-----------------">
+              <div class="value-checkbox">
+                <input type="checkbox" name="components-unwalkable" id="components-unwalkable" class="invisible-Control">
+                <label for="components-unwalkable" class="checkbox-body">
+                  <div class="checkbox-body-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <p class="checkbox-body-text">通り抜け禁止</p>
+                </label>
+              </div>
+            </div>
+            <div class="value-element" title="このブロックの地図での色を設定します。#000000~#ffffffまで設定できます。">
+              <div class="value-label">
+                <label>地図の色</label>
+              </div>
+              <div class="value-input type-unit">
+                <label><input type="text" name="components-map-color" id="components-map-color"></label>
+                <label><svg aria-label="色選択" style="
+                  width: 0;
+                  filter: alpha(opacity=0);
+                  -moz-opacity: 0;
+                  opacity: 0;
+                  -webkit-appearance: none;
+                  appearance: none;
+                  position: absolute;
+                  pointer-events: none;"></svg><input type="color" name="components-map-color-pick" id="components-map-color-pick"></label>
+              </div>
+            </div>
+            <!-- components-crafting-table -->
+            <!-- components-geometry -->
+            <!-- components-material-instances -->
+            <!-- components-entity-collision -->
+            <!-- components-pick-collision -->
+            <div class="value-element" id="components_rotation" title="-----------------">
+              <div class="value-label">
+                <p>回転</p>
+              </div>
+              <div class="value-input type-3D">
+                <label>
+                  <span>X=</span>
+                  <input type="number" name="" id="components-rotation-x" value="0" step="90" />
+                </label>
+                <label>
+                  <span>Y=</span>
+                  <input type="number" name="" id="components-rotation-y" value="0" step="90" />
+                </label>
+                <label>
+                  <span>Z=</span>
+                  <input type="number" name="" id="components-rotation-z" value="0" step="90" />
+                </label>
+              </div>
+            </div>
+            <div class="value-element" id="components_breathability" title="-----------------">
+              <div class="value-label">
+                <label for=components-breathability>通気性</label>
+              </div>
+              <div class="value-input">
+                <select name=components-breathability id=components-breathability>
+                  <option value="solid">solid</option>
+                  <option value="air">air</option>
+                </select>
+              </div>
+            </div>
+            <div class="value-element" title="このブロックが吸収する光の量を設定します。">
+              <div class="value-label">
+                <label for="components-block-light-absorption">光の吸収</label>
+              </div>
+              <div class="value-input">
+                <input type="number" min="0" max="16" name="components-block-light-absorption" id="components-block-light-absorption" value="0">
+              </div>
+            </div>
+            <div class="value-element" title="このブロックが発する光の量を設定します。">
+              <div class="value-label">
+                <p>発光量</p>
+              </div>
+              <div class="value-input type-unit">
+                <label>
+                  <input type="number" min="0.0" max="1.0" name="components-block-light-emission" id="components-block-light-emission" value="0.0" step="0.1">
+                  <span id="components-block-light-emission-eq">=0</span>
+                </label>
+              </div>
+            </div>
+            <div class="value-element" title="このブロックの破壊にかかる時間を設定します[秒]">
+              <div class="value-label">
+                <p>破壊にかかる時間</p>
+              </div>
+              <div class="value-input type-unit">
+                <label>
+                  <input type="number" min="0" name="components-destroy-time" id="components-destroy-time" value="1.0" step="0.1">
+                  <span>s</span>
+                </label>
+              </div>
+            </div>
+            <div class="value-element" title="このブロックの爆発耐性を設定します。">
+              <div class="value-label">
+                <label for="components-explosion-resistance">爆発耐性</label>
+              </div>
+              <div class="value-input">
+                <input type="number" min="0" name="components-explosion-resistance" id="components-explosion-resistance" value="1.0" step="0.1">
+              </div>
+            </div>
+            <div class="value-element" id="components_breakonpush" title="-----------------">
+              <div class="value-checkbox">
+                <input type="checkbox" name="components-breakonpush" id="components-breakonpush" class="invisible-Control">
+                <label for="components-breakonpush" class="checkbox-body">
+                  <div class="checkbox-body-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <p class="checkbox-body-text">ピストンで破壊</p>
+                </label>
+              </div>
+            </div>
+            <div class="value-element" id="components_immovable" title="-----------------">
+              <div class="value-checkbox">
+                <input type="checkbox" name="components-immovable" id="components-immovable" class="invisible-Control">
+                <label for="components-immovable" class="checkbox-body">
+                  <div class="checkbox-body-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <p class="checkbox-body-text">ピストン押引不可</p>
+                </label>
+              </div>
+            </div>
+            <div class="value-element" title="このブロックの上をエンティティが移動するときの止まりにくさを設定します。">
+              <div class="value-label">
+                <label for="components-friction">摩擦</label>
+              </div>
+              <div class="value-input">
+                <input type="number" min="0.1" name="components-friction" id="components-friction" value="0.1" step="0.1">
+              </div>
+            </div>
+            <div class="value-element" title="ブロックの燃えやすさを設定します。">
+              <div class="value-label">
+                <label for="components-flame-odds">燃焼発火性</label>
+              </div>
+              <div class="value-input">
+                <input type="number" min="0" name="components-flame-odds" id="components-flame-odds" value="0">
+              </div>
+            </div>
+            <div class="value-element" title="ブロックが燃えた後消滅する確率を設定します。">
+              <div class="value-label">
+                <p>燃焼消失率</p>
+              </div>
+              <div class="value-input type-unit">
+                <label>
+                  <input type="number" min="0" name="components-burn-odds" id="components-burn-odds" value="0" disabled>
+                  <span>%</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </form>
+        <form name="editor-event" id="editor-event" class="hide">
+          <div class="event status-block">
+            <div class="event status-block-controls">
+              <div class="event status-block-header">
+                <div class="event status-block-title">
+                  <p>Event</p>
+                </div>
+                <div class="event status-block-controlBar">
+                  <div class="event add-status-block" title="-----------------">
+                    <label class="invisible-Control">
+                      <input type="button" id="event-add" class="event">
+                      <div class="add-button-text">+ 追加</div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="event status-blocks">
+              <div class="event status-block-content">
+                <div class="editor-element" title="-----------------">
+                  <div class="editor-element-legend changeable">
+                    <label><input type="text" name="event-name" class="event-name" placeholder="プロパティ名"></label>
+                    <div class="event remove-status-block" title="-----------------">
+                      <label class="invisible-Control">
+                        <input type="button" id="event-delete" class="event">
+                        <div class="remove-button-text">- 削除</div>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="value-element" title="-----------------">
+                    <div class="value-label">
+                      <label for="set-block-property">ブロックプロパティのセット</label>
+                    </div>
+                    <div class="value-input">
+                      <input type="text" name="uuid" id="set-block-property" />
+                    </div>
+                  </div>
+                  <div class="value-element" title="-----------------">
+                    <div class="value-label">
+                      <label for="blockState-type">型</label>
+                    </div>
+                    <div class="value-input">
+                      <select name="blockState-type" class="blockState-type">
+                        <option value="Boolean">Boolean</option>
+                        <option value="Integer">Integer</option>
+                        <option value="String">String</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="value-element" title="-----------------">
+                    <div class="value-label">
+                      <label for="blockState-type-array">取りうる値</label>
+                    </div>
+                    <div class="value-input type-type-arrays">
+                      <div class="array-list">
+                        <label class="array-data">
+                          <div class="array-num">0</div>
+                          <input type="text" class="blockState-type-array" />
+                        </label>
+                      </div>
+                      <div class="array-list-control" title="値入力欄を追加します。">
+                        <div class="add-array-element">
+                          <input type="button" id="type-array-add" class="invisible-Control">
+                          <label for="type-array-add">
+                            <div class="add-array-element-text">+ 値を追加</div>
+                          </label>
+                        </div>
+                        <div class="remove-array-element" title="値入力欄を消します。">
+                          <input type="button" id="type-array-delete" class="invisible-Control">
+                          <label for="type-array-delete">
+                            <div class="remove-array-element-text">- 値を削除</div>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <form name="editor-permutations" id="editor-permutations" class="editor-permutations hide">
+          <div class="permutations block-tab">
+            <div class="permutations block-tab-controls">
+              <div class="permutations block-tab-header">
+                <div class="permutations block-tab-title">
+                  <p>Permutations</p>
+                </div>
+                <div class="permutations block-tab-controlBar">
+                  <div class="permutations add-block-tab" title="-----------------">
+                    <label class="invisible-Control">
+                      <input type="button" id="permutations-add" class="permutations" disabled>
+                      <div class="add-button-text">+ 追加</div>
+                    </label>
+                  </div>
+                  <div class="permutations remove-block-tab" title="-----------------">
+                    <label class="invisible-Control">
+                      <input type="button" id="permutations-delete" class="permutations" disabled>
+                      <div class="remove-button-text">- 削除</div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="permutations block-tab-controls-list">
+                <label class="permutations block-tab-children invisible-Control">
+                  <input type="radio" name="permutations block-tab" class="permutations" checked>
+                  <div class="tab-number">0</div>
+                </label>
+                <label class="permutations block-tab-children invisible-Control">
+                  <input type="radio" name="permutations block-tab" class="permutations">
+                  <div class="tab-number">1</div>
+                </label>
+              </div>
+            </div>
+            <div class="permutations block-tab-contents">
+              <div class="permutations tab-content selected">
+                <div class="editor-element" title="-----------------">
+                  <div class="editor-element-legend">
+                    <p>Condition</p>
+                  </div>
+                  <div class="value-element" title="-----------------">
+                    <div class="value-label">
+                      <label for="permutations_condition">状況</label>
+                    </div>
+                    <div class="value-input">
+                      <input type="text" name="uuid" id="permutations_condition" />
+                    </div>
+                  </div>
+                </div>
+                <div class="editor-element" title="-----------------">
+                  <div class="editor-element-legend">
+                    <p>Components</p>
+                  </div>
+                  <div class="value-element" title="サブパックのフォルダー名を指定します。">
+                    <div class="value-label">
+                      <label for="subpacks_folder_name">フォルダー名</label>
+                    </div>
+                    <div class="value-input">
+                      <input type="text" name="uuid" id="subpacks_folder_name" />
+                    </div>
+                  </div>
+                  <div class="value-element" title="サブパックの実際に表示される名前を設定します。">
+                    <div class="value-label">
+                      <label for="subpacks_name">名前</label>
+                    </div>
+                    <div class="value-input">
+                      <input type="text" name="uuid" id="subpacks_name" />
+                    </div>
+                  </div>
+                  <div class="value-element" title="このサブパックのメモリ使用量">
+                    <div class="value-label">
+                      <label for="subpacks_memory_tier">メモリティア</label>
+                    </div>
+                    <div class="value-input">
+                      <input type="number" min="0" name="subpacks_memory_tier" id="subpacks_memory_tier" value="0" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <form name="editor-blockState" id="editor-blockState" class="editor-blockState hide">
+          <div class="blockState status-block">
+            <div class="blockState status-block-controls">
+              <div class="blockState status-block-header">
+                <div class="blockState status-block-title">
+                  <p>BlockState</p>
+                </div>
+                <div class="blockState status-block-controlBar">
+                  <div class="blockState add-status-block" title="-----------------">
+                    <label class="invisible-Control">
+                      <input type="button" id="blockState-add" class="blockState">
+                      <div class="add-button-text">+ 追加</div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <script>
+              $("#blockState-add").on("click", () => {
+                $(".blockState.status-blocks").append($("#blockState-status-block").contents().clone());
+              });
+              $(document).on("click", "input.blockState-delete", (event) => {
+                $(event.target).parents(".status-block-content").remove();
+              });
+              $(document).on("click", "select.blockState-type", (event) => {
+                const select_elem = $(event.target);
+                const select_elem_val = select_elem.val();
+                const editor_element = select_elem.parents(".editor-element");
+                ["Boolean", "Integer", "String"].forEach((val) => {
+                  editor_element.find(`.${val}`).toggleClass("hide", val != select_elem_val);
+                });
+              });
+              $(document).on("click", "input.add-array-element", (event) => {
+                const value_input = $(event.target).parents(".value-input");
+                const array_list = value_input.find(".array-list");
+                array_list.append(
+                  $("<label>").addClass("array-data").append(
+                    $("<div>").addClass("array-num").text(array_list.children().length),
+                    (() => {
+                      const input = $("<input>");
+                      if (value_input.hasClass("type-array-integer")) {
+                        input.attr("type", "number").addClass("blockState-integer type-array-integer");
+                      } else if (value_input.hasClass("type-array-string")) {
+                        input.attr("type", "text").addClass("blockState-string type-array-string");
+                      }
+                      return input;
+                    })()
+                  )
+                )
+              });
+              $(document).on("click", "input.remove-array-element", (event) => {
+                $(event.target).parents(".status-block-content").remove();
+              });
+            </script>
+            <template id="blockState-status-block">
+              <div class="blockState status-block-content">
+                <div class="editor-element" title="-----------------">
+                  <div class="editor-element-legend changeable">
+                    <label><input type="text" name="blockState-name" class="blockState-name" placeholder="プロパティ名"></label>
+                    <div class="blockState remove-status-block" title="-----------------">
+                      <label class="invisible-Control">
+                        <input type="button" class="blockState-delete blockState">
+                        <div class="remove-button-text">- 削除</div>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="value-element" title="-----------------">
+                    <div class="value-label">
+                      <label for="blockState-type">型</label>
+                    </div>
+                    <div class="value-input">
+                      <select name="blockState-type" class="blockState-type">
+                        <option value="Boolean">Boolean</option>
+                        <option value="Integer">Integer</option>
+                        <option value="String">String</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="value-element Boolean" title="-----------------">
+                    <label class="value-checkbox">
+                      <input type="checkbox" class="blockState-boolean invisible-Control">
+                      <div class="checkbox-body">
+                        <div class="checkbox-body-box">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                        </div>
+                        <p class="checkbox-body-text">trueをデフォルトに</p>
+                      </div>
+                    </label>
+                  </div>
+                  <div class="value-element Integer hide" title="-----------------">
+                    <div class="value-label">
+                      <label for="blockState-integer">取りうる値</label>
+                    </div>
+                    <div class="value-input type-array-integer">
+                      <div class="array-list">
+                        <label class="array-data">
+                          <div class="array-num">0</div>
+                          <input type="number" class="blockState-integer type-array-integer" />
+                        </label>
+                      </div>
+                      <div class="array-list-control" title="値入力欄を追加します。">
+                        <label class="add-array">
+                          <input type="button" class="add-array-element invisible-Control">
+                          <div class="add-array-label">
+                            <div class="add-array-element-text">+ 値を追加</div>
+                          </div>
+                        </label>
+                        <label class="remove-array" title="値入力欄を消します。">
+                          <input type="button" class="remove-array-element invisible-Control">
+                          <div class="remove-array-label">
+                            <div class="remove-array-element-text">- 値を削除</div>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="value-element String hide" title="-----------------">
+                    <div class="value-label">
+                      <label for="blockState-string">取りうる値</label>
+                    </div>
+                    <div class="value-input type-array-string">
+                      <div class="array-list">
+                        <label class="array-data">
+                          <div class="array-num">0</div>
+                          <input type="text" class="blockState-string type-array-string" />
+                        </label>
+                      </div>
+                      <div class="array-list-control" title="値入力欄を追加します。">
+                        <label class="add-array">
+                          <input type="button" class="add-array-element invisible-Control">
+                          <div class="add-array-label">
+                            <div class="add-array-element-text">+ 値を追加</div>
+                          </div>
+                        </label>
+                        <label class="remove-array" title="値入力欄を消します。">
+                          <input type="button" class="remove-array-element invisible-Control">
+                          <div class="remove-array-label">
+                            <div class="remove-array-element-text">- 値を削除</div>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+            <div class="blockState status-blocks">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="separator"></div>
+      <div class="data-check">
+        <div class="preview">
+          <div class="preview-control-bar">
+            <div class="preview-control-child" title="jsonをクリップボードにコピーします。">
+              <input type="button" id="control-copy" class="invisible-Control">
+              <label for="control-copy" class="control-text">
+                <p id="control-copy-text">Copy</p>
+              </label>
+            </div>
+            <div class="preview-control-child" title="manifest.jsonをダウンロードします。">
+              <input type="button" id="control-download" class="invisible-Control">
+              <label for="control-download" class="control-text">
+                <p>Download</p>
+              </label>
+            </div>
+          </div>
+          <div class="code-preview">
+            <pre class="language-json">
+              <code class="language-json"></code>
+            </pre>
+            <label>
+              <textarea name="code-buffer" id="code-buffer" tabindex="-1"></textarea>
+            </label>
+          </div>
+        </div>
+        <div class="issue">
+          <input type="checkbox" name="issue-control" id="issue-control" class="invisible-Control">
+          <label for="issue-control" class="issue-status-bar">
+            <div class="issue-status-label">
+              <svg xmlns="http://www.w3.org/2000/svg" class="close" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 15l-6-6-6 6" />
+              </svg>
+              <span>問題</span>
+            </div>
+            <div class="issue-status-num">
+              <div class="issue-status-warning">
+                <img src="img/warning.svg" alt="" width="19px" height="19px" />
+                <span class="issue-warning-num">警告:0</span>
+              </div>
+              <div class="issue-status-error">
+                <img src="img/error.svg" alt="" width="19px" height="19px" />
+                <span class="issue-error-num">エラー:0</span>
+              </div>
+            </div>
+          </label>
+          <div class="issue-content" style="display: none;">
+            <ul class="issue-list"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="unsupported">
+      <p>ご利用のブラウザ(Internet Explorer)では利用できません。</p>
+      <p><a href="microsoft-edge:https://toka7290.github.io/TokaTools/TokaBlockGenerator/" target="_blank" rel="noopener noreferrer">Edge</a>,Chrome,Firefox,Safariをご利用ください</p>
+    </div>
+    <!-- sw -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker.register('/TokaTools/TokaBlockGenerator/serviceworker.js', { scope: '/TokaTools/TokaBlockGenerator/' })
+            .then(function (registration) {
+              // registration worked
+              registration.onupdatefound = function () {
+                registration.update();
+              }
+            }).catch(function (error) {
+              // registration failed
+              console.error("serviceWorker failed");
+            });
+        });
+      }
+      let deferredPrompt;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+      });
+    </script>
+    <!-- lib -->
+    <!-- <script src="lib/jquery-3.5.1.min.js" defer></script>
+    <script src="lib/prism.js" defer></script> -->
+    <!-- js -->
+    <script type="text/javascript" src="js/main.min.js" defer></script>
+  </body>
 
 </html>
