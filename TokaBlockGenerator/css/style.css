@@ -536,6 +536,112 @@ input:not(:disabled):focus + .remove-button-text {
   color: var(--color-remove);
 }
 
+.tab-navigation {
+  /* 通常タブ */
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: 1fr;
+  margin: 1rem;
+}
+.tab-controls {
+  /* コントロール部分 */
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: 1fr;
+  grid-gap: 1rem;
+  place-items: center end;
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+.tab-body {
+  /* tab部分 */
+  display: flex;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-scrollbar-track) transparent;
+}
+.tab-children {
+  /* tab子要素 */
+  display: block;
+  flex-grow: 1;
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.77, 0, 0.18, 1);
+}
+.tab-number {
+  /* tab番号 */
+  /* ブロック状タブと共通 */
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 2rem;
+  grid-template-rows: 2rem;
+  justify-content: center;
+  justify-content: center;
+}
+.tab-underBar {
+  /* tab下線 */
+  position: absolute;
+  width: 50%;
+  height: 3px;
+  left: 25%;
+  right: 25%;
+  bottom: 0;
+}
+input[type="radio"]:checked ~ .tab-underBar {
+  /* 選択時の下線 */
+  background-color: var(--color-toolbar);
+  transition: all 0.5s cubic-bezier(0.77, 0, 0.18, 1);
+}
+.tab-number:hover,
+input:focus ~ .tab-number {
+  /* タブホバー */
+  background-color: var(--color-toolbar-hover);
+}
+.tab-number:hover ~ .tab-underBar,
+input:focus ~ .tab-underBar {
+  /* タブホバー下線 */
+  width: 100%;
+  left: 0;
+  right: 0;
+}
+.add-tab,
+.remove-tab {
+  /* 追加削除 */
+  font-size: small;
+}
+.add-tab-label-text,
+.remove-tab-label-text {
+  /* 追加削除の文字 */
+  padding: 0.25rem;
+  margin: 0;
+}
+.add-tab-label:hover,
+input:not(:disabled):focus ~ .add-tab-label {
+  /* 追加ホバーフォーカス */
+  cursor: pointer;
+  color: var(--color-add);
+}
+.remove-tab-label:hover,
+input:not(:disabled):focus ~ .remove-tab-label {
+  /* 削除ホバーフォーカス */
+  cursor: pointer;
+  color: var(--color-remove);
+}
+.tab-container {
+  /* 選択以外非表示 */
+  display: none;
+}
+.tab-container.selected {
+  /* 選択表示 */
+  display: block;
+  /* 通常タブ end  */
+}
+
 .block-tab-controls {
   /* ブロック状タブ */
   padding: 1rem 0;
@@ -571,19 +677,13 @@ input:not(:disabled):focus + .remove-button-text {
   justify-items: center;
   padding: 0 1rem;
 }
-.tab-number {
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  grid-template-columns: 2rem;
-  grid-template-rows: 2rem;
-}
 .block-tab-children > input[type="radio"]:checked + .tab-number {
   background-color: rgb(130, 188, 255);
   /* ブロック状タブ end */
 }
 
 .status-block {
+  /* ステータス リスト状 */
   position: relative;
 }
 .status-block-controls {
@@ -612,6 +712,7 @@ input:not(:disabled):focus + .remove-button-text {
   grid-template-rows: 1fr;
   padding: 0.5rem;
   grid-gap: 1rem;
+  /* ステータス リスト状 end */
 }
 
 .editor-element {
@@ -724,7 +825,8 @@ input:not(:disabled):not(:checked) + .checkbox-body:hover .checkbox-body-checkMa
 
 .multi-values-list,
 .type-array-integer,
-.type-array-string {
+.type-array-string,
+.type-array-select {
   /* 複数入力 */
   display: grid;
   grid-gap: 0.5rem;
@@ -855,6 +957,72 @@ input.remove-array-element:not(:disabled):focus + .remove-array-label {
   appearance: none;
   position: absolute;
   pointer-events: none;
+}
+
+.value-input.type-modal > label {
+  /* モーダル入力 */
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+  margin-left: 0;
+}
+.modal {
+  /* 背景部分 */
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0000007a;
+  z-index: 9;
+  overflow-y: auto;
+}
+.modal.hide {
+  /* 通常時非表示 */
+  display: none;
+}
+.modal-dialog {
+  /* ダイアログ部分 */
+  max-width: 50%;
+  margin: 2rem auto;
+  background: var(--color-element-background);
+  border-radius: 0.5rem;
+}
+.modal-header {
+  /* ヘッダー */
+  padding: 1rem 1.5rem;
+  border-bottom: var(--color-input-disabled) solid 2px;
+  display: grid;
+  grid-template-columns: auto 2rem;
+  grid-template-rows: 1fr;
+  justify-content: normal;
+  align-items: center;
+}
+.modal-title {
+  /* タイトル */
+  margin: 0;
+  font-size: large;
+  font-weight: bolder;
+}
+.modal-close-btn {
+  /* ヘッダー閉じる */
+  width: 2rem;
+  height: 2rem;
+}
+.modal-close-btn:hover {
+  /* 閉じるボタンホバー */
+  cursor: pointer;
+  color: var(--color-textNeither);
+}
+.modal-footer {
+  /* フッター */
+  display: grid;
+  justify-content: end;
+  align-content: center;
+  padding: 1rem 1.5rem;
+  border-top: var(--color-input-disabled) solid 2px;
+  /* モーダル入力 end */
 }
 
 #components-block-light-emission-eq {

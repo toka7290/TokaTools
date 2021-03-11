@@ -186,8 +186,11 @@ $(function () {
   });
 
   // color change
-  $("#components-map-color").on("change", function () {
-    $("#components-map-color-pick").val($("#components-map-color").val().toString());
+  $(".components-map-color").on("change", function (event) {
+    $(event.target)
+      .closest(".type-color")
+      .find(".components-map-color-pick")
+      .val($(event.target).val().toString());
   });
 
   // フォーマットバージョン変更
@@ -298,7 +301,8 @@ $(function () {
   }
   // 色変更
   function onChangedColor() {
-    $("#components-map-color").val($("#components-map-color-pick").val().toString());
+    const element = $(".components-map-color-pick");
+    element.closest(".type-color").find(".components-map-color").val(element.val().toString());
   }
   // 発光量変更
   function onChangedBlockLightEmission() {

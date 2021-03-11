@@ -311,6 +311,15 @@
             <div class="editor-element-legend">
               <p>Components</p>
             </div>
+            <div class="editor-element-legend changeable">
+              <p>Components</p>
+              <label class="remove-array" title="-----------------">
+                <input type="button" class="remove-array-element invisible-Control">
+                <div class="remove-array-label">
+                  <div class="remove-array-element-text">- タグを削除</div>
+                </div>
+              </label>
+            </div>
             <div class="value-element" title="このブロックが破壊された時に落とすアイテムが記述されたルートテーブルを指定します。">
               <div class="value-label">
                 <p>ルートテーブル</p>
@@ -335,7 +344,7 @@
                 <div class="array-list">
                   <label class="array-data">
                     <div class="array-num">0</div>
-                    <input type="text" class="components_tag type-array-string" />
+                    <input type="text" class="components-tag type-array-string" />
                   </label>
                 </div>
                 <div class="array-list-control" title="タグ入力欄を追加します。">
@@ -354,7 +363,144 @@
                 </div>
               </div>
             </div>
-            <!-- components-placement-filter -->
+            <div class="value-element" id="components_placement_filter" title="-----------------">
+              <div class="value-label">
+                <p>配置フィルター</p>
+                <script>
+                  $(document).on("click", ".components-placement-filter", (event) => {
+                    $(event.target).parents(".type-modal").find(".modal").removeClass("hide");
+                  });
+                  $(document).on("click", ".modal", (event) => {
+                    const click_element = $(event.target);
+                    if (!click_element.closest(".modal-content").length) {
+                      click_element.parents(".type-modal").find(".modal").addClass("hide");
+                    }
+                  });
+                  $(document).on("click", ".modal-close", (event) => {
+                    const click_element = $(event.target);
+                    click_element.parents(".type-modal").find(".modal").addClass("hide");
+                  });
+                </script>
+              </div>
+              <div class="value-input type-modal">
+                <label><input type="button" value="編集" class="components-placement-filter"></label>
+                <div class="modal hide">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <div class="modal-title">コンディション</div>
+                        <label class="modal-close-btn">
+                          <input type="button" value="閉じる" class="modal-close invisible-Control">
+                          <div class="close-btn-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                              <line x1="18" y1="6" x2="6" y2="18"></line>
+                              <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                          </div>
+                        </label>
+                      </div>
+                      <div class="modal-body">
+                        <div class="tabpanel">
+                          <div class="tab-navigation">
+                            <div class="tab-body">
+                              <label class="tab-children invisible-Control">
+                                <input type="radio" name="components-placement-filter-conditions" class="components-placement-filter-conditions" checked>
+                                <div class="tab-number">0</div>
+                                <div class="tab-underBar"></div>
+                              </label>
+                            </div>
+                            <div class="tab-controls">
+                              <label class="add-tab" title="-----------------">
+                                <input type="button" class="add-tab-element invisible-Control">
+                                <div class="add-tab-label">
+                                  <div class="add-tab-label-text">+ 追加</div>
+                                </div>
+                              </label>
+                              <label class="remove-tab" title="-----------------">
+                                <input type="button" class="remove-tab-element invisible-Control">
+                                <div class="remove-tab-label">
+                                  <div class="remove-tab-label-text">- 削除</div>
+                                </div>
+                              </label>
+                            </div>
+                          </div>
+                          <div class="tab-contents">
+                            <div class="tab-container selected">
+                              <div class="value-element" title="-----------------">
+                                <div class="value-label">
+                                  <p>許可する面</p>
+                                </div>
+                                <div class="value-input type-array-select">
+                                  <div class="array-list">
+                                    <label class="array-data">
+                                      <div class="array-num">0</div>
+                                      <select name="format-version" class="allowed_faces type-array-select">
+                                        <option value="up">上</option>
+                                        <option value="down">下</option>
+                                        <option value="north">北</option>
+                                        <option value="south">南</option>
+                                        <option value="east">東</option>
+                                        <option value="west">西</option>
+                                        <option value="side">側面</option>
+                                        <option value="all">全面</option>
+                                      </select>
+                                    </label>
+                                  </div>
+                                  <div class="array-list-control" title="-----------------">
+                                    <label class="add-array">
+                                      <input type="button" class="add-array-element invisible-Control">
+                                      <div class="add-array-label">
+                                        <div class="add-array-element-text">+ 追加</div>
+                                      </div>
+                                    </label>
+                                    <label class="remove-array" title="-----------------">
+                                      <input type="button" class="remove-array-element invisible-Control">
+                                      <div class="remove-array-label">
+                                        <div class="remove-array-element-text">- 削除</div>
+                                      </div>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="value-element" title="-----------------">
+                                <div class="value-label">
+                                  <p>ブロック</p>
+                                </div>
+                                <div class="value-input type-array-string">
+                                  <div class="array-list">
+                                    <label class="array-data">
+                                      <div class="array-num">0</div>
+                                      <input type="text" class="components-tag type-array-string" />
+                                    </label>
+                                  </div>
+                                  <div class="array-list-control" title="タグ入力欄を追加します。">
+                                    <label class="add-array">
+                                      <input type="button" class="add-array-element invisible-Control">
+                                      <div class="add-array-label">
+                                        <div class="add-array-element-text">+ 追加</div>
+                                      </div>
+                                    </label>
+                                    <label class="remove-array" title="タグ入力欄を消します。">
+                                      <input type="button" class="remove-array-element invisible-Control">
+                                      <div class="remove-array-label">
+                                        <div class="remove-array-element-text">- 削除</div>
+                                      </div>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <label><input type="button" value="Close" class="modal-close"></label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="value-element" id="components_preventsjumping" title="-----------------">
               <label class="value-checkbox">
                 <input type="checkbox" name="components-preventsJumping" class="components-preventsJumping invisible-Control">
@@ -705,18 +851,18 @@
               $(".blockState.status-block-body").append($("#blockState-status-block").contents().clone());
             });
             $(document).on("click", "input.blockState-delete", (event) => {
-              $(event.target).parents(".status-block-content").remove();
+              $(event.target).closest(".status-block-content").remove();
             });
             $(document).on("click", "select.blockState-type", (event) => {
               const select_elem = $(event.target);
               const select_elem_val = select_elem.val();
-              const editor_element = select_elem.parents(".editor-element");
+              const editor_element = select_elem.closest(".editor-element");
               ["Boolean", "Integer", "String"].forEach((val) => {
                 editor_element.find(`.${val}`).toggleClass("hide", val != select_elem_val);
               });
             });
             $(document).on("click", "input.add-array-element", (event) => {
-              const value_input = $(event.target).parents(".value-input");
+              const value_input = $(event.target).closest(".value-input");
               const array_list = value_input.find(".array-list");
               array_list.append(
                 $("<label>").addClass("array-data").append(
@@ -727,6 +873,17 @@
                       input.attr("type", "number").addClass("blockState-integer type-array-integer");
                     } else if (value_input.hasClass("type-array-string")) {
                       input.attr("type", "text").addClass("blockState-string type-array-string");
+                    } else if (value_input.hasClass("type-array-select")) {
+                      return $("<select>").attr("name", "format-version").addClass("allowed_faces type-array-select").append(
+                        $('<option value="up">上</option>'),
+                        $('<option value="down">下</option>'),
+                        $('<option value="north">北</option>'),
+                        $('<option value="south">南</option>'),
+                        $('<option value="east">東</option>'),
+                        $('<option value="west">西</option>'),
+                        $('<option value="side">側面</option>'),
+                        $('<option value="all">全面</option>')
+                      )
                     }
                     return input;
                   })()
@@ -734,7 +891,7 @@
               )
             });
             $(document).on("click", "input.remove-array-element", (event) => {
-              $(event.target).parents(".value-input").find(".array-list> :last-child").remove();
+              $(event.target).closest(".value-input").find(".array-list> :last-child").remove();
             });
           </script>
           <template id="blockState-status-block">
