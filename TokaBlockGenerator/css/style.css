@@ -433,7 +433,7 @@ div.content {
   display: flex;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow-y: hidden;
   scrollbar-width: thin;
   scrollbar-color: var(--color-scrollbar-track) transparent;
 }
@@ -495,13 +495,10 @@ div.editor.drag-lock {
 }
 
 /* div.editor form {
-   フォーム 
+   フォーム
   width: 100%;
   padding: 1em;
   box-sizing: border-box;
-  overflow-y: scroll;
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-scrollbar-track) transparent;
 } */
 div.editor form.hide {
   display: none;
@@ -509,6 +506,13 @@ div.editor form.hide {
 .editor-permutations,
 .editor-blockState {
   display: grid;
+}
+.editor-main,
+.editor-blockState {
+  max-height: 100vh;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-scrollbar-track) transparent;
 }
 .disabled {
   /* 無効状態 */
@@ -573,10 +577,18 @@ input:not(:disabled):focus + .remove-button-text {
   align-items: center;
   grid-template-columns: 2rem;
   grid-template-rows: 2rem;
+}
+.block-tab-children > input[type="radio"]:checked + .tab-number {
+  background-color: rgb(130, 188, 255);
   /* ブロック状タブ end */
 }
 
+.status-block {
+  position: relative;
+}
 .status-block-controls {
+  position: sticky;
+  top: 0;
   padding: 1rem 0;
   background-color: white;
 }
@@ -600,10 +612,6 @@ input:not(:disabled):focus + .remove-button-text {
   grid-template-rows: 1fr;
   padding: 0.5rem;
   grid-gap: 1rem;
-}
-
-.block-tab-children > input[type="radio"]:checked + .tab-number {
-  background-color: rgb(130, 188, 255);
 }
 
 .editor-element {
@@ -817,6 +825,36 @@ input.remove-array-element:not(:disabled):focus + .remove-array-label {
 .type-unit > label > input {
   max-width: 100vw;
   /* 相互変換入力用 end */
+}
+
+.type-color {
+  /* 色選択 */
+  display: grid;
+  align-items: center;
+  grid-template-rows: 1fr;
+  grid-template-columns: 2fr auto;
+  grid-gap: 1rem;
+}
+.type-color > label {
+  display: grid;
+  width: 100%;
+  align-items: center;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+}
+.type-color > label > input {
+  max-width: 100vw;
+  /* 色選択 end */
+}
+.accessibility-label {
+  width: 0;
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  opacity: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
+  pointer-events: none;
 }
 
 #components-block-light-emission-eq {
