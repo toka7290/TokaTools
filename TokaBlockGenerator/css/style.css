@@ -763,6 +763,11 @@ input:not(:disabled):focus ~ .remove-tab-label {
   margin-left: 0;
 }
 
+.switchable-element.hide {
+  /* 入力切替方式用 */
+  display: none;
+}
+
 .value-checkbox {
   /* チェックボックス用 */
   position: relative;
