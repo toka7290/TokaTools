@@ -366,24 +366,9 @@
             <div class="value-element" id="components_placement_filter" title="-----------------">
               <div class="value-label">
                 <p>配置フィルター</p>
-                <script>
-                  $(document).on("click", ".components-placement-filter", (event) => {
-                    $(event.target).parents(".type-modal").find(".modal").removeClass("hide");
-                  });
-                  $(document).on("click", ".modal", (event) => {
-                    const click_element = $(event.target);
-                    if (!click_element.closest(".modal-content").length) {
-                      click_element.parents(".type-modal").find(".modal").addClass("hide");
-                    }
-                  });
-                  $(document).on("click", ".modal-close", (event) => {
-                    const click_element = $(event.target);
-                    click_element.parents(".type-modal").find(".modal").addClass("hide");
-                  });
-                </script>
               </div>
               <div class="value-input type-modal">
-                <label><input type="button" value="編集" class="components-placement-filter"></label>
+                <label><input type="button" value="編集" class="modal-open"></label>
                 <div class="modal hide">
                   <div class="modal-dialog">
                     <div class="modal-content">
@@ -404,7 +389,7 @@
                           <div class="tab-navigation">
                             <div class="tab-body">
                               <label class="tab-children invisible-Control">
-                                <input type="radio" name="components-placement-filter-conditions" class="components-placement-filter-conditions" checked>
+                                <input type="radio" name="placement-filter-conditions" class="placement-filter-conditions" checked>
                                 <div class="tab-number">0</div>
                                 <div class="tab-underBar"></div>
                               </label>
@@ -847,6 +832,65 @@
             </div>
           </div>
           <script>
+            // モーダル開く
+            $(document).on("click", ".modal-open", (event) => {
+              $(event.target).parents(".type-modal").find(".modal").removeClass("hide");
+            });
+            // モーダル閉じる
+            $(document).on("click", ".modal", (event) => {
+              const click_element = $(event.target);
+              if (!click_element.closest(".modal-content").length) {
+                click_element.parents(".type-modal").find(".modal").addClass("hide");
+              }
+            });
+            // モーダル閉じる(ボタン)
+            $(document).on("click", ".modal-close", (event) => {
+              const click_element = $(event.target);
+              click_element.parents(".type-modal").find(".modal").addClass("hide");
+            });
+            //tab変更
+            $(document).on("click", ".tab-children>input[type=radio]", (event) => {
+              const target = $(event.target);
+              const tabNumber = Number(target.next(".tab-number").text());
+              target.closest(".tabpanel").find(".tab-container").removeClass("selected");
+              target.closest(".tabpanel").find(".tab-container").eq(tabNumber).addClass("selected");
+            });
+            //tab追加
+            $(document).on("click", ".add-tab-element", (event) => {
+              const target = $(event.target);
+              const tabpanel = target.closest(".tabpanel");
+              const body = tabpanel.find(".tab-body");
+              const child = tabpanel.find(".tab-body > :first-child").clone();
+              child.find(".tab-number").text(body.children().length);
+              body.append(child);
+              const tab_contents = tabpanel.find(".tab-contents");
+              tab_contents.append(
+                tab_contents.children("div:first-child").clone().removeClass("selected")
+              )
+            });
+            //tab削除
+            $(document).on("click", ".remove-tab-element", (event) => {
+              const target = $(event.target);
+              let tabpanel = target.closest(".tabpanel");
+              let child = tabpanel.find(".tab-body > .tab-children");
+              let child_len = child.length;
+              let checked_index = 0;
+              for (let index = 0; index < child_len; index++) {
+                if (child.eq(index).find("input[type=radio]").is(":checked")) {
+                  checked_index = index;
+                  break;
+                }
+              }
+              tabpanel.find(".tab-container").eq(checked_index).remove();
+              child.eq(checked_index).remove();
+              tabpanel.find(".tab-container:first-child").addClass("selected");
+              child = tabpanel.find(".tab-body > .tab-children");
+              child_len = child.length;
+              for (let index = 0; index < child_len; index++) {
+                child.eq(index).find("input[type=radio]").prop("checked", index == 0);
+                child.eq(index).find(".tab-number").text(index);
+              }
+            });
             $("#blockState-add").on("click", () => {
               $(".blockState.status-block-body").append($("#blockState-status-block").contents().clone());
             });
