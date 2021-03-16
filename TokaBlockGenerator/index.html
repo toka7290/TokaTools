@@ -595,8 +595,146 @@
                 </div>
               </div>
             </div>
-            <!-- components-geometry -->
-            <!-- components-material-instances -->
+            <div class="value-element" id="components-geometry" title="-----------------">
+              <div class="value-label">
+                <p>ジオメトリ</p>
+              </div>
+              <div class="value-input type-modal">
+                <label><input type="button" value="編集" class="modal-open"></label>
+                <div class="modal hide">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <div class="modal-title">ジオメトリ</div>
+                        <label class="modal-close-btn">
+                          <input type="button" value="閉じる" class="modal-close invisible-Control">
+                          <div class="close-btn-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                              <line x1="18" y1="6" x2="6" y2="18"></line>
+                              <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                          </div>
+                        </label>
+                      </div>
+                      <div class="modal-body">
+                        <div class="value-element switchable-content" title="-----------------">
+                          <div class="value-label">
+                            <p>形状</p>
+                          </div>
+                          <label class="value-input">
+                            <select name="components-geometry-switch" class="components-geometry-switch">
+                              <option value="val_cube">立方体</option>
+                              <option value="val_geometry">ジオメトリを指定</option>
+                            </select>
+                          </label>
+                        </div>
+                        <div class="switchable-element val_cube"></div>
+                        <div class="switchable-element val_geometry hide">
+                          <div class="value-element" title="-----------------">
+                            <div class="value-label">
+                              <p>ジオメトリ</p>
+                            </div>
+                            <label class="value-input">
+                              <input type="text" name="components-geometry-" class="components-geometry">
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <label><input type="button" value="Close" class="modal-close"></label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="value-element" id="components-material-instances" title="-----------------">
+              <div class="value-label">
+                <p>マテリアルインスタンス</p>
+              </div>
+              <div class="value-input type-array-modal">
+                <div class="array-list">
+                  <label class="array-data type-modal">
+                    <div class="array-num">0</div>
+                    <input type="button" value="編集" class="modal-open">
+                    <div class="modal hide">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <div class="modal-title">マテリアル</div>
+                            <label class="modal-close-btn">
+                              <input type="button" value="閉じる" class="modal-close invisible-Control">
+                              <div class="close-btn-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                              </div>
+                            </label>
+                          </div>
+                          <div class="modal-body">
+                            <div class="value-element" title="-----------------">
+                              <div class="value-label">
+                                <p>設定面</p>
+                              </div>
+                              <label class="value-input">
+                                <select name="components-material-instances-face" class="components-material-instances-face">
+                                  <option value="all">全面</option>
+                                  <option value="up">上</option>
+                                  <option value="down">下</option>
+                                  <option value="north">北</option>
+                                  <option value="south">南</option>
+                                  <option value="east">東</option>
+                                  <option value="west">西</option>
+                                </select>
+                              </label>
+                            </div>
+                            <div class="value-element" title="-----------------">
+                              <div class="value-label">
+                                <p>テクスチャ</p>
+                              </div>
+                              <label class="value-input">
+                                <input type="text" name="components-material-instances-texture" class="components-material-instances-texture">
+                              </label>
+                            </div>
+                            <div class="value-element" title="-----------------">
+                              <div class="value-label">
+                                <p>マテリアル</p>
+                              </div>
+                              <label class="value-input">
+                                <select name="components-material-instances-material" class="components-material-instances-material">
+                                  <option value="opaque">不透明</option>
+                                  <option value="alpha_test">透過</option>
+                                  <option value="blend">半透過</option>
+                                  <option value="double_sided">double_sided</option>
+                                </select>
+                              </label>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <label><input type="button" value="Close" class="modal-close"></label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+                <div class="array-list-control" title="タグ入力欄を追加します。">
+                  <label class="add-array">
+                    <input type="button" class="add-array-element invisible-Control">
+                    <div class="add-array-label">
+                      <div class="add-array-element-text">+ 追加</div>
+                    </div>
+                  </label>
+                  <label class="remove-array" title="タグ入力欄を消します。">
+                    <input type="button" class="remove-array-element invisible-Control">
+                    <div class="remove-array-label">
+                      <div class="remove-array-element-text">- 削除</div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
             <div class="value-element" id="components-entity-collision" title="-----------------">
               <div class="value-label">
                 <p>衝突判定</p>
@@ -932,68 +1070,526 @@
               </div>
             </div>
             <div class="event status-block-body">
-              <div class="event status-block-content">
-                <div class="editor-element" title="-----------------">
-                  <div class="editor-element-legend changeable">
-                    <label><input type="text" name="event-name" class="event-name" placeholder="プロパティ名"></label>
-                    <div class="event remove-status-block" title="-----------------">
-                      <label class="invisible-Control">
-                        <input type="button" id="event-delete" class="event">
-                        <div class="remove-button-text">- 削除</div>
-                      </label>
-                    </div>
-                  </div>
-                  <div class="value-element" title="-----------------">
-                    <div class="value-label">
-                      <label for="set-block-property">ブロックプロパティのセット</label>
-                    </div>
-                    <div class="value-input">
-                      <input type="text" name="uuid" id="set-block-property" />
-                    </div>
-                  </div>
-                  <div class="value-element" title="-----------------">
-                    <div class="value-label">
-                      <label for="blockState-type">型</label>
-                    </div>
-                    <div class="value-input">
-                      <select name="blockState-type" class="blockState-type">
-                        <option value="Boolean">Boolean</option>
-                        <option value="Integer">Integer</option>
-                        <option value="String">String</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="value-element" title="-----------------">
-                    <div class="value-label">
-                      <label for="blockState-type-array">取りうる値</label>
-                    </div>
-                    <div class="value-input type-type-arrays">
-                      <div class="array-list">
-                        <label class="array-data">
-                          <div class="array-num">0</div>
-                          <input type="text" class="blockState-type-array" />
-                        </label>
-                      </div>
-                      <div class="array-list-control" title="値入力欄を追加します。">
-                        <div class="add-array-element">
-                          <input type="button" id="type-array-add" class="invisible-Control">
-                          <label for="type-array-add">
-                            <div class="add-array-element-text">+ 値を追加</div>
-                          </label>
+            </div>
+          </div>
+          <template id="event-status-block">
+            <div class="event status-block-content">
+              <div class="editor-element" title="-----------------">
+                <div class="editor-element-legend changeable">
+                  <label><input type="text" name="event-name" class="event-name" placeholder="イベント名"></label>
+                  <div class="event block-content-element-control" title="-----------------">
+                    <label class="invisible-Control type-modal">
+                      <input type="button" class="modal-open">
+                      <div class="add-button-text">+ 追加</div>
+                      <div class="modal hide">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <div class="modal-title">コンポーネント</div>
+                              <label class="modal-close-btn">
+                                <input type="button" value="閉じる" class="modal-close invisible-Control">
+                                <div class="close-btn-icon">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                  </svg>
+                                </div>
+                              </label>
+                            </div>
+                            <div class="modal-body">
+                              <div class="value-element" id="event_responses_set_block_property" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_set_block_property" class="event_responses_set_block_property invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">ブロックプロパティ</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_set_block_at_pos" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_set_block_at_pos" class="event_responses_set_block_at_pos invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">ブロック設置</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_spawn_loot" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_spawn_loot" class="event_responses_spawn_loot invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">ルートをスポーン</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_add_mob_effect" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_add_mob_effect" class="event_responses_add_mob_effect invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">エフェクト付与</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_remove_mob_effect" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_remove_mob_effect" class="event_responses_remove_mob_effect invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">エフェクト削除</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_damage" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_damage" class="event_responses_damage invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">ダメージ</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_decrement_stack" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_decrement_stack" class="event_responses_decrement_stack invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">アイテムデクリメント</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_die" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_die" class="event_responses_die invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">キルする</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_play_effect" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_play_effect" class="event_responses_play_effect invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">エフェクトを再生</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_play_sound" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_play_sound" class="event_responses_play_sound invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">サウンドを再生</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_teleport" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_teleport" class="event_responses_teleport invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">テレポート</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_transform_item" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_transform_item" class="event_responses_transform_item invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">アイテム変換</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_trigger" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_trigger" class="event_responses_trigger invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">イベントトリガー</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_run_command" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_run_command" class="event_responses_run_command invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">コマンド実行</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_swing" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_swing" class="event_responses_swing invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">スウィング</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_sequence" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_sequence" class="event_responses_sequence invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">シーケンスを設定</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_randomize" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_randomize" class="event_responses_randomize invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">ランダムに選択</p>
+                                  </div>
+                                </label>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <label><input type="button" value="Close" class="modal-close"></label>
+                            </div>
+                          </div>
                         </div>
-                        <div class="remove-array-element" title="値入力欄を消します。">
-                          <input type="button" id="type-array-delete" class="invisible-Control">
-                          <label for="type-array-delete">
-                            <div class="remove-array-element-text">- 値を削除</div>
-                          </label>
+                      </div>
+                    </label>
+                    <label class="invisible-Control">
+                      <input type="button" class="event-delete event">
+                      <div class="remove-button-text">- 削除</div>
+                    </label>
+                  </div>
+                </div>
+
+                ダメージ
+                アイテムデクリメント
+                キルする
+                エフェクトを再生
+                サウンドを再生
+                テレポート
+                アイテム変換
+                イベントトリガー
+                コマンド実行
+                スウィング
+                シーケンスを設定
+                ランダムに選択
+                <div class="value-element" id="event_responses_set_block_property" title="-----------------">
+                  <div class="value-label">
+                    <p>ブロックプロパティ</p>
+                  </div>
+                  <label class="value-input">
+                    <input type="text" name="event-responses-set-block-property" class="event-responses-set-block-property">
+                  </label>
+                </div>
+                <div class="value-element" id="event_responses_set_block_at_pos" title="-----------------">
+                  <div class="value-label">
+                    <p>ブロック設置</p>
+                  </div>
+                  <div class="value-input type-modal">
+                    <label><input type="button" value="編集" class="modal-open"></label>
+                    <div class="modal hide">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <div class="modal-title">ブロック設置</div>
+                            <label class="modal-close-btn">
+                              <input type="button" value="閉じる" class="modal-close invisible-Control">
+                              <div class="close-btn-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                              </div>
+                            </label>
+                          </div>
+                          <div class="modal-body">
+                            <div class="value-element switchable-content" title="-----------------">
+                              <div class="value-label">
+                                <p>モード</p>
+                              </div>
+                              <label class="value-input">
+                                <select name="event-responses-set-block-switch" class="event-responses-set-block-switch">
+                                  <option value="val_normal">通常</option>
+                                  <option value="val_position">座標指定</option>
+                                </select>
+                              </label>
+                            </div>
+                            <div class="switchable-element val_normal"></div>
+                            <div class="switchable-element val_position hide">
+                              <div class="value-element" title="-----------------">
+                                <div class="value-label">
+                                  <p>座標</p>
+                                </div>
+                                <div class="value-input type-3D">
+                                  <label>
+                                    <span>X=</span>
+                                    <input type="number" name="" class="event-responses-set-block-position-x" value="0" step="90" />
+                                  </label>
+                                  <label>
+                                    <span>Y=</span>
+                                    <input type="number" name="" class="event-responses-set-block-position-y" value="0" step="90" />
+                                  </label>
+                                  <label>
+                                    <span>Z=</span>
+                                    <input type="number" name="" class="event-responses-set-block-position-z" value="0" step="90" />
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="value-element" title="-----------------">
+                              <div class="value-label">
+                                <p>ブロック</p>
+                              </div>
+                              <label class="value-input">
+                                <input type="text" name="event-responses-set-block-id" class="event-responses-set-block-id">
+                              </label>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <label><input type="button" value="Close" class="modal-close"></label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="value-element" id="event_responses_spawn_loot" title="-----------------">
+                  <div class="value-label">
+                    <p>ルートをスポーン</p>
+                  </div>
+                  <label class="value-input">
+                    <input type="text" name="event-responses-spawn-loot" class="event-responses-spawn-loot">
+                  </label>
+                </div>
+                <div class="value-element" id="event_responses_add_mob_effect" title="-----------------">
+                  <div class="value-label">
+                    <p>エフェクト付与</p>
+                  </div>
+                  <div class="value-input type-modal">
+                    <label><input type="button" value="編集" class="modal-open"></label>
+                    <div class="modal hide">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <div class="modal-title">エフェクト付与</div>
+                            <label class="modal-close-btn">
+                              <input type="button" value="閉じる" class="modal-close invisible-Control">
+                              <div class="close-btn-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                              </div>
+                            </label>
+                          </div>
+                          <div class="modal-body">
+                            <div class="value-element" title="-----------------">
+                              <div class="value-label">
+                                <p>エフェクトID</p>
+                              </div>
+                              <label class="value-input">
+                                <input type="text" name="event-responses-add-mob-effect-id" class="event-responses-add-mob-effect-id">
+                              </label>
+                            </div>
+                            <div class="value-element" title="このブロックの爆発耐性を設定します。">
+                              <div class="value-label">
+                                <p>amplifier</p>
+                              </div>
+                              <label class="value-input">
+                                <input type="number" min="0" name="event-responses-add-mob-effect-amplifier" class="event-responses-add-mob-effect-amplifier" value="1" step="1">
+                              </label>
+                            </div>
+                            <div class="value-element" title="このブロックの爆発耐性を設定します。">
+                              <div class="value-label">
+                                <p>duration</p>
+                              </div>
+                              <label class="value-input">
+                                <input type="number" min="0" name="event-responses-add-mob-effect-duration" class="event-responses-add-mob-effect-duration" value="1" step="1">
+                              </label>
+                            </div>
+                          </div>
+                          <div class="value-element" title="-----------------">
+                            <div class="value-label">
+                              <p>ターゲット</p>
+                            </div>
+                            <div class="value-input">
+                              <select name="event-responses-add-mob-effect-target" class="event-responses-add-mob-effect-target" id="test">
+                                <option value="default">default</option>
+                                <option value="self">self</option>
+                                <option value="holder">holder</option>
+                                <option value="baby">baby</option>
+                                <option value="other">other</option>
+                                <option value="player">player</option>
+                                <option value="target">target</option>
+                                <option value="parent">parent</option>
+                                <option value="block">block</option>
+                                <option value="damager">damager</option>
+                                <option value="item">item</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <label><input type="button" value="Close" class="modal-close"></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="value-element" id="event_responses_remove_mob_effect" title="-----------------">
+                  <div class="value-label">
+                    <p>エフェクト削除</p>
+                  </div>
+                  <div class="value-input type-modal">
+                    <label><input type="button" value="編集" class="modal-open"></label>
+                    <div class="modal hide">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <div class="modal-title">エフェクト削除</div>
+                            <label class="modal-close-btn">
+                              <input type="button" value="閉じる" class="modal-close invisible-Control">
+                              <div class="close-btn-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                              </div>
+                            </label>
+                          </div>
+                          <div class="modal-body">
+                            <div class="value-element" title="-----------------">
+                              <div class="value-label">
+                                <p>エフェクトID</p>
+                              </div>
+                              <label class="value-input">
+                                <input type="text" name="event-responses-remove-mob-effect-id" class="event-responses-remove-mob-effect-id" placeholder="all">
+                              </label>
+                            </div>
+                          </div>
+                          <div class="value-element" title="-----------------">
+                            <div class="value-label">
+                              <p>ターゲット</p>
+                            </div>
+                            <div class="value-input">
+                              <select name="event-responses-remove-mob-effect-target" class="event-responses-remove-mob-effect-target" id="test">
+                                <option value="default">default</option>
+                                <option value="self">self</option>
+                                <option value="holder">holder</option>
+                                <option value="baby">baby</option>
+                                <option value="other">other</option>
+                                <option value="player">player</option>
+                                <option value="target">target</option>
+                                <option value="parent">parent</option>
+                                <option value="block">block</option>
+                                <option value="damager">damager</option>
+                                <option value="item">item</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <label><input type="button" value="Close" class="modal-close"></label>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <div class="value-element" title="-----------------">
+                <div class="value-label">
+                  <label for="blockState-type">型</label>
+                </div>
+                <div class="value-input">
+                  <select name="blockState-type" class="blockState-type" id="test" multiple>
+                    <option value="val_Boolean">Boolean</option>
+                    <option value="val_Integer">Integer</option>
+                    <option value="val_String">String</option>
+                  </select>
+                </div>
+              </div>
             </div>
-          </div>
+          </template>
+          <script>
+            $("#event-add").on("click", () => {
+              $(".event.status-block-body").append($("#event-status-block").contents().clone());
+            });
+            $(document).on("click", "input.event-delete", (event) => {
+              $(event.target).closest(".status-block-content").remove();
+            });
+          </script>
         </form>
         <form name="editor-permutations" id="editor-permutations" class="editor-permutations hide">
           <div class="permutations block-tab">
@@ -1170,19 +1766,12 @@
             $(document).on("click", "input.blockState-delete", (event) => {
               $(event.target).closest(".status-block-content").remove();
             });
-            $(document).on("click", "select.blockState-type", (event) => {
-              const select_elem = $(event.target);
-              const select_elem_val = select_elem.val();
-              const editor_element = select_elem.closest(".editor-element");
-              ["Boolean", "Integer", "String"].forEach((val) => {
-                editor_element.find(`.${val}`).toggleClass("hide", val != select_elem_val);
-              });
-            });
+            // 配列制御 追加
             $(document).on("click", "input.add-array-element", (event) => {
               const value_input = $(event.target).closest(".value-input");
               const array_list = value_input.find(".array-list");
               array_list.append(
-                $("<label>").addClass("array-data").append(
+                $("<label>").addClass(`array-data${value_input.hasClass("type-array-modal") ? ` type-modal` : ``}`).append(
                   $("<div>").addClass("array-num").text(array_list.children().length),
                   (() => {
                     const input = $("<input>");
@@ -1201,12 +1790,21 @@
                         $('<option value="side">側面</option>'),
                         $('<option value="all">全面</option>')
                       )
+                    } else if (value_input.hasClass("type-array-modal")) {
+                      input.attr("type", "button").addClass("modal-open").val("編集");
                     }
                     return input;
+                  })(),
+                  (() => {
+                    if (value_input.hasClass("type-array-modal")) {
+                      console.log(array_list.find(":first-child .modal"))
+                      return array_list.find(":first-child .modal").clone();
+                    }
                   })()
                 )
               )
             });
+            // 配列制御 削除
             $(document).on("click", "input.remove-array-element", (event) => {
               $(event.target).closest(".value-input").find(".array-list> :last-child").remove();
             });
@@ -1223,82 +1821,88 @@
                     </label>
                   </div>
                 </div>
-                <div class="value-element" title="-----------------">
+                <div class="value-element switchable-content" title="-----------------">
                   <div class="value-label">
                     <label for="blockState-type">型</label>
                   </div>
                   <div class="value-input">
                     <select name="blockState-type" class="blockState-type">
-                      <option value="Boolean">Boolean</option>
-                      <option value="Integer">Integer</option>
-                      <option value="String">String</option>
+                      <option value="val_Boolean">Boolean</option>
+                      <option value="val_Integer">Integer</option>
+                      <option value="val_String">String</option>
                     </select>
                   </div>
                 </div>
-                <div class="value-element Boolean" title="-----------------">
-                  <label class="value-checkbox">
-                    <input type="checkbox" class="blockState-boolean invisible-Control">
-                    <div class="checkbox-body">
-                      <div class="checkbox-body-box">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                          <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
+                <div class="switchable-element val_Boolean">
+                  <div class="value-element" title="-----------------">
+                    <label class="value-checkbox">
+                      <input type="checkbox" class="blockState-boolean invisible-Control">
+                      <div class="checkbox-body">
+                        <div class="checkbox-body-box">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                        </div>
+                        <p class="checkbox-body-text">trueをデフォルトに</p>
                       </div>
-                      <p class="checkbox-body-text">trueをデフォルトに</p>
-                    </div>
-                  </label>
-                </div>
-                <div class="value-element Integer hide" title="-----------------">
-                  <div class="value-label">
-                    <label for="blockState-integer">取りうる値</label>
-                  </div>
-                  <div class="value-input type-array-integer">
-                    <div class="array-list">
-                      <label class="array-data">
-                        <div class="array-num">0</div>
-                        <input type="number" class="blockState-integer type-array-integer" />
-                      </label>
-                    </div>
-                    <div class="array-list-control" title="値入力欄を追加します。">
-                      <label class="add-array">
-                        <input type="button" class="add-array-element invisible-Control">
-                        <div class="add-array-label">
-                          <div class="add-array-element-text">+ 値を追加</div>
-                        </div>
-                      </label>
-                      <label class="remove-array" title="値入力欄を消します。">
-                        <input type="button" class="remove-array-element invisible-Control">
-                        <div class="remove-array-label">
-                          <div class="remove-array-element-text">- 値を削除</div>
-                        </div>
-                      </label>
-                    </div>
+                    </label>
                   </div>
                 </div>
-                <div class="value-element String hide" title="-----------------">
-                  <div class="value-label">
-                    <label for="blockState-string">取りうる値</label>
-                  </div>
-                  <div class="value-input type-array-string">
-                    <div class="array-list">
-                      <label class="array-data">
-                        <div class="array-num">0</div>
-                        <input type="text" class="blockState-string type-array-string" />
-                      </label>
+                <div class="switchable-element val_Integer hide">
+                  <div class="value-element" title="-----------------">
+                    <div class="value-label">
+                      <label for="blockState-integer">取りうる値</label>
                     </div>
-                    <div class="array-list-control" title="値入力欄を追加します。">
-                      <label class="add-array">
-                        <input type="button" class="add-array-element invisible-Control">
-                        <div class="add-array-label">
-                          <div class="add-array-element-text">+ 値を追加</div>
-                        </div>
-                      </label>
-                      <label class="remove-array" title="値入力欄を消します。">
-                        <input type="button" class="remove-array-element invisible-Control">
-                        <div class="remove-array-label">
-                          <div class="remove-array-element-text">- 値を削除</div>
-                        </div>
-                      </label>
+                    <div class="value-input type-array-integer">
+                      <div class="array-list">
+                        <label class="array-data">
+                          <div class="array-num">0</div>
+                          <input type="number" class="blockState-integer type-array-integer" />
+                        </label>
+                      </div>
+                      <div class="array-list-control" title="値入力欄を追加します。">
+                        <label class="add-array">
+                          <input type="button" class="add-array-element invisible-Control">
+                          <div class="add-array-label">
+                            <div class="add-array-element-text">+ 値を追加</div>
+                          </div>
+                        </label>
+                        <label class="remove-array" title="値入力欄を消します。">
+                          <input type="button" class="remove-array-element invisible-Control">
+                          <div class="remove-array-label">
+                            <div class="remove-array-element-text">- 値を削除</div>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="switchable-element val_String hide">
+                  <div class="value-element String hide" title="-----------------">
+                    <div class="value-label">
+                      <label for="blockState-string">取りうる値</label>
+                    </div>
+                    <div class="value-input type-array-string">
+                      <div class="array-list">
+                        <label class="array-data">
+                          <div class="array-num">0</div>
+                          <input type="text" class="blockState-string type-array-string" />
+                        </label>
+                      </div>
+                      <div class="array-list-control" title="値入力欄を追加します。">
+                        <label class="add-array">
+                          <input type="button" class="add-array-element invisible-Control">
+                          <div class="add-array-label">
+                            <div class="add-array-element-text">+ 値を追加</div>
+                          </div>
+                        </label>
+                        <label class="remove-array" title="値入力欄を消します。">
+                          <input type="button" class="remove-array-element invisible-Control">
+                          <div class="remove-array-label">
+                            <div class="remove-array-element-text">- 値を削除</div>
+                          </div>
+                        </label>
+                      </div>
                     </div>
                   </div>
                 </div>

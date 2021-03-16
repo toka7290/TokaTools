@@ -736,7 +736,24 @@ input:not(:disabled):focus ~ .remove-tab-label {
   /* 入力可能欄 */
   display: grid;
   grid-template-columns: 1fr auto;
-  align-items: center;
+  place-items: center start;
+  grid-gap: 1rem;
+}
+.editor-element-legend.changeable label{
+  display: grid;
+}
+.remove-status-block{
+  justify-self: end;
+}
+.block-content-element-control{    
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+  justify-self: end;
+}
+.remove-button-text{
+  word-break: keep-all;
+  white-space: nowrap;
 }
 .value-element {
   /* 入力要素 */
