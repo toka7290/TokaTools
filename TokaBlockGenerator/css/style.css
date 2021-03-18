@@ -455,6 +455,7 @@ div.editor.drag-lock {
   /* エディタ切換 */
   display: grid;
   grid-template-columns: max-content auto;
+  grid-template-rows: 100%;
 }
 .editor-switcher {
   width: fit-content;
@@ -684,7 +685,11 @@ input:not(:disabled):focus ~ .remove-tab-label {
 
 .status-block {
   /* ステータス リスト状 */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   position: relative;
+  max-height: 100%;
 }
 .status-block-controls {
   position: sticky;
@@ -713,6 +718,9 @@ input:not(:disabled):focus ~ .remove-tab-label {
   padding: 0.5rem;
   grid-gap: 1rem;
   /* ステータス リスト状 end */
+}
+.status-block-body{
+  overflow: auto;
 }
 
 .editor-element {
