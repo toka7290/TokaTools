@@ -185,14 +185,6 @@ $(function () {
     $("#editor-blockState").toggleClass("hide", hide[3]);
   });
 
-  // color change
-  $(".components-map-color").on("change", function (event) {
-    $(event.target)
-      .closest(".type-color")
-      .find(".components-map-color-pick")
-      .val($(event.target).val().toString());
-  });
-
   // フォーマットバージョン変更
   $("#format-version").on("change", function () {
     format_version = $("#format-version").val();
@@ -278,8 +270,6 @@ $(function () {
   // 更新処理
   function onChangedJSON() {
     onChangedFlammable();
-    onChangedColor();
-    onChangedBlockLightEmission();
 
     if (is_can_issue) checkIssue();
     setDelayIssue();
@@ -299,19 +289,27 @@ $(function () {
       $("#components-burn-odds").parent().addClass("disabled");
     }
   }
-  // 色変更
-  function onChangedColor() {
-    const element = $(".components-map-color-pick");
-    element.closest(".type-color").find(".components-map-color").val(element.val().toString());
-  }
+  // 色変更 color val-> color
+  $(document).on("change", ".components-map-color", (event) => {
+    $(event.target)
+      .closest(".type-color")
+      .find(".components-map-color-pick")
+      .val($(event.target).val().toString());
+  });
+  // 色変更 color -> color val
+  $(document).on("change", ".components-map-color-pick", (event) => {
+    $(event.target)
+      .closest(".type-color")
+      .find(".components-map-color")
+      .val($(event.target).val().toString());
+  });
   // 発光量変更
-  function onChangedBlockLightEmission() {
-    $("#components-block-light-emission-eq").text(
-      `= ${`  ${Math.round(parseFloat($("#components-block-light-emission").val()) * 15)}`.slice(
-        -2
-      )}`
-    );
-  }
+  $(document).on("change", ".components-block-light-emission", (event) => {
+    const target = $(event.target);
+    target
+      .next(".components-block-light-emission-eq")
+      .text(`= ${`  ${Math.round(parseFloat(target.val()) * 15)}`.slice(-2)}`);
+  });
   // イシューチェック
   function checkIssue() {
     // イシュー削除

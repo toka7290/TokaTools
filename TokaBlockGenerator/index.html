@@ -310,15 +310,6 @@
             <div class="editor-element-legend">
               <p>Components</p>
             </div>
-            <div class="editor-element-legend changeable">
-              <p>Components</p>
-              <label class="remove-array" title="-----------------">
-                <input type="button" class="remove-array-element invisible-Control">
-                <div class="remove-array-label">
-                  <div class="remove-array-element-text">- タグを削除</div>
-                </div>
-              </label>
-            </div>
             <div class="value-element" title="このブロックが破壊された時に落とすアイテムが記述されたルートテーブルを指定します。">
               <div class="value-label">
                 <p>ルートテーブル</p>
@@ -653,9 +644,11 @@
               </div>
               <div class="value-input type-array-modal">
                 <div class="array-list">
-                  <label class="array-data type-modal">
-                    <div class="array-num">0</div>
-                    <input type="button" value="編集" class="modal-open">
+                  <div class="array-data type-modal">
+                    <label>
+                      <div class="array-num">0</div>
+                      <input type="button" value="編集" class="modal-open">
+                    </label>
                     <div class="modal hide">
                       <div class="modal-dialog">
                         <div class="modal-content">
@@ -716,7 +709,7 @@
                         </div>
                       </div>
                     </div>
-                  </label>
+                  </div>
                 </div>
                 <div class="array-list-control" title="タグ入力欄を追加します。">
                   <label class="add-array">
@@ -973,7 +966,7 @@
               <div class="value-input type-unit">
                 <label>
                   <input type="number" min="0.0" max="1.0" name="components-block-light-emission" class="components-block-light-emission" value="0.0" step="0.1">
-                  <span id="components-block-light-emission-eq">=0</span>
+                  <span class="components-block-light-emission-eq">=0</span>
                 </label>
               </div>
             </div>
@@ -1049,6 +1042,258 @@
                 </label>
               </div>
             </div>
+            <div class="editor-element-footer element-contlol">
+              <div class="type-modal">
+                <label class="invisible-Control">
+                  <input type="button" class="modal-open">
+                  <div class="element-contlol-text">要素の追加・削除</div>
+                </label>
+                <div class="modal hide">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <div class="modal-title">コンポーネント</div>
+                        <label class="modal-close-btn">
+                          <input type="button" value="閉じる" class="modal-close invisible-Control">
+                          <div class="close-btn-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                              <line x1="18" y1="6" x2="6" y2="18"></line>
+                              <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                          </div>
+                        </label>
+                      </div>
+                      <div class="modal-body">
+                        <div class="value-element" id="event_responses_set_block_property" title="-----------------">
+                          <label class="value-checkbox">
+                            <input type="checkbox" name="event_responses_set_block_property" class="event_responses_set_block_property invisible-Control">
+                            <div class="checkbox-body">
+                              <div class="checkbox-body-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              </div>
+                              <p class="checkbox-body-text">ブロックプロパティ</p>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="value-element" id="event_responses_set_block_at_pos" title="-----------------">
+                          <label class="value-checkbox">
+                            <input type="checkbox" name="event_responses_set_block_at_pos" class="event_responses_set_block_at_pos invisible-Control">
+                            <div class="checkbox-body">
+                              <div class="checkbox-body-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              </div>
+                              <p class="checkbox-body-text">ブロック設置</p>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="value-element" id="event_responses_spawn_loot" title="-----------------">
+                          <label class="value-checkbox">
+                            <input type="checkbox" name="event_responses_spawn_loot" class="event_responses_spawn_loot invisible-Control">
+                            <div class="checkbox-body">
+                              <div class="checkbox-body-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              </div>
+                              <p class="checkbox-body-text">ルートをスポーン</p>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="value-element" id="event_responses_add_mob_effect" title="-----------------">
+                          <label class="value-checkbox">
+                            <input type="checkbox" name="event_responses_add_mob_effect" class="event_responses_add_mob_effect invisible-Control">
+                            <div class="checkbox-body">
+                              <div class="checkbox-body-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              </div>
+                              <p class="checkbox-body-text">エフェクト付与</p>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="value-element" id="event_responses_remove_mob_effect" title="-----------------">
+                          <label class="value-checkbox">
+                            <input type="checkbox" name="event_responses_remove_mob_effect" class="event_responses_remove_mob_effect invisible-Control">
+                            <div class="checkbox-body">
+                              <div class="checkbox-body-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              </div>
+                              <p class="checkbox-body-text">エフェクト削除</p>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="value-element" id="event_responses_damage" title="-----------------">
+                          <label class="value-checkbox">
+                            <input type="checkbox" name="event_responses_damage" class="event_responses_damage invisible-Control">
+                            <div class="checkbox-body">
+                              <div class="checkbox-body-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              </div>
+                              <p class="checkbox-body-text">ダメージ</p>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="value-element" id="event_responses_decrement_stack" title="-----------------">
+                          <label class="value-checkbox">
+                            <input type="checkbox" name="event_responses_decrement_stack" class="event_responses_decrement_stack invisible-Control">
+                            <div class="checkbox-body">
+                              <div class="checkbox-body-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              </div>
+                              <p class="checkbox-body-text">アイテムデクリメント</p>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="value-element" id="event_responses_die" title="-----------------">
+                          <label class="value-checkbox">
+                            <input type="checkbox" name="event_responses_die" class="event_responses_die invisible-Control">
+                            <div class="checkbox-body">
+                              <div class="checkbox-body-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              </div>
+                              <p class="checkbox-body-text">キルする</p>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="value-element" id="event_responses_play_effect" title="-----------------">
+                          <label class="value-checkbox">
+                            <input type="checkbox" name="event_responses_play_effect" class="event_responses_play_effect invisible-Control">
+                            <div class="checkbox-body">
+                              <div class="checkbox-body-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              </div>
+                              <p class="checkbox-body-text">パーティクルを再生</p>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="value-element" id="event_responses_play_sound" title="-----------------">
+                          <label class="value-checkbox">
+                            <input type="checkbox" name="event_responses_play_sound" class="event_responses_play_sound invisible-Control">
+                            <div class="checkbox-body">
+                              <div class="checkbox-body-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              </div>
+                              <p class="checkbox-body-text">サウンドを再生</p>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="value-element" id="event_responses_teleport" title="-----------------">
+                          <label class="value-checkbox">
+                            <input type="checkbox" name="event_responses_teleport" class="event_responses_teleport invisible-Control">
+                            <div class="checkbox-body">
+                              <div class="checkbox-body-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              </div>
+                              <p class="checkbox-body-text">テレポート</p>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="value-element" id="event_responses_transform_item" title="-----------------">
+                          <label class="value-checkbox">
+                            <input type="checkbox" name="event_responses_transform_item" class="event_responses_transform_item invisible-Control">
+                            <div class="checkbox-body">
+                              <div class="checkbox-body-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              </div>
+                              <p class="checkbox-body-text">アイテム変換</p>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="value-element" id="event_responses_trigger" title="-----------------">
+                          <label class="value-checkbox">
+                            <input type="checkbox" name="event_responses_trigger" class="event_responses_trigger invisible-Control">
+                            <div class="checkbox-body">
+                              <div class="checkbox-body-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              </div>
+                              <p class="checkbox-body-text">イベントトリガー</p>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="value-element" id="event_responses_run_command" title="-----------------">
+                          <label class="value-checkbox">
+                            <input type="checkbox" name="event_responses_run_command" class="event_responses_run_command invisible-Control">
+                            <div class="checkbox-body">
+                              <div class="checkbox-body-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              </div>
+                              <p class="checkbox-body-text">コマンド実行</p>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="value-element" id="event_responses_swing" title="-----------------">
+                          <label class="value-checkbox">
+                            <input type="checkbox" name="event_responses_swing" class="event_responses_swing invisible-Control">
+                            <div class="checkbox-body">
+                              <div class="checkbox-body-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              </div>
+                              <p class="checkbox-body-text">スウィング</p>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="value-element" id="event_responses_sequence" title="-----------------">
+                          <label class="value-checkbox">
+                            <input type="checkbox" name="event_responses_sequence" class="event_responses_sequence invisible-Control">
+                            <div class="checkbox-body">
+                              <div class="checkbox-body-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              </div>
+                              <p class="checkbox-body-text">シーケンスを設定</p>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="value-element" id="event_responses_randomize" title="-----------------">
+                          <label class="value-checkbox">
+                            <input type="checkbox" name="event_responses_randomize" class="event_responses_randomize invisible-Control">
+                            <div class="checkbox-body">
+                              <div class="checkbox-body-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              </div>
+                              <p class="checkbox-body-text">ランダムに選択</p>
+                            </div>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <label><input type="button" value="Close" class="modal-close"></label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </form>
         <form name="editor-event" id="editor-event" class="editor-event hide">
@@ -1076,255 +1321,7 @@
               <div class="editor-element" title="-----------------">
                 <div class="editor-element-legend changeable">
                   <label><input type="text" name="event-name" class="event-name" placeholder="イベント名"></label>
-                  <div class="event block-content-element-control" title="-----------------">
-                    <label class="invisible-Control type-modal">
-                      <input type="button" class="modal-open">
-                      <div class="add-button-text">+ 追加</div>
-                      <div class="modal hide">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <div class="modal-title">コンポーネント</div>
-                              <label class="modal-close-btn">
-                                <input type="button" value="閉じる" class="modal-close invisible-Control">
-                                <div class="close-btn-icon">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                  </svg>
-                                </div>
-                              </label>
-                            </div>
-                            <div class="modal-body">
-                              <div class="value-element" id="event_responses_set_block_property" title="-----------------">
-                                <label class="value-checkbox">
-                                  <input type="checkbox" name="event_responses_set_block_property" class="event_responses_set_block_property invisible-Control">
-                                  <div class="checkbox-body">
-                                    <div class="checkbox-body-box">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                      </svg>
-                                    </div>
-                                    <p class="checkbox-body-text">ブロックプロパティ</p>
-                                  </div>
-                                </label>
-                              </div>
-                              <div class="value-element" id="event_responses_set_block_at_pos" title="-----------------">
-                                <label class="value-checkbox">
-                                  <input type="checkbox" name="event_responses_set_block_at_pos" class="event_responses_set_block_at_pos invisible-Control">
-                                  <div class="checkbox-body">
-                                    <div class="checkbox-body-box">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                      </svg>
-                                    </div>
-                                    <p class="checkbox-body-text">ブロック設置</p>
-                                  </div>
-                                </label>
-                              </div>
-                              <div class="value-element" id="event_responses_spawn_loot" title="-----------------">
-                                <label class="value-checkbox">
-                                  <input type="checkbox" name="event_responses_spawn_loot" class="event_responses_spawn_loot invisible-Control">
-                                  <div class="checkbox-body">
-                                    <div class="checkbox-body-box">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                      </svg>
-                                    </div>
-                                    <p class="checkbox-body-text">ルートをスポーン</p>
-                                  </div>
-                                </label>
-                              </div>
-                              <div class="value-element" id="event_responses_add_mob_effect" title="-----------------">
-                                <label class="value-checkbox">
-                                  <input type="checkbox" name="event_responses_add_mob_effect" class="event_responses_add_mob_effect invisible-Control">
-                                  <div class="checkbox-body">
-                                    <div class="checkbox-body-box">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                      </svg>
-                                    </div>
-                                    <p class="checkbox-body-text">エフェクト付与</p>
-                                  </div>
-                                </label>
-                              </div>
-                              <div class="value-element" id="event_responses_remove_mob_effect" title="-----------------">
-                                <label class="value-checkbox">
-                                  <input type="checkbox" name="event_responses_remove_mob_effect" class="event_responses_remove_mob_effect invisible-Control">
-                                  <div class="checkbox-body">
-                                    <div class="checkbox-body-box">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                      </svg>
-                                    </div>
-                                    <p class="checkbox-body-text">エフェクト削除</p>
-                                  </div>
-                                </label>
-                              </div>
-                              <div class="value-element" id="event_responses_damage" title="-----------------">
-                                <label class="value-checkbox">
-                                  <input type="checkbox" name="event_responses_damage" class="event_responses_damage invisible-Control">
-                                  <div class="checkbox-body">
-                                    <div class="checkbox-body-box">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                      </svg>
-                                    </div>
-                                    <p class="checkbox-body-text">ダメージ</p>
-                                  </div>
-                                </label>
-                              </div>
-                              <div class="value-element" id="event_responses_decrement_stack" title="-----------------">
-                                <label class="value-checkbox">
-                                  <input type="checkbox" name="event_responses_decrement_stack" class="event_responses_decrement_stack invisible-Control">
-                                  <div class="checkbox-body">
-                                    <div class="checkbox-body-box">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                      </svg>
-                                    </div>
-                                    <p class="checkbox-body-text">アイテムデクリメント</p>
-                                  </div>
-                                </label>
-                              </div>
-                              <div class="value-element" id="event_responses_die" title="-----------------">
-                                <label class="value-checkbox">
-                                  <input type="checkbox" name="event_responses_die" class="event_responses_die invisible-Control">
-                                  <div class="checkbox-body">
-                                    <div class="checkbox-body-box">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                      </svg>
-                                    </div>
-                                    <p class="checkbox-body-text">キルする</p>
-                                  </div>
-                                </label>
-                              </div>
-                              <div class="value-element" id="event_responses_play_effect" title="-----------------">
-                                <label class="value-checkbox">
-                                  <input type="checkbox" name="event_responses_play_effect" class="event_responses_play_effect invisible-Control">
-                                  <div class="checkbox-body">
-                                    <div class="checkbox-body-box">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                      </svg>
-                                    </div>
-                                    <p class="checkbox-body-text">パーティクルを再生</p>
-                                  </div>
-                                </label>
-                              </div>
-                              <div class="value-element" id="event_responses_play_sound" title="-----------------">
-                                <label class="value-checkbox">
-                                  <input type="checkbox" name="event_responses_play_sound" class="event_responses_play_sound invisible-Control">
-                                  <div class="checkbox-body">
-                                    <div class="checkbox-body-box">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                      </svg>
-                                    </div>
-                                    <p class="checkbox-body-text">サウンドを再生</p>
-                                  </div>
-                                </label>
-                              </div>
-                              <div class="value-element" id="event_responses_teleport" title="-----------------">
-                                <label class="value-checkbox">
-                                  <input type="checkbox" name="event_responses_teleport" class="event_responses_teleport invisible-Control">
-                                  <div class="checkbox-body">
-                                    <div class="checkbox-body-box">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                      </svg>
-                                    </div>
-                                    <p class="checkbox-body-text">テレポート</p>
-                                  </div>
-                                </label>
-                              </div>
-                              <div class="value-element" id="event_responses_transform_item" title="-----------------">
-                                <label class="value-checkbox">
-                                  <input type="checkbox" name="event_responses_transform_item" class="event_responses_transform_item invisible-Control">
-                                  <div class="checkbox-body">
-                                    <div class="checkbox-body-box">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                      </svg>
-                                    </div>
-                                    <p class="checkbox-body-text">アイテム変換</p>
-                                  </div>
-                                </label>
-                              </div>
-                              <div class="value-element" id="event_responses_trigger" title="-----------------">
-                                <label class="value-checkbox">
-                                  <input type="checkbox" name="event_responses_trigger" class="event_responses_trigger invisible-Control">
-                                  <div class="checkbox-body">
-                                    <div class="checkbox-body-box">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                      </svg>
-                                    </div>
-                                    <p class="checkbox-body-text">イベントトリガー</p>
-                                  </div>
-                                </label>
-                              </div>
-                              <div class="value-element" id="event_responses_run_command" title="-----------------">
-                                <label class="value-checkbox">
-                                  <input type="checkbox" name="event_responses_run_command" class="event_responses_run_command invisible-Control">
-                                  <div class="checkbox-body">
-                                    <div class="checkbox-body-box">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                      </svg>
-                                    </div>
-                                    <p class="checkbox-body-text">コマンド実行</p>
-                                  </div>
-                                </label>
-                              </div>
-                              <div class="value-element" id="event_responses_swing" title="-----------------">
-                                <label class="value-checkbox">
-                                  <input type="checkbox" name="event_responses_swing" class="event_responses_swing invisible-Control">
-                                  <div class="checkbox-body">
-                                    <div class="checkbox-body-box">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                      </svg>
-                                    </div>
-                                    <p class="checkbox-body-text">スウィング</p>
-                                  </div>
-                                </label>
-                              </div>
-                              <div class="value-element" id="event_responses_sequence" title="-----------------">
-                                <label class="value-checkbox">
-                                  <input type="checkbox" name="event_responses_sequence" class="event_responses_sequence invisible-Control">
-                                  <div class="checkbox-body">
-                                    <div class="checkbox-body-box">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                      </svg>
-                                    </div>
-                                    <p class="checkbox-body-text">シーケンスを設定</p>
-                                  </div>
-                                </label>
-                              </div>
-                              <div class="value-element" id="event_responses_randomize" title="-----------------">
-                                <label class="value-checkbox">
-                                  <input type="checkbox" name="event_responses_randomize" class="event_responses_randomize invisible-Control">
-                                  <div class="checkbox-body">
-                                    <div class="checkbox-body-box">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                      </svg>
-                                    </div>
-                                    <p class="checkbox-body-text">ランダムに選択</p>
-                                  </div>
-                                </label>
-                              </div>
-                            </div>
-                            <div class="modal-footer">
-                              <label><input type="button" value="Close" class="modal-close"></label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </label>
+                  <div class="event remove-status-block" title="-----------------">
                     <label class="invisible-Control">
                       <input type="button" class="event-delete event">
                       <div class="remove-button-text">- 削除</div>
@@ -2194,263 +2191,260 @@
                               </div>
                               <div class="tab-contents">
                                 <div class="tab-container selected">
-                                  <div class="editor-element-legend changeable">
-                                    <p>event</p>
-                                    <div class="event remove-status-block" title="-----------------">
-                                      <div class="type-modal">
-                                        <label class="invisible-Control">
-                                          <input type="button" class="modal-open">
-                                          <div class="add-button-text">+ 追加</div>
-                                        </label>
-                                        <div class="modal hide">
-                                          <div class="modal-dialog">
-                                            <div class="modal-content">
-                                              <div class="modal-header">
-                                                <div class="modal-title">コンポーネント</div>
-                                                <label class="modal-close-btn">
-                                                  <input type="button" value="閉じる" class="modal-close invisible-Control">
-                                                  <div class="close-btn-icon">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                                      <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                      <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                    </svg>
+                                  <div>content</div>
+                                  <!-- template -->
+                                  <div class="editor-element-footer element-contlol">
+                                    <div class="type-modal">
+                                      <label class="invisible-Control">
+                                        <input type="button" class="modal-open">
+                                        <div class="element-contlol-text">要素の追加・削除</div>
+                                      </label>
+                                      <div class="modal hide">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <div class="modal-title">コンポーネント</div>
+                                              <label class="modal-close-btn">
+                                                <input type="button" value="閉じる" class="modal-close invisible-Control">
+                                                <div class="close-btn-icon">
+                                                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                                  </svg>
+                                                </div>
+                                              </label>
+                                            </div>
+                                            <div class="modal-body">
+                                              <div class="value-element" id="event_responses_set_block_property" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_set_block_property" class="event_responses_set_block_property invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">ブロックプロパティ</p>
                                                   </div>
                                                 </label>
                                               </div>
-                                              <div class="modal-body">
-                                                <div class="value-element" id="event_responses_set_block_property" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_set_block_property" class="event_responses_set_block_property invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">ブロックプロパティ</p>
+                                              <div class="value-element" id="event_responses_set_block_at_pos" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_set_block_at_pos" class="event_responses_set_block_at_pos invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
                                                     </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_set_block_at_pos" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_set_block_at_pos" class="event_responses_set_block_at_pos invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">ブロック設置</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_spawn_loot" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_spawn_loot" class="event_responses_spawn_loot invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">ルートをスポーン</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_add_mob_effect" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_add_mob_effect" class="event_responses_add_mob_effect invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">エフェクト付与</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_remove_mob_effect" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_remove_mob_effect" class="event_responses_remove_mob_effect invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">エフェクト削除</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_damage" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_damage" class="event_responses_damage invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">ダメージ</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_decrement_stack" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_decrement_stack" class="event_responses_decrement_stack invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">アイテムデクリメント</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_die" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_die" class="event_responses_die invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">キルする</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_play_effect" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_play_effect" class="event_responses_play_effect invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">パーティクルを再生</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_play_sound" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_play_sound" class="event_responses_play_sound invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">サウンドを再生</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_teleport" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_teleport" class="event_responses_teleport invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">テレポート</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_transform_item" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_transform_item" class="event_responses_transform_item invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">アイテム変換</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_trigger" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_trigger" class="event_responses_trigger invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">イベントトリガー</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_run_command" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_run_command" class="event_responses_run_command invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">コマンド実行</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_swing" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_swing" class="event_responses_swing invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">スウィング</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_sequence" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_sequence" class="event_responses_sequence invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">シーケンスを設定</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_randomize" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_randomize" class="event_responses_randomize invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">ランダムに選択</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
+                                                    <p class="checkbox-body-text">ブロック設置</p>
+                                                  </div>
+                                                </label>
                                               </div>
-                                              <div class="modal-footer">
-                                                <label><input type="button" value="Close" class="modal-close"></label>
+                                              <div class="value-element" id="event_responses_spawn_loot" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_spawn_loot" class="event_responses_spawn_loot invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">ルートをスポーン</p>
+                                                  </div>
+                                                </label>
                                               </div>
+                                              <div class="value-element" id="event_responses_add_mob_effect" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_add_mob_effect" class="event_responses_add_mob_effect invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">エフェクト付与</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_remove_mob_effect" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_remove_mob_effect" class="event_responses_remove_mob_effect invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">エフェクト削除</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_damage" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_damage" class="event_responses_damage invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">ダメージ</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_decrement_stack" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_decrement_stack" class="event_responses_decrement_stack invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">アイテムデクリメント</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_die" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_die" class="event_responses_die invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">キルする</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_play_effect" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_play_effect" class="event_responses_play_effect invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">パーティクルを再生</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_play_sound" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_play_sound" class="event_responses_play_sound invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">サウンドを再生</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_teleport" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_teleport" class="event_responses_teleport invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">テレポート</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_transform_item" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_transform_item" class="event_responses_transform_item invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">アイテム変換</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_trigger" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_trigger" class="event_responses_trigger invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">イベントトリガー</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_run_command" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_run_command" class="event_responses_run_command invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">コマンド実行</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_swing" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_swing" class="event_responses_swing invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">スウィング</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_sequence" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_sequence" class="event_responses_sequence invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">シーケンスを設定</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_randomize" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_randomize" class="event_responses_randomize invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">ランダムに選択</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <label><input type="button" value="Close" class="modal-close"></label>
                                             </div>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
                                   </div>
-                                  <div>0</div>
-                                  <!-- template -->
                                 </div>
                               </div>
                             </div>
@@ -2519,263 +2513,260 @@
                                       <input type="number" min="0" name="event-responses-randomize-weight" class="event-responses-randomize-weight" value="1" step="1">
                                     </label>
                                   </div>
-                                  <div class="editor-element-legend changeable">
-                                    <p>event</p>
-                                    <div class="event remove-status-block" title="-----------------">
-                                      <div class="type-modal">
-                                        <label class="invisible-Control">
-                                          <input type="button" class="modal-open">
-                                          <div class="add-button-text">+ 追加</div>
-                                        </label>
-                                        <div class="modal hide">
-                                          <div class="modal-dialog">
-                                            <div class="modal-content">
-                                              <div class="modal-header">
-                                                <div class="modal-title">コンポーネント</div>
-                                                <label class="modal-close-btn">
-                                                  <input type="button" value="閉じる" class="modal-close invisible-Control">
-                                                  <div class="close-btn-icon">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                                      <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                      <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                    </svg>
+                                  <div>content</div>
+                                  <!-- template -->
+                                  <div class="editor-element-footer element-contlol">
+                                    <div class="type-modal">
+                                      <label class="invisible-Control">
+                                        <input type="button" class="modal-open">
+                                        <div class="element-contlol-text">要素の追加・削除</div>
+                                      </label>
+                                      <div class="modal hide">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <div class="modal-title">コンポーネント</div>
+                                              <label class="modal-close-btn">
+                                                <input type="button" value="閉じる" class="modal-close invisible-Control">
+                                                <div class="close-btn-icon">
+                                                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                                  </svg>
+                                                </div>
+                                              </label>
+                                            </div>
+                                            <div class="modal-body">
+                                              <div class="value-element" id="event_responses_set_block_property" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_set_block_property" class="event_responses_set_block_property invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">ブロックプロパティ</p>
                                                   </div>
                                                 </label>
                                               </div>
-                                              <div class="modal-body">
-                                                <div class="value-element" id="event_responses_set_block_property" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_set_block_property" class="event_responses_set_block_property invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">ブロックプロパティ</p>
+                                              <div class="value-element" id="event_responses_set_block_at_pos" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_set_block_at_pos" class="event_responses_set_block_at_pos invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
                                                     </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_set_block_at_pos" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_set_block_at_pos" class="event_responses_set_block_at_pos invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">ブロック設置</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_spawn_loot" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_spawn_loot" class="event_responses_spawn_loot invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">ルートをスポーン</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_add_mob_effect" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_add_mob_effect" class="event_responses_add_mob_effect invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">エフェクト付与</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_remove_mob_effect" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_remove_mob_effect" class="event_responses_remove_mob_effect invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">エフェクト削除</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_damage" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_damage" class="event_responses_damage invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">ダメージ</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_decrement_stack" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_decrement_stack" class="event_responses_decrement_stack invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">アイテムデクリメント</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_die" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_die" class="event_responses_die invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">キルする</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_play_effect" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_play_effect" class="event_responses_play_effect invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">パーティクルを再生</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_play_sound" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_play_sound" class="event_responses_play_sound invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">サウンドを再生</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_teleport" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_teleport" class="event_responses_teleport invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">テレポート</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_transform_item" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_transform_item" class="event_responses_transform_item invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">アイテム変換</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_trigger" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_trigger" class="event_responses_trigger invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">イベントトリガー</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_run_command" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_run_command" class="event_responses_run_command invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">コマンド実行</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_swing" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_swing" class="event_responses_swing invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">スウィング</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_sequence" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_sequence" class="event_responses_sequence invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">シーケンスを設定</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
-                                                <div class="value-element" id="event_responses_randomize" title="-----------------">
-                                                  <label class="value-checkbox">
-                                                    <input type="checkbox" name="event_responses_randomize" class="event_responses_randomize invisible-Control">
-                                                    <div class="checkbox-body">
-                                                      <div class="checkbox-body-box">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                                          <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                      </div>
-                                                      <p class="checkbox-body-text">ランダムに選択</p>
-                                                    </div>
-                                                  </label>
-                                                </div>
+                                                    <p class="checkbox-body-text">ブロック設置</p>
+                                                  </div>
+                                                </label>
                                               </div>
-                                              <div class="modal-footer">
-                                                <label><input type="button" value="Close" class="modal-close"></label>
+                                              <div class="value-element" id="event_responses_spawn_loot" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_spawn_loot" class="event_responses_spawn_loot invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">ルートをスポーン</p>
+                                                  </div>
+                                                </label>
                                               </div>
+                                              <div class="value-element" id="event_responses_add_mob_effect" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_add_mob_effect" class="event_responses_add_mob_effect invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">エフェクト付与</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_remove_mob_effect" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_remove_mob_effect" class="event_responses_remove_mob_effect invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">エフェクト削除</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_damage" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_damage" class="event_responses_damage invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">ダメージ</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_decrement_stack" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_decrement_stack" class="event_responses_decrement_stack invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">アイテムデクリメント</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_die" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_die" class="event_responses_die invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">キルする</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_play_effect" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_play_effect" class="event_responses_play_effect invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">パーティクルを再生</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_play_sound" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_play_sound" class="event_responses_play_sound invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">サウンドを再生</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_teleport" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_teleport" class="event_responses_teleport invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">テレポート</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_transform_item" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_transform_item" class="event_responses_transform_item invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">アイテム変換</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_trigger" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_trigger" class="event_responses_trigger invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">イベントトリガー</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_run_command" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_run_command" class="event_responses_run_command invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">コマンド実行</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_swing" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_swing" class="event_responses_swing invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">スウィング</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_sequence" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_sequence" class="event_responses_sequence invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">シーケンスを設定</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                              <div class="value-element" id="event_responses_randomize" title="-----------------">
+                                                <label class="value-checkbox">
+                                                  <input type="checkbox" name="event_responses_randomize" class="event_responses_randomize invisible-Control">
+                                                  <div class="checkbox-body">
+                                                    <div class="checkbox-body-box">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                                      </svg>
+                                                    </div>
+                                                    <p class="checkbox-body-text">ランダムに選択</p>
+                                                  </div>
+                                                </label>
+                                              </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <label><input type="button" value="Close" class="modal-close"></label>
                                             </div>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
                                   </div>
-                                  <div>0</div>
-                                  <!-- template -->
                                 </div>
                               </div>
                             </div>
@@ -2788,17 +2779,257 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="value-element" title="-----------------">
-                <div class="value-label">
-                  <label for="blockState-type">型</label>
-                </div>
-                <div class="value-input">
-                  <select name="blockState-type" class="blockState-type" id="test" multiple>
-                    <option value="val_Boolean">Boolean</option>
-                    <option value="val_Integer">Integer</option>
-                    <option value="val_String">String</option>
-                  </select>
+                <div class="editor-element-footer element-contlol">
+                  <div class="type-modal">
+                    <label class="invisible-Control">
+                      <input type="button" class="modal-open">
+                      <div class="element-contlol-text">要素の追加・削除</div>
+                    </label>
+                    <div class="modal hide">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <div class="modal-title">コンポーネント</div>
+                            <label class="modal-close-btn">
+                              <input type="button" value="閉じる" class="modal-close invisible-Control">
+                              <div class="close-btn-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                              </div>
+                            </label>
+                          </div>
+                          <div class="modal-body">
+                            <div class="value-element" id="event_responses_set_block_property" title="-----------------">
+                              <label class="value-checkbox">
+                                <input type="checkbox" name="event_responses_set_block_property" class="event_responses_set_block_property invisible-Control">
+                                <div class="checkbox-body">
+                                  <div class="checkbox-body-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                      <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                  </div>
+                                  <p class="checkbox-body-text">ブロックプロパティ</p>
+                                </div>
+                              </label>
+                            </div>
+                            <div class="value-element" id="event_responses_set_block_at_pos" title="-----------------">
+                              <label class="value-checkbox">
+                                <input type="checkbox" name="event_responses_set_block_at_pos" class="event_responses_set_block_at_pos invisible-Control">
+                                <div class="checkbox-body">
+                                  <div class="checkbox-body-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                      <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                  </div>
+                                  <p class="checkbox-body-text">ブロック設置</p>
+                                </div>
+                              </label>
+                            </div>
+                            <div class="value-element" id="event_responses_spawn_loot" title="-----------------">
+                              <label class="value-checkbox">
+                                <input type="checkbox" name="event_responses_spawn_loot" class="event_responses_spawn_loot invisible-Control">
+                                <div class="checkbox-body">
+                                  <div class="checkbox-body-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                      <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                  </div>
+                                  <p class="checkbox-body-text">ルートをスポーン</p>
+                                </div>
+                              </label>
+                            </div>
+                            <div class="value-element" id="event_responses_add_mob_effect" title="-----------------">
+                              <label class="value-checkbox">
+                                <input type="checkbox" name="event_responses_add_mob_effect" class="event_responses_add_mob_effect invisible-Control">
+                                <div class="checkbox-body">
+                                  <div class="checkbox-body-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                      <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                  </div>
+                                  <p class="checkbox-body-text">エフェクト付与</p>
+                                </div>
+                              </label>
+                            </div>
+                            <div class="value-element" id="event_responses_remove_mob_effect" title="-----------------">
+                              <label class="value-checkbox">
+                                <input type="checkbox" name="event_responses_remove_mob_effect" class="event_responses_remove_mob_effect invisible-Control">
+                                <div class="checkbox-body">
+                                  <div class="checkbox-body-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                      <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                  </div>
+                                  <p class="checkbox-body-text">エフェクト削除</p>
+                                </div>
+                              </label>
+                            </div>
+                            <div class="value-element" id="event_responses_damage" title="-----------------">
+                              <label class="value-checkbox">
+                                <input type="checkbox" name="event_responses_damage" class="event_responses_damage invisible-Control">
+                                <div class="checkbox-body">
+                                  <div class="checkbox-body-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                      <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                  </div>
+                                  <p class="checkbox-body-text">ダメージ</p>
+                                </div>
+                              </label>
+                            </div>
+                            <div class="value-element" id="event_responses_decrement_stack" title="-----------------">
+                              <label class="value-checkbox">
+                                <input type="checkbox" name="event_responses_decrement_stack" class="event_responses_decrement_stack invisible-Control">
+                                <div class="checkbox-body">
+                                  <div class="checkbox-body-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                      <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                  </div>
+                                  <p class="checkbox-body-text">アイテムデクリメント</p>
+                                </div>
+                              </label>
+                            </div>
+                            <div class="value-element" id="event_responses_die" title="-----------------">
+                              <label class="value-checkbox">
+                                <input type="checkbox" name="event_responses_die" class="event_responses_die invisible-Control">
+                                <div class="checkbox-body">
+                                  <div class="checkbox-body-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                      <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                  </div>
+                                  <p class="checkbox-body-text">キルする</p>
+                                </div>
+                              </label>
+                            </div>
+                            <div class="value-element" id="event_responses_play_effect" title="-----------------">
+                              <label class="value-checkbox">
+                                <input type="checkbox" name="event_responses_play_effect" class="event_responses_play_effect invisible-Control">
+                                <div class="checkbox-body">
+                                  <div class="checkbox-body-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                      <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                  </div>
+                                  <p class="checkbox-body-text">パーティクルを再生</p>
+                                </div>
+                              </label>
+                            </div>
+                            <div class="value-element" id="event_responses_play_sound" title="-----------------">
+                              <label class="value-checkbox">
+                                <input type="checkbox" name="event_responses_play_sound" class="event_responses_play_sound invisible-Control">
+                                <div class="checkbox-body">
+                                  <div class="checkbox-body-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                      <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                  </div>
+                                  <p class="checkbox-body-text">サウンドを再生</p>
+                                </div>
+                              </label>
+                            </div>
+                            <div class="value-element" id="event_responses_teleport" title="-----------------">
+                              <label class="value-checkbox">
+                                <input type="checkbox" name="event_responses_teleport" class="event_responses_teleport invisible-Control">
+                                <div class="checkbox-body">
+                                  <div class="checkbox-body-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                      <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                  </div>
+                                  <p class="checkbox-body-text">テレポート</p>
+                                </div>
+                              </label>
+                            </div>
+                            <div class="value-element" id="event_responses_transform_item" title="-----------------">
+                              <label class="value-checkbox">
+                                <input type="checkbox" name="event_responses_transform_item" class="event_responses_transform_item invisible-Control">
+                                <div class="checkbox-body">
+                                  <div class="checkbox-body-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                      <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                  </div>
+                                  <p class="checkbox-body-text">アイテム変換</p>
+                                </div>
+                              </label>
+                            </div>
+                            <div class="value-element" id="event_responses_trigger" title="-----------------">
+                              <label class="value-checkbox">
+                                <input type="checkbox" name="event_responses_trigger" class="event_responses_trigger invisible-Control">
+                                <div class="checkbox-body">
+                                  <div class="checkbox-body-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                      <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                  </div>
+                                  <p class="checkbox-body-text">イベントトリガー</p>
+                                </div>
+                              </label>
+                            </div>
+                            <div class="value-element" id="event_responses_run_command" title="-----------------">
+                              <label class="value-checkbox">
+                                <input type="checkbox" name="event_responses_run_command" class="event_responses_run_command invisible-Control">
+                                <div class="checkbox-body">
+                                  <div class="checkbox-body-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                      <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                  </div>
+                                  <p class="checkbox-body-text">コマンド実行</p>
+                                </div>
+                              </label>
+                            </div>
+                            <div class="value-element" id="event_responses_swing" title="-----------------">
+                              <label class="value-checkbox">
+                                <input type="checkbox" name="event_responses_swing" class="event_responses_swing invisible-Control">
+                                <div class="checkbox-body">
+                                  <div class="checkbox-body-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                      <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                  </div>
+                                  <p class="checkbox-body-text">スウィング</p>
+                                </div>
+                              </label>
+                            </div>
+                            <div class="value-element" id="event_responses_sequence" title="-----------------">
+                              <label class="value-checkbox">
+                                <input type="checkbox" name="event_responses_sequence" class="event_responses_sequence invisible-Control">
+                                <div class="checkbox-body">
+                                  <div class="checkbox-body-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                      <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                  </div>
+                                  <p class="checkbox-body-text">シーケンスを設定</p>
+                                </div>
+                              </label>
+                            </div>
+                            <div class="value-element" id="event_responses_randomize" title="-----------------">
+                              <label class="value-checkbox">
+                                <input type="checkbox" name="event_responses_randomize" class="event_responses_randomize invisible-Control">
+                                <div class="checkbox-body">
+                                  <div class="checkbox-body-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                      <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                  </div>
+                                  <p class="checkbox-body-text">ランダムに選択</p>
+                                </div>
+                              </label>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <label><input type="button" value="Close" class="modal-close"></label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2813,7 +3044,7 @@
           </script>
         </form>
         <form name="editor-permutations" id="editor-permutations" class="editor-permutations hide">
-          <div class="permutations block-tab">
+          <div class="permutations block-tabpanel">
             <div class="permutations block-tab-controls">
               <div class="permutations block-tab-header">
                 <div class="permutations block-tab-title">
@@ -2822,31 +3053,25 @@
                 <div class="permutations block-tab-controlBar">
                   <div class="permutations add-block-tab" title="-----------------">
                     <label class="invisible-Control">
-                      <input type="button" id="permutations-add" class="permutations" disabled>
+                      <input type="button" class="permutations add-block-tab-element">
                       <div class="add-button-text">+ 追加</div>
                     </label>
                   </div>
                   <div class="permutations remove-block-tab" title="-----------------">
                     <label class="invisible-Control">
-                      <input type="button" id="permutations-delete" class="permutations" disabled>
+                      <input type="button" class="permutations remove-block-tab-element">
                       <div class="remove-button-text">- 削除</div>
                     </label>
                   </div>
                 </div>
               </div>
-              <div class="permutations block-tab-controls-list">
-                <label class="permutations block-tab-children invisible-Control">
-                  <input type="radio" name="permutations block-tab" class="permutations" checked>
-                  <div class="tab-number">0</div>
-                </label>
-                <label class="permutations block-tab-children invisible-Control">
-                  <input type="radio" name="permutations block-tab" class="permutations">
-                  <div class="tab-number">1</div>
-                </label>
+              <div class="permutations block-tab-body">
               </div>
             </div>
             <div class="permutations block-tab-contents">
-              <div class="permutations tab-content selected">
+            </div>
+            <template id="permutation-block-tab">
+              <div class="permutations block-tab-container selected">
                 <div class="editor-element" title="-----------------">
                   <div class="editor-element-legend">
                     <p>Condition</p>
@@ -2864,33 +3089,261 @@
                   <div class="editor-element-legend">
                     <p>Components</p>
                   </div>
-                  <div class="value-element" title="サブパックのフォルダー名を指定します。">
-                    <div class="value-label">
-                      <label for="subpacks_folder_name">フォルダー名</label>
-                    </div>
-                    <div class="value-input">
-                      <input type="text" name="uuid" id="subpacks_folder_name">
-                    </div>
-                  </div>
-                  <div class="value-element" title="サブパックの実際に表示される名前を設定します。">
-                    <div class="value-label">
-                      <label for="subpacks_name">名前</label>
-                    </div>
-                    <div class="value-input">
-                      <input type="text" name="uuid" id="subpacks_name">
-                    </div>
-                  </div>
-                  <div class="value-element" title="このサブパックのメモリ使用量">
-                    <div class="value-label">
-                      <label for="subpacks_memory_tier">メモリティア</label>
-                    </div>
-                    <div class="value-input">
-                      <input type="number" min="0" name="subpacks_memory_tier" id="subpacks_memory_tier" value="0">
+                  <div class="editor-element-footer element-contlol">
+                    <div class="type-modal">
+                      <label class="invisible-Control">
+                        <input type="button" class="modal-open">
+                        <div class="element-contlol-text">要素の追加・削除</div>
+                      </label>
+                      <div class="modal hide">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <div class="modal-title">コンポーネント</div>
+                              <label class="modal-close-btn">
+                                <input type="button" value="閉じる" class="modal-close invisible-Control">
+                                <div class="close-btn-icon">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                  </svg>
+                                </div>
+                              </label>
+                            </div>
+                            <div class="modal-body">
+                              <div class="value-element" id="event_responses_set_block_property" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_set_block_property" class="event_responses_set_block_property invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">ブロックプロパティ</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_set_block_at_pos" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_set_block_at_pos" class="event_responses_set_block_at_pos invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">ブロック設置</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_spawn_loot" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_spawn_loot" class="event_responses_spawn_loot invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">ルートをスポーン</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_add_mob_effect" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_add_mob_effect" class="event_responses_add_mob_effect invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">エフェクト付与</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_remove_mob_effect" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_remove_mob_effect" class="event_responses_remove_mob_effect invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">エフェクト削除</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_damage" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_damage" class="event_responses_damage invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">ダメージ</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_decrement_stack" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_decrement_stack" class="event_responses_decrement_stack invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">アイテムデクリメント</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_die" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_die" class="event_responses_die invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">キルする</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_play_effect" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_play_effect" class="event_responses_play_effect invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">パーティクルを再生</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_play_sound" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_play_sound" class="event_responses_play_sound invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">サウンドを再生</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_teleport" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_teleport" class="event_responses_teleport invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">テレポート</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_transform_item" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_transform_item" class="event_responses_transform_item invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">アイテム変換</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_trigger" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_trigger" class="event_responses_trigger invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">イベントトリガー</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_run_command" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_run_command" class="event_responses_run_command invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">コマンド実行</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_swing" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_swing" class="event_responses_swing invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">スウィング</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_sequence" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_sequence" class="event_responses_sequence invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">シーケンスを設定</p>
+                                  </div>
+                                </label>
+                              </div>
+                              <div class="value-element" id="event_responses_randomize" title="-----------------">
+                                <label class="value-checkbox">
+                                  <input type="checkbox" name="event_responses_randomize" class="event_responses_randomize invisible-Control">
+                                  <div class="checkbox-body">
+                                    <div class="checkbox-body-box">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </div>
+                                    <p class="checkbox-body-text">ランダムに選択</p>
+                                  </div>
+                                </label>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <label><input type="button" value="Close" class="modal-close"></label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </template>
           </div>
         </form>
         <form name="editor-blockState" id="editor-blockState" class="editor-blockState hide">
@@ -2922,12 +3375,11 @@
             // モーダル閉じる
             $(document).on("click", ".modal", (event) => {
               const click_element = $(event.target);
-              console.log(!click_element.closest(".modal").find(".modal").hasClass("hide"));
-              if (
-                !(click_element.closest(".modal-content").length) ||
-                !click_element.closest(".modal").find(".modal").hasClass("hide")
+              // console.log(click_element.children(".modal-dialog").length,
+              // !click_element.closest(".modal").find(".modal").hasClass("hide"));
+              if (click_element.children(".modal-dialog").length
               ) {
-                console.log(click_element.closest(".type-modal").children(".modal"));
+                // console.log(click_element.closest(".type-modal").children(".modal"))
                 click_element.closest(".type-modal").children(".modal").addClass("hide");
               }
               event.stopPropagation();
@@ -2950,6 +3402,7 @@
               const tabpanel = target.closest(".tabpanel");
               const body = tabpanel.find(".tab-body");
               const child = tabpanel.find(".tab-body > :first-child").clone();
+              child.find("input[type=radio]").prop("checked", false);
               child.find(".tab-number").text(body.children().length);
               body.append(child);
               const tab_contents = tabpanel.find(".tab-contents");
@@ -2960,9 +3413,11 @@
             //tab削除
             $(document).on("click", ".remove-tab-element", (event) => {
               const target = $(event.target);
-              let tabpanel = target.closest(".tabpanel");
+              const tabpanel = target.closest(".tabpanel");
               let child = tabpanel.find(".tab-body > .tab-children");
               let child_len = child.length;
+              // 1以下終了
+              if (child_len <= 1) return;
               let checked_index = 0;
               for (let index = 0; index < child_len; index++) {
                 if (child.eq(index).find("input[type=radio]").is(":checked")) {
@@ -2974,6 +3429,58 @@
               child.eq(checked_index).remove();
               tabpanel.find(".tab-container:first-child").addClass("selected");
               child = tabpanel.find(".tab-body > .tab-children");
+              child_len = child.length;
+              for (let index = 0; index < child_len; index++) {
+                child.eq(index).find("input[type=radio]").prop("checked", index == 0);
+                child.eq(index).find(".tab-number").text(index);
+              }
+            });
+            // block tab変更
+            $(document).on("click", ".block-tab-children>input[type=radio]", (event) => {
+              const target = $(event.target);
+              const tabNumber = Number(target.next(".tab-number").text());
+              target.closest(".block-tabpanel").find(".block-tab-container").removeClass("selected");
+              target.closest(".block-tabpanel").find(".block-tab-container").eq(tabNumber).addClass("selected");
+            });
+            // block tab追加
+            $(document).on("click", ".add-block-tab-element", (event) => {
+              const target = $(event.target);
+              const tabpanel = target.closest(".block-tabpanel");
+              // tab
+              const body = tabpanel.find(".block-tab-body");
+              const children_len = body.children().length;
+              body.append(
+                $("<label>").addClass(`${target.prop("class").replace(" add-block-tab-element", "")} block-tab-children invisible-Control`).append(
+                  $("<input>").prop("type", "radio").prop("name", "permutations").addClass("permutations block-tab").prop("checked", children_len == 0),
+                  $("<div>").addClass("tab-number").text(children_len)
+                )
+              );
+              // コンテンツ
+              const tab_contents = tabpanel.find(".block-tab-contents");
+              tab_contents.append(
+                $("#permutation-block-tab").contents().clone().toggleClass("selected", children_len == 0)
+              )
+            });
+            // block tab削除
+            $(document).on("click", ".remove-block-tab-element", (event) => {
+              const target = $(event.target);
+              const tabpanel = target.closest(".block-tabpanel");
+              let child = tabpanel.find(".block-tab-body > .block-tab-children");
+              let child_len = child.length;
+              // 0以下終了
+              if (child_len <= 0) return;
+              // 選択tab検索
+              let checked_index = 0;
+              for (let index = 0; index < child_len; index++) {
+                if (child.eq(index).find("input[type=radio]").is(":checked")) {
+                  checked_index = index;
+                  break;
+                }
+              }
+              tabpanel.find(".block-tab-container").eq(checked_index).remove();
+              child.eq(checked_index).remove();
+              tabpanel.find(".block-tab-container:first-child").addClass("selected");
+              child = tabpanel.find(".block-tab-body > .block-tab-children");
               child_len = child.length;
               for (let index = 0; index < child_len; index++) {
                 child.eq(index).find("input[type=radio]").prop("checked", index == 0);
@@ -2998,39 +3505,43 @@
             $(document).on("click", "input.add-array-element", (event) => {
               const value_input = $(event.target).closest(".value-input");
               const array_list = value_input.find(".array-list");
-              array_list.append(
-                $("<label>").addClass(`array-data${value_input.hasClass("type-array-modal") ? ` type-modal` : ``}`).append(
-                  $("<div>").addClass("array-num").text(array_list.children().length),
-                  (() => {
-                    const input = $("<input>");
-                    if (value_input.hasClass("type-array-integer")) {
-                      input.attr("type", "number").addClass("blockState-integer type-array-integer");
-                    } else if (value_input.hasClass("type-array-string")) {
-                      input.attr("type", "text").addClass("blockState-string type-array-string");
-                    } else if (value_input.hasClass("type-array-select")) {
-                      return $("<select>").attr("name", "format-version").addClass("allowed_faces type-array-select").append(
-                        $('<option value="up">上</option>'),
-                        $('<option value="down">下</option>'),
-                        $('<option value="north">北</option>'),
-                        $('<option value="south">南</option>'),
-                        $('<option value="east">東</option>'),
-                        $('<option value="west">西</option>'),
-                        $('<option value="side">側面</option>'),
-                        $('<option value="all">全面</option>')
-                      )
-                    } else if (value_input.hasClass("type-array-modal")) {
-                      input.attr("type", "button").addClass("modal-open").val("編集");
-                    }
-                    return input;
-                  })(),
-                  (() => {
-                    if (value_input.hasClass("type-array-modal")) {
-                      console.log(array_list.find(":first-child .modal"))
-                      return array_list.find(":first-child .modal").clone();
-                    }
-                  })()
+              if (value_input.hasClass("type-array-modal")) {
+                array_list.append(
+                  $("<div>").addClass("array-data type-modal").append(
+                    $("<label>").append(
+                      $("<div>").addClass("array-num").text(array_list.children().length),
+                      $("<input>").attr("type", "button").addClass("modal-open").val("編集")
+                    ),
+                    array_list.find(":first-child .modal").clone()
+                  )
                 )
-              )
+              } else {
+                array_list.append(
+                  $("<label>").addClass("array-data").append(
+                    $("<div>").addClass("array-num").text(array_list.children().length),
+                    (() => {
+                      const input = $("<input>");
+                      if (value_input.hasClass("type-array-integer")) {
+                        input.attr("type", "number").addClass("blockState-integer type-array-integer");
+                      } else if (value_input.hasClass("type-array-string")) {
+                        input.attr("type", "text").addClass("blockState-string type-array-string");
+                      } else if (value_input.hasClass("type-array-select")) {
+                        return $("<select>").attr("name", "format-version").addClass("allowed_faces type-array-select").append(
+                          $('<option value="up">上</option>'),
+                          $('<option value="down">下</option>'),
+                          $('<option value="north">北</option>'),
+                          $('<option value="south">南</option>'),
+                          $('<option value="east">東</option>'),
+                          $('<option value="west">西</option>'),
+                          $('<option value="side">側面</option>'),
+                          $('<option value="all">全面</option>')
+                        )
+                      }
+                      return input;
+                    })()
+                  )
+                )
+              }
             });
             // 配列制御 削除
             $(document).on("click", "input.remove-array-element", (event) => {
