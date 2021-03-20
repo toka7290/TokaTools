@@ -517,8 +517,8 @@ div.editor form.hide {
 
 input:not(.disabled):hover + .add-button-text,
 input:not(:disabled):focus + .add-button-text,
-input:not(.disabled):hover + .element-contlol-text,
-input:not(:disabled):focus + .element-contlol-text,
+input:not(.disabled):hover + .element-control-text,
+input:not(:disabled):focus + .element-control-text,
 input:not(:disabled) + .add-tab-label:hover,
 input:not(:disabled):focus ~ .add-tab-label,
 input.add-array-element:not(:disabled) + .add-array-label:hover,
@@ -667,7 +667,7 @@ input.remove-array-element:not(:disabled):focus + .remove-array-label {
   /* 編集要素フッター */
   border-top: var(--color-input-disabled) solid 2px;
 }
-.element-contlol-text {
+.element-control-text {
   display: grid;
   place-content: center;
   padding: 1rem;

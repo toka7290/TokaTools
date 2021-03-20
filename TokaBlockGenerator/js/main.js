@@ -220,6 +220,23 @@ $(function () {
       child.eq(index).find(".tab-number").text(index);
     }
   });
+  // コンポーネント削除＆追加
+  $(document).on("click", "input.element-control-switch", (event) => {
+    const target = $(event.target);
+    const element_body = target.closest(".element-control").prev(".editor-element-body");
+    if (target.is(":checked"))
+      element_body.append(
+        $("#value-elements-component")
+          .contents()
+          .filter(`.value-element.${target.attr("name")}`)
+          .clone()
+      );
+    else
+      element_body
+        .contents()
+        .filter(`.value-element.${target.attr("name")}`)
+        .remove();
+  });
   /** value-input switchable */
   $(document).on("click", ".switchable-content select", (event) => {
     const select_elem = $(event.target);
@@ -235,30 +252,35 @@ $(function () {
         );
     }
   });
-  /** ab変更 */
+  /** tab変更 */
   $(document).on("click", ".tab-children>input[type=radio]", (event) => {
     const target = $(event.target);
     const tabNumber = Number(target.next(".tab-number").text());
-    target.closest(".tabpanel").find(".tab-container").removeClass("selected");
-    target.closest(".tabpanel").find(".tab-container").eq(tabNumber).addClass("selected");
+    target
+      .closest(".tabpanel")
+      .children(".tab-contents")
+      .children(".tab-container")
+      .removeClass("selected")
+      .eq(tabNumber)
+      .addClass("selected");
   });
-  /** ab追加 */
+  /** tab追加 */
   $(document).on("click", ".add-tab-element", (event) => {
     const target = $(event.target);
     const tabpanel = target.closest(".tabpanel");
-    const body = tabpanel.find(".tab-body");
-    const child = tabpanel.find(".tab-body > :first-child").clone();
+    const body = tabpanel.children(".tab-navigation").children(".tab-body");
+    const child = body.children(":first-child").clone();
     child.find("input[type=radio]").prop("checked", false);
     child.find(".tab-number").text(body.children().length);
     body.append(child);
-    const tab_contents = tabpanel.find(".tab-contents");
+    const tab_contents = tabpanel.children(".tab-contents");
     tab_contents.append(tab_contents.children("div:first-child").clone().removeClass("selected"));
   });
-  /** ab削除 */
+  /** tab削除 */
   $(document).on("click", ".remove-tab-element", (event) => {
     const target = $(event.target);
     const tabpanel = target.closest(".tabpanel");
-    let child = tabpanel.find(".tab-body > .tab-children");
+    let child = tabpanel.children(".tab-navigation").find(".tab-body > .tab-children");
     let child_len = child.length;
     // 1以下終了
     if (child_len <= 1) return;
@@ -269,10 +291,19 @@ $(function () {
         break;
       }
     }
-    tabpanel.find(".tab-container").eq(checked_index).remove();
+    target
+      .closest(".tabpanel")
+      .children(".tab-contents")
+      .children(".tab-container")
+      .eq(checked_index)
+      .remove();
     child.eq(checked_index).remove();
-    tabpanel.find(".tab-container:first-child").addClass("selected");
-    child = tabpanel.find(".tab-body > .tab-children");
+    target
+      .closest(".tabpanel")
+      .children(".tab-contents")
+      .children(".tab-container:first-child")
+      .addClass("selected");
+    child = tabpanel.children(".tab-navigation").find(".tab-body > .tab-children");
     child_len = child.length;
     for (let index = 0; index < child_len; index++) {
       child
