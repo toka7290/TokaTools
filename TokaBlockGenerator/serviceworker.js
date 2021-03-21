@@ -25,7 +25,7 @@ var urlsToCache = [
   "/TokaTools/TokaBlockGenerator/js/main.js",
   "/TokaTools/TokaBlockGenerator/json/webapp.webmanifest",
   "/TokaTools/TokaBlockGenerator/lib/prism.js",
-  "/TokaTools/TokaBlockGenerator/lib/jquery-3.5.1.min.js",
+  "/TokaTools/TokaBlockGenerator/lib/jquery-3.6.0.min.js",
 ];
 var oldCacheKeys = ["TokaBlockGenerator-20200904", "pwa-caches"];
 
