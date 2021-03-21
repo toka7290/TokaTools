@@ -579,8 +579,15 @@ input.remove-array-element:not(:disabled):focus + .remove-array-label {
   position: relative;
 }
 
-.block-tab-controls {
+.block-tabpanel {
   /* form ブロック状タブ */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  max-height: 100%;
+}
+.block-tab-controls {
   padding: 1rem 0;
   background-color: white;
 }
@@ -616,6 +623,9 @@ input.remove-array-element:not(:disabled):focus + .remove-array-label {
 }
 .block-tab-children > input[type="radio"]:checked + .tab-number {
   background-color: rgb(130, 188, 255);
+}
+.block-tab-contents {
+  overflow-y: auto;
 }
 .block-tab-container {
   /* 選択以外非表示 */
