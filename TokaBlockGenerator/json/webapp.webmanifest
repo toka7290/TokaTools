@@ -5,7 +5,7 @@
   "display": "standalone",
   "icons": [
     {
-      "src": "https://toka7290.github.io/TokaTools/TokaBlockGenerator/img/icon_256.png",
+      "src": "/img/icon_256.png",
       "sizes": "256x256",
       "purpose": "any maskable"
     },
@@ -18,7 +18,7 @@
       "sizes": "2000x2000"
     }
   ],
-  "scope": "/TokaTools/TokaBlockGenerator/",
+  "scope": "/",
   "start_url": "/TokaTools/TokaBlockGenerator/index.html",
   "theme_color": "#60ad5e",
   "background_color": "#e8f5e9",
@@ -49,7 +49,7 @@
   "related_applications": [
     {
       "platform": "webapp",
-      "url": "https://toka7290.github.io/TokaTools/TokaBlockGenerator/json/webapp.webmanifest"
+      "url": "/json/webapp.webmanifest"
     }
   ]
 }
