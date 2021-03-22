@@ -1,4 +1,8 @@
 {
+  "editor-switcher": ["1.16.100"],
+  "editor-event": ["1.16.100"],
+  "editor-permutations": ["1.16.100"],
+  "editor-blockState": ["1.16.100"],
   "description_properties": ["1.16.100"],
   "description_is_experimental": ["1.12.0", "1.16.0"],
   "description_register_to_creative_menu": ["1.12.0", "1.16.0"],

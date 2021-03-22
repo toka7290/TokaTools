@@ -461,6 +461,9 @@ div.editor.drag-lock {
   display: block;
   background: var(--color-textAlt);
 }
+.editor-switcher.unsupported + #editor-main {
+  grid-column: 2;
+}
 .switch-element-body {
   display: grid;
   grid-template-columns: 0.5rem 2.5rem;
