@@ -74,11 +74,11 @@ $(function () {
     switch (help_page_num) {
       case 1:
         $("#help-content-1").fadeOut("fast");
-        $("#help-content_2").slideToggle("fast");
+        $("#help-content-2").slideToggle("fast");
         help_page_num++;
         return;
       case 2:
-        $("#help-content_2").slideToggle("fast");
+        $("#help-content-2").slideToggle("fast");
         $("#help-content-3").fadeIn("fast");
         help_page_num++;
         return;
@@ -89,7 +89,7 @@ $(function () {
         return;
       case 5:
         $("#help-content-1").hide();
-        $("#help-content_2").hide();
+        $("#help-content-2").hide();
         $("#help-content-3").hide();
         $("#page-help").hide();
         help_page_num = 0;

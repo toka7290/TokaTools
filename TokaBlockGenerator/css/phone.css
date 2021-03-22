@@ -65,6 +65,16 @@
     position: relative;
     overflow-y: hidden;
   }
+  .editor {
+    max-height: 100%;
+    overflow: hidden;
+  }
+  .block-tab-header {
+    grid-template-columns: 1fr;
+  }
+  .block-tab-title {
+    padding: 0.5rem;
+  }
   div.value-input > input {
     /* エディタ */
     width: auto;
@@ -81,6 +91,9 @@
     min-width: 0;
     width: auto;
   }
+  .modal-dialog {
+    max-width: 90%;
+  }
   div.data-check {
     /* データチェック */
     overflow-y: unset;
@@ -96,6 +109,9 @@
     left: 0;
     right: 0;
     bottom: 0;
+  }
+  div.issue {
+    height: auto;
   }
   div.separator {
     /* セパレータ */
