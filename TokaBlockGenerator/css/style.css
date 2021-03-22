@@ -592,7 +592,7 @@ input.remove-array-element:not(:disabled):focus + .remove-array-label {
   position: relative;
 }
 
-.block-tabpanel {
+.block-tabPanel {
   /* form ブロック状タブ */
   display: flex;
   flex-direction: column;
@@ -1303,11 +1303,12 @@ div.separator:hover {
   display: none;
 }
 @media all and (-ms-high-contrast: none) {
+  /* IEの場合 */
   html {
-    background-color: #ddedde;
+    background-color: #e7f2f9;
   }
   .header {
-    background-color: #127815;
+    background-color: #1a5192;
     color: #fff;
   }
   div.title > p {
@@ -1322,9 +1323,12 @@ div.separator:hover {
   input,
   select,
   textarea {
-    border: #1d8320 solid 3px;
+    border: #245a98 solid 3px;
   }
   div.header-menu-alt {
+    display: none;
+  }
+  template {
     display: none;
   }
   /* IE使用不可に */

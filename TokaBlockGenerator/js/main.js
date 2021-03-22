@@ -150,9 +150,9 @@ $(function () {
   $(document).on("click", ".block-tab-children>input[type=radio]", (event) => {
     const target = $(event.target);
     const tabNumber = Number(target.next(".tab-number").text());
-    target.closest(".block-tabpanel").find(".block-tab-container").removeClass("selected");
+    target.closest(".block-tabPanel").find(".block-tab-container").removeClass("selected");
     target
-      .closest(".block-tabpanel")
+      .closest(".block-tabPanel")
       .find(".block-tab-container")
       .eq(tabNumber)
       .addClass("selected");
@@ -160,7 +160,7 @@ $(function () {
   /** block tab追加 */
   $(document).on("click", ".add-block-tab-element", (event) => {
     const target = $(event.target);
-    const tabpanel = target.closest(".block-tabpanel");
+    const tabpanel = target.closest(".block-tabPanel");
     // tab
     const body = tabpanel.find(".block-tab-body");
     const children_len = body.children().length;
@@ -194,7 +194,7 @@ $(function () {
   /** block tab削除 */
   $(document).on("click", ".remove-block-tab-element", (event) => {
     const target = $(event.target);
-    const tabpanel = target.closest(".block-tabpanel");
+    const tabpanel = target.closest(".block-tabPanel");
     let child = tabpanel.find(".block-tab-body > .block-tab-children");
     let child_len = child.length;
     // 0以下終了
