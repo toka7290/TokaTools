@@ -18,7 +18,45 @@
       "sizes": "2000x2000"
     }
   ],
+  "scope": "/TokaTools/TokaBlockGenerator/",
   "start_url": "/TokaTools/TokaBlockGenerator/index.html",
   "theme_color": "#60ad5e",
-  "background_color": "#e8f5e9"
+  "background_color": "#e8f5e9",
+  "orientation": "any",
+  "categories": ["tools", "minecraft", "addon", "block"],
+  "iarc_rating_id": "8a50fa4e-e4ef-4cff-8c7c-ae5dc1bf900b",
+  "screenshots": [
+    {
+      "src": "/img/screen/BlockGenerator_desktop.webp",
+      "sizes": "1280x720",
+      "type": "image/webp"
+    },
+    {
+      "src": "/img/screen/BlockGenerator_phone.webp",
+      "sizes": "1280x720",
+      "type": "image/webp"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "とかさんのブログ",
+      "short_name": "ブログ",
+      "description": "とかさんのホームページに飛びます",
+      "url": "https://tokamcwin10.blog.jp/",
+      "icons": [{ "src": "/icons/Material_icon_min.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "とかさんのToolBox",
+      "short_name": "ToolBox",
+      "description": "ツールポータルサイトに飛びます",
+      "url": "https://toka7290.github.io/TokaTools/",
+      "icons": [{ "src": "/icons/ToolBox_min.png", "sizes": "192x192" }]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://toka7290.github.io/TokaTools/TokaBlockGenerator/json/webapp.webmanifest"
+    }
+  ]
 }
