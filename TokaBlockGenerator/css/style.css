@@ -515,6 +515,19 @@ div.editor form.hide {
   cursor: auto;
 }
 
+.add-button-text,
+.element-control-text,
+.add-tab-label,
+.add-array-label,
+.remove-button-text,
+.remove-tab-label,
+.remove-array-label {
+  /* ホバー,フォーカス テキスト共通 */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
 input:not(.disabled):hover + .add-button-text,
 input:not(:disabled):focus + .add-button-text,
 input:not(.disabled):hover + .element-control-text,
@@ -922,6 +935,14 @@ input:not(:disabled):not(:checked) + .checkbox-body:hover .checkbox-body-checkMa
   /* 複数入力 end */
 }
 
+.value-input.type-2D {
+  /* 2軸入力 */
+  display: grid;
+  width: auto;
+  align-items: center;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr;
+}
 .value-input.type-3D {
   /* 3軸入力 */
   display: grid;
@@ -930,20 +951,23 @@ input:not(:disabled):not(:checked) + .checkbox-body:hover .checkbox-body-checkMa
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr 1fr;
 }
+.type-2D > label,
 .type-3D > label {
   display: grid;
   width: 100%;
   align-items: center;
   grid-template-columns: 2rem 1fr;
 }
+.type-2D > label > input,
 .type-3D > label > input {
   width: auto;
   max-width: 100vw;
   text-align: end;
 }
+.type-2D > label > span,
 .type-3D > label > span {
   text-align: center;
-  /* 3軸入力 end */
+  /* 2軸入力 3軸入力 end */
 }
 
 .value-input.type-unit {

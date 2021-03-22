@@ -39,18 +39,11 @@
   ],
   "shortcuts": [
     {
-      "name": "とかさんのブログ",
-      "short_name": "ブログ",
-      "description": "とかさんのホームページに飛びます",
-      "url": "https://tokamcwin10.blog.jp/",
-      "icons": [{ "src": "/icons/Material_icon_min.png", "sizes": "192x192" }]
-    },
-    {
-      "name": "とかさんのToolBox",
-      "short_name": "ToolBox",
-      "description": "ツールポータルサイトに飛びます",
-      "url": "https://toka7290.github.io/TokaTools/",
-      "icons": [{ "src": "/icons/ToolBox_min.png", "sizes": "192x192" }]
+      "name": "新しく作る",
+      "short_name": "新規作成",
+      "description": "新しく画面をひらきます",
+      "url": "/",
+      "icons": [{ "src": "/img/icon_256.png", "sizes": "256x256" }]
     }
   ],
   "related_applications": [

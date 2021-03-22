@@ -593,6 +593,19 @@
                             </div>
                           </label>
                         </div>
+                        <div class="value-element components_onlypistonpush" title="-----------------">
+                          <label class="value-checkbox">
+                            <input type="checkbox" name="components_onlypistonpush" class="element-control-switch invisible-Control">
+                            <div class="checkbox-body">
+                              <div class="checkbox-body-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              </div>
+                              <p class="checkbox-body-text">ピストン押込みのみ</p>
+                            </div>
+                          </label>
+                        </div>
                         <div class="value-element components_friction" title="-----------------">
                           <label class="value-checkbox">
                             <input type="checkbox" name="components_friction" class="element-control-switch invisible-Control">
@@ -928,7 +941,7 @@
           <div class="array-list">
             <label class="array-data">
               <div class="array-num">0</div>
-              <input type="text" class="components-tag type-array-string">
+              <input type="text" name="components-tag" class="components-tag type-array-string">
             </label>
           </div>
           <div class="array-list-control" title="タグ入力欄を追加します。">
@@ -1003,7 +1016,7 @@
                             <div class="array-list">
                               <label class="array-data">
                                 <div class="array-num">0</div>
-                                <select name="format-version" class="allowed_faces type-array-select">
+                                <select name="components-placement-filter-allowed_faces" class="components-placement-filter-allowed_faces type-array-select">
                                   <option value="up">上</option>
                                   <option value="down">下</option>
                                   <option value="north">北</option>
@@ -1039,7 +1052,7 @@
                             <div class="array-list">
                               <label class="array-data">
                                 <div class="array-num">0</div>
-                                <input type="text" class="components-tag type-array-string">
+                                <input type="text" name="components-placement-filter-block-filter" class="components-placement-filter-block-filter type-array-string">
                               </label>
                             </div>
                             <div class="array-list-control" title="タグ入力欄を追加します。">
@@ -1132,7 +1145,7 @@
                       <p>グリッドサイズ</p>
                     </div>
                     <label class="value-input">
-                      <input type="number" min="0" max="16" name="components-crafting-table-grid-size" class="components-crafting-table-grid-size" value="0">
+                      <input type="number" min="0" max="16" name="components-crafting-table-grid-size" class="components-crafting-table-grid-size" value="3">
                     </label>
                   </div>
                   <div class="value-element" title="-----------------">
@@ -1143,7 +1156,7 @@
                       <div class="array-list">
                         <label class="array-data">
                           <div class="array-num">0</div>
-                          <input type="text" class="components-crafting-table-crafting-tags type-array-string">
+                          <input type="text" name="components-crafting-table-crafting-tags" class="components-crafting-table-crafting-tags type-array-string">
                         </label>
                       </div>
                       <div class="array-list-control" title="タグ入力欄を追加します。">
@@ -1265,7 +1278,7 @@
                         </div>
                         <label class="value-input">
                           <select name="components-material-instances-face" class="components-material-instances-face">
-                            <option value="all">全面</option>
+                            <option value="*">全面</option>
                             <option value="up">上</option>
                             <option value="down">下</option>
                             <option value="north">北</option>
@@ -1357,7 +1370,7 @@
                   <div class="switchable-element val_simple">
                     <div class="value-element" title="-----------------">
                       <label class="value-checkbox">
-                        <input type="checkbox" name="components-entity-collision-simple" class="invisible-Control" checked>
+                        <input type="checkbox" name="components-entity-collision-simple" class="components-entity-collision-simple invisible-Control" checked>
                         <div class="checkbox-body">
                           <div class="checkbox-body-box">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -1377,15 +1390,15 @@
                       <div class="value-input type-3D">
                         <label>
                           <span>X=</span>
-                          <input type="number" name="" class="components-entity-collision-origin-x" value="0" step="90">
+                          <input type="number" name="" class="components-entity-collision-origin-x" value="0" step="1">
                         </label>
                         <label>
                           <span>Y=</span>
-                          <input type="number" name="" class="components-entity-collision-origin-y" value="0" step="90">
+                          <input type="number" name="" class="components-entity-collision-origin-y" value="0" step="1">
                         </label>
                         <label>
                           <span>Z=</span>
-                          <input type="number" name="" class="components-entity-collision-origin-z" value="0" step="90">
+                          <input type="number" name="" class="components-entity-collision-origin-z" value="0" step="1">
                         </label>
                       </div>
                     </div>
@@ -1396,15 +1409,15 @@
                       <div class="value-input type-3D">
                         <label>
                           <span>X=</span>
-                          <input type="number" name="" class="components-entity-collision-size-x" value="0" step="90">
+                          <input type="number" name="" class="components-entity-collision-size-x" value="0" step="1">
                         </label>
                         <label>
                           <span>Y=</span>
-                          <input type="number" name="" class="components-entity-collision-size-y" value="0" step="90">
+                          <input type="number" name="" class="components-entity-collision-size-y" value="0" step="1">
                         </label>
                         <label>
                           <span>Z=</span>
-                          <input type="number" name="" class="components-entity-collision-size-z" value="0" step="90">
+                          <input type="number" name="" class="components-entity-collision-size-z" value="0" step="1">
                         </label>
                       </div>
                     </div>
@@ -1454,7 +1467,7 @@
                   <div class="switchable-element val_simple">
                     <div class="value-element" title="-----------------">
                       <label class="value-checkbox">
-                        <input type="checkbox" name="components-pick-collision-simple" class="invisible-Control" checked>
+                        <input type="checkbox" name="components-pick-collision-simple" class="components-pick-collision-simple invisible-Control" checked>
                         <div class="checkbox-body">
                           <div class="checkbox-body-box">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -1474,15 +1487,15 @@
                       <div class="value-input type-3D">
                         <label>
                           <span>X=</span>
-                          <input type="number" name="" class="components-pick-collision-origin-x" value="0" step="90">
+                          <input type="number" name="" class="components-pick-collision-origin-x" value="0" step="1">
                         </label>
                         <label>
                           <span>Y=</span>
-                          <input type="number" name="" class="components-pick-collision-origin-y" value="0" step="90">
+                          <input type="number" name="" class="components-pick-collision-origin-y" value="0" step="1">
                         </label>
                         <label>
                           <span>Z=</span>
-                          <input type="number" name="" class="components-pick-collision-origin-z" value="0" step="90">
+                          <input type="number" name="" class="components-pick-collision-origin-z" value="0" step="1">
                         </label>
                       </div>
                     </div>
@@ -1493,15 +1506,15 @@
                       <div class="value-input type-3D">
                         <label>
                           <span>X=</span>
-                          <input type="number" name="" class="components-pick-collision-size-x" value="0" step="90">
+                          <input type="number" name="" class="components-pick-collision-size-x" value="0" step="1">
                         </label>
                         <label>
                           <span>Y=</span>
-                          <input type="number" name="" class="components-pick-collision-size-y" value="0" step="90">
+                          <input type="number" name="" class="components-pick-collision-size-y" value="0" step="1">
                         </label>
                         <label>
                           <span>Z=</span>
-                          <input type="number" name="" class="components-pick-collision-size-z" value="0" step="90">
+                          <input type="number" name="" class="components-pick-collision-size-z" value="0" step="1">
                         </label>
                       </div>
                     </div>
@@ -1585,7 +1598,7 @@
       </div>
       <div class="value-element components_breakonpush" title="-----------------">
         <label class="value-checkbox">
-          <input type="checkbox" name="components-breakonpush" class="invisible-Control">
+          <input type="checkbox" name="components-breakonpush" class="components-breakonpush invisible-Control">
           <div for="components-breakonpush" class="checkbox-body">
             <div class="checkbox-body-box">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -1598,14 +1611,27 @@
       </div>
       <div class="value-element components_immovable" title="-----------------">
         <label class="value-checkbox">
-          <input type="checkbox" name="components-immovable" class="invisible-Control">
-          <div for="components-immovable" class="checkbox-body">
+          <input type="checkbox" name="components-immovable" class="components-immovable invisible-Control">
+          <div class="checkbox-body">
             <div class="checkbox-body-box">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
             </div>
             <p class="checkbox-body-text">ピストン押引不可</p>
+          </div>
+        </label>
+      </div>
+      <div class="value-element components_onlypistonpush" title="-----------------">
+        <label class="value-checkbox">
+          <input type="checkbox" name="components-onlypistonpush" class="components-onlypistonpush invisible-Control">
+          <div class="checkbox-body">
+            <div class="checkbox-body-box">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <p class="checkbox-body-text">ピストン押込みのみ</p>
           </div>
         </label>
       </div>
@@ -1644,7 +1670,7 @@
                       <p>燃焼発火性</p>
                     </div>
                     <label class="value-input">
-                      <input type="number" min="0" name="components-flame-odds" class="components-flame-odds" value="0">
+                      <input type="number" min="0" name="components-flammable-flame-odds" class="components-flammable-flame-odds" value="0">
                     </label>
                   </div>
                   <div class="value-element" title="ブロックが燃えた後消滅する確率を設定します。">
@@ -1653,7 +1679,7 @@
                     </div>
                     <div class="value-input type-unit">
                       <label>
-                        <input type="number" min="0" name="components-burn-odds" class="components-burn-odds" value="0" disabled>
+                        <input type="number" min="0" name="components-flammable-burn-odds" class="components-flammable-burn-odds" value="0" disabled>
                         <span>%</span>
                       </label>
                     </div>
@@ -2195,6 +2221,34 @@
                       </select>
                     </div>
                   </div>
+                  <div class="value-element" title="-----------------">
+                    <div class="value-label">
+                      <p>範囲</p>
+                    </div>
+                    <div class="value-input type-2D">
+                      <label>
+                        <span>X=</span>
+                        <input type="number" name="" class="components-event-ticking-range-x" value="0" step="1">
+                      </label>
+                      <label>
+                        <span>Z=</span>
+                        <input type="number" name="" class="components-event-ticking-range-z" value="0" step="1">
+                      </label>
+                    </div>
+                  </div>
+                  <div class="value-element" title="-----------------">
+                    <label class="value-checkbox">
+                      <input type="checkbox" name="components-event-ticking-looping" class="components-event-ticking-looping invisible-Control">
+                      <div class="checkbox-body">
+                        <div class="checkbox-body-box">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                        </div>
+                        <p class="checkbox-body-text">ループ</p>
+                      </div>
+                    </label>
+                  </div>
                 </div>
               </div>
               <div class="modal-footer">
@@ -2322,15 +2376,15 @@
                       <div class="value-input type-3D">
                         <label>
                           <span>X=</span>
-                          <input type="number" name="" class="event-responses-set-block-position-x" value="0" step="90">
+                          <input type="number" name="" class="event-responses-set-block-position-x" value="0" step="1">
                         </label>
                         <label>
                           <span>Y=</span>
-                          <input type="number" name="" class="event-responses-set-block-position-y" value="0" step="90">
+                          <input type="number" name="" class="event-responses-set-block-position-y" value="0" step="1">
                         </label>
                         <label>
                           <span>Z=</span>
-                          <input type="number" name="" class="event-responses-set-block-position-z" value="0" step="90">
+                          <input type="number" name="" class="event-responses-set-block-position-z" value="0" step="1">
                         </label>
                       </div>
                     </div>
@@ -2395,7 +2449,7 @@
                       <p>amplifier</p>
                     </div>
                     <label class="value-input">
-                      <input type="number" min="0" name="event-responses-add-mob-effect-amplifier" class="event-responses-add-mob-effect-amplifier" value="1" step="1">
+                      <input type="number" min="0" name="event-responses-add-mob-effect-amplifier" class="event-responses-add-mob-effect-amplifier" value="0" step="1">
                     </label>
                   </div>
                   <div class="value-element" title="-----------------">
@@ -2403,7 +2457,7 @@
                       <p>duration</p>
                     </div>
                     <label class="value-input">
-                      <input type="number" min="0" name="event-responses-add-mob-effect-duration" class="event-responses-add-mob-effect-duration" value="1" step="1">
+                      <input type="number" min="0" name="event-responses-add-mob-effect-duration" class="event-responses-add-mob-effect-duration" value="0" step="1">
                     </label>
                   </div>
                   <div class="value-element" title="-----------------">
@@ -2520,16 +2574,49 @@
                     <div class="value-label">
                       <p>ダメージタイプ</p>
                     </div>
-                    <label class="value-input">
-                      <input type="text" name="event-responses-damage-type" class="event-responses-damage-type">
-                    </label>
+                    <div class="value-input">
+                      <select name="event-responses-damage-type" class="event-responses-damage-type">
+                        <option value="all">all</option>
+                        <option value="anvil">anvil</option>
+                        <option value="block_explosion">block_explosion</option>
+                        <option value="charging">charging</option>
+                        <option value="contact">contact</option>
+                        <option value="drowning">drowning</option>
+                        <option value="entity_attack">entity_attack</option>
+                        <option value="entity_explosion">entity_explosion</option>
+                        <option value="fall">fall</option>
+                        <option value="falling_block">falling_block</option>
+                        <option value="fire">fire</option>
+                        <option value="fire_tick">fire_tick</option>
+                        <option value="fireworks">fireworks</option>
+                        <option value="fly_into_wall">fly_into_wall</option>
+                        <option value="freezing">freezing</option>
+                        <option value="lava">lava</option>
+                        <option value="lightning">lightning</option>
+                        <option value="magic">magic</option>
+                        <option value="magma">magma</option>
+                        <option value="none">none</option>
+                        <option value="override">override</option>
+                        <option value="piston">piston</option>
+                        <option value="projectile">projectile</option>
+                        <option value="stalactite">stalactite</option>
+                        <option value="stalagmite">stalagmite</option>
+                        <option value="starve">starve</option>
+                        <option value="suffocation">suffocation</option>
+                        <option value="suicide">suicide</option>
+                        <option value="temperature">temperature</option>
+                        <option value="thorns">thorns</option>
+                        <option value="void">void</option>
+                        <option value="wither">wither</option>
+                      </select>
+                    </div>
                   </div>
                   <div class="value-element" title="-----------------">
                     <div class="value-label">
                       <p>ダメージ量</p>
                     </div>
                     <label class="value-input">
-                      <input type="number" min="0" name="event-responses-damage-amount" class="event-responses-damage-amount" value="1" step="1">
+                      <input type="number" min="0" name="event-responses-damage-amount" class="event-responses-damage-amount" value="0" step="1">
                     </label>
                   </div>
                   <div class="value-element" title="-----------------">
@@ -3033,7 +3120,7 @@
                       <div class="array-list">
                         <label class="array-data">
                           <div class="array-num">0</div>
-                          <input type="text" class="event-responses-run-command type-array-string">
+                          <input type="text" name="event-responses-run-command" class="event-responses-run-command type-array-string">
                         </label>
                       </div>
                       <div class="array-list-control" title="入力欄を追加します。">
@@ -4001,7 +4088,7 @@
               <label for="permutations_condition">状況</label>
             </div>
             <div class="value-input">
-              <input type="text" name="uuid" id="permutations_condition">
+              <input type="text" name="uuid" class="permutations_condition">
             </div>
           </div>
         </div>
@@ -4495,7 +4582,7 @@
                 <div class="array-list">
                   <label class="array-data">
                     <div class="array-num">0</div>
-                    <input type="number" class="blockState-integer type-array-integer">
+                    <input type="number" name="blockState-integer" class="blockState-integer type-array-integer">
                   </label>
                 </div>
                 <div class="array-list-control" title="値入力欄を追加します。">
@@ -4524,7 +4611,7 @@
                 <div class="array-list">
                   <label class="array-data">
                     <div class="array-num">0</div>
-                    <input type="text" class="blockState-string type-array-string">
+                    <input type="text" name="blockState-string" class="blockState-string type-array-string">
                   </label>
                 </div>
                 <div class="array-list-control" title="値入力欄を追加します。">
