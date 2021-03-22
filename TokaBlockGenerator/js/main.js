@@ -682,6 +682,8 @@ function getJSONData() {
       // blockState
       const status_block_contents = $(".blockState.status-block-content");
       const status_block_contents_len = status_block_contents.length;
+      const name_list = $("#blockState-name-list");
+      name_list.children().remove();
       if (
         (() => {
           // 名前アリ 1つ以上
@@ -733,6 +735,8 @@ function getJSONData() {
                 break;
             }
             properties[key] = data_list;
+            // 画面 データリスト更新
+            name_list.append($("<option>").attr("value", key));
           }
         }
         description["properties"] = properties;
