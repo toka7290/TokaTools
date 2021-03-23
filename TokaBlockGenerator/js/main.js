@@ -535,6 +535,7 @@ $("#format-version").on("change", function () {
 $(window).on("load", () => {
   setFormatJson();
 });
+/** format.json を取得 */ 
 function setFormatJson() {
   let request = new XMLHttpRequest();
   request.open("GET", "../json/format.json");
@@ -545,8 +546,7 @@ function setFormatJson() {
   };
 }
 
-/** 更新処理
- * */
+/** 更新処理 */
 function onChangedJSON() {
   onChangedFlammable();
 
@@ -1646,3 +1646,451 @@ function setJSONData(json_text = "") {
   }
   onChangedJSON();
 }
+
+/**
+ * @param {object} import_data - 元json
+* @param {jQuery} element_scope -.editor-element を返す
+ * @param {String} format_version
+ */
+ function getComponents(/** @type {object} */ import_data, /** @type {jQuery} */ element_scope, /** @type {string} */ format_version) {
+   const element_control = element_scope.closestOpposite(".editor-element-footer.element-control .modal-body").children();
+   const value_elements = element_scope.closestOpposite(".editor-element-body").children();
+   
+  switch (format_version) {
+    case "1.16.100":
+      let element ;
+      let is_exist = import_data["minecraft:loot"]!=null;
+      element_control.filter(".components_loot").find(".element-control-switch").prop("checked",is_exist);
+      if (is_exist) {
+        value_elements.filter(".components_loot").find(".components-loot").val(import_data["minecraft:loot"]);
+      }
+      is_exist = import_data["minecraft:display_name"]!=null;
+      element_control.filter(".components_display_name").find(".element-control-switch").prop("checked",is_exist);
+      if (is_exist) {
+        value_elements.filter(".components_display_name").find(".components-display-name").val(import_data["minecraft:display_name"]);
+      }
+      // tag
+      element = value_elements.filter(".components_tag");
+      if (element.length) {
+        const tag = element.find(".components-tag");
+        const tag_len = tag.length;
+        for (let index = 0; index < tag_len; index++) {
+          import_data[`tag:${tag.eq(index).val()}`] = new Object();
+        }
+      }
+      // placement filter
+      element = value_elements.filter(".components_placement_filter");
+      if (element.length) {
+        import_data["minecraft:placement_filter"] = new Object();
+        const container = element.find(".tab-container");
+        const container_len = container.length;
+        let condition_list = new Array();
+        for (let index = 0; index < container_len; index++) {
+          let condition = new Object();
+
+          const face = container.eq(index).find(".components-placement-filter-allowed_faces");
+          let allowed_faces = new Array();
+          for (let index_face = 0; index_face < face.length && index_face <= 8; index_face++) {
+            allowed_faces.push(face.eq(index_face).val());
+          }
+          condition["allowed_faces"] = allowed_faces;
+
+          const block = container.eq(index).find(".components-placement-filter-block-filter");
+          let block_filter = new Array();
+          for (let index_block = 0; index_block < block.length; index_block++) {
+            block_filter.push(block.eq(index_block).val());
+          }
+          condition["block_filter"] = block_filter;
+          condition_list.push(condition);
+        }
+        import_data["minecraft:placement_filter"]["conditions"] = condition_list;
+      }
+
+      is_exist = import_data["minecraft:preventsjumping"]!=null;
+      element_control.filter(".components_preventsjumping").find(".element-control-switch").prop("checked",is_exist);
+      if (is_exist) {
+        value_elements.filter(".components_preventsjumping").find(".components-preventsJumping").prop("checked",import_data["minecraft:preventsjumping"]);
+      }
+      is_exist = import_data["minecraft:unwalkable"]!=null;
+      element_control.filter(".components_unwalkable").find(".element-control-switch").prop("checked",is_exist);
+      if (is_exist) {
+        value_elements.filter(".components_unwalkable").find(".components-unwalkable").prop("checked",import_data["minecraft:unwalkable"]);
+      }
+      is_exist = import_data["minecraft:map_color"]!=null;
+      element_control.filter(".components_map_color").find(".element-control-switch").prop("checked",is_exist);
+      if (is_exist) {
+        value_elements.filter(".components_map_color").find(".components-map-color").val(import_data["minecraft:map_color"])
+      }
+
+      element = value_elements.filter(".components_crafting_table");
+      if (element.length) {
+        let crafting_table = new Object();
+        crafting_table["grid_size"] = Number(
+          element.find(".components-crafting-table-grid-size").val()
+        );
+        const tag = element.find(".components-crafting-table-crafting-tags");
+        const tag_len = tag.length;
+        let crafting_tags = new Array();
+        for (let index = 0; index < tag_len; index++) {
+          crafting_tags.push(tag.eq(index).val());
+        }
+        crafting_table["crafting_tags"] = crafting_tags;
+        crafting_table["custom_description"] = element
+          .find(".components-crafting-table-custom-description")
+          .val();
+        import_data["minecraft:crafting_table"] = crafting_table;
+      }
+      element = value_elements.filter(".components_geometry");
+      if (element.length) {
+        switch (element.find(".components-geometry-switch").val()) {
+          case "val_geometry":
+            import_data["minecraft:geometry"] = element.find(".components-geometry").val();
+            break;
+          case "val_cube":
+            import_data["minecraft:unit_cube"] = new Object();
+            break;
+          default:
+            break;
+        }
+      }
+      element = value_elements.filter(".components_material_instances");
+      if (element.length) {
+        let data = new Object();
+
+        const face = element.find(".components-material-instances-face");
+        const face_len = face.length;
+        for (let index = 0; index < face_len; index++) {
+          let instance = new Object();
+          instance["texture"] = element
+            .find(".components-material-instances-texture")
+            .eq(index)
+            .val();
+          instance["render_method"] = element
+            .find(".components-material-instances-material")
+            .eq(index)
+            .val();
+          data[face.eq(index).val()] = instance;
+        }
+
+        import_data["minecraft:material_instances"] = data;
+      }
+      element = value_elements.filter(".components_entity_collision");
+      if (element.length) {
+        let val;
+        switch (element.find(".components-entity-collision-switch").val()) {
+          case "val_simple":
+            val = element.find(".components-entity-collision-simple").is(":checked");
+            break;
+          case "val_details":
+            val = new Object();
+            val["origin"] = [
+              Number(element.find(".components-entity-collision-origin-x").val()),
+              Number(element.find(".components-entity-collision-origin-y").val()),
+              Number(element.find(".components-entity-collision-origin-z").val()),
+            ];
+            val["size"] = [
+              Number(element.find(".components-entity-collision-size-x").val()),
+              Number(element.find(".components-entity-collision-size-y").val()),
+              Number(element.find(".components-entity-collision-size-z").val()),
+            ];
+            break;
+          default:
+            break;
+        }
+        import_data["minecraft:entity_collision"] = val;
+      }
+      element = value_elements.filter(".components_pick_collision");
+      if (element.length) {
+        let val;
+        switch (element.find(".components-pick-collision-switch").val()) {
+          case "val_simple":
+            val = element.find(".components-pick-collision-simple").is(":checked");
+            break;
+          case "val_details":
+            val = new Object();
+            val["origin"] = [
+              Number(element.find(".components-pick-collision-origin-x").val()),
+              Number(element.find(".components-pick-collision-origin-y").val()),
+              Number(element.find(".components-pick-collision-origin-z").val()),
+            ];
+            val["size"] = [
+              Number(element.find(".components-pick-collision-size-x").val()),
+              Number(element.find(".components-pick-collision-size-y").val()),
+              Number(element.find(".components-pick-collision-size-z").val()),
+            ];
+            break;
+          default:
+            break;
+        }
+        import_data["minecraft:pick_collision"] = val;
+      }
+      
+      is_exist = import_data["minecraft:rotation"]!=null;
+      element_control.filter(".components_rotation").find(".element-control-switch").prop("checked",is_exist);
+      if (is_exist) {
+        value_elements.filter(".components_rotation").find(".components-rotation-x").val(import_data["minecraft:rotation"][0])
+        value_elements.filter(".components_rotation").find(".components-rotation-y").val(import_data["minecraft:rotation"][1])
+        value_elements.filter(".components_rotation").find(".components-rotation-z").val(import_data["minecraft:rotation"][2])
+      }
+      is_exist = import_data["minecraft:breathability"]!=null;
+      element_control.filter(".components_breathability").find(".element-control-switch").prop("checked",is_exist);
+      if (is_exist) {
+        value_elements.filter(".components_breathability").find(".components-breathability").val(import_data["minecraft:breathability"])
+      }
+
+      element = value_elements.filter(".components_block_light_absorption");
+      if (element.length) {
+        import_data["minecraft:block_light_absorption"] = parseInt(
+          element.find(".components-block-light-absorption").val()
+        );
+      }
+      element = value_elements.filter(".components_block_light_emission");
+      if (element.length) {
+        import_data["minecraft:block_light_emission"] = Number(
+          element.find(".components-block-light-emission").val()
+        );
+      }
+      element = value_elements.filter(".components_destroy_time");
+      if (element.length) {
+        import_data["minecraft:destroy_time"] = Number(
+          element.find(".components-destroy-time").val()
+        );
+      }
+      element = value_elements.filter(".components_explosion_resistance");
+      if (element.length) {
+        import_data["minecraft:explosion_resistance"] = Number(
+          element.find(".components-explosion-resistance").val()
+        );
+      }
+      element = value_elements.filter(".components_breakonpush");
+      if (element.length) {
+        import_data["minecraft:breakonpush"] = element
+          .find(".components-breakonpush")
+          .is(":checked");
+      }
+      element = value_elements.filter(".components_immovable");
+      if (element.length) {
+        import_data["minecraft:immovable"] = element.find(".components-immovable").is(":checked");
+      }
+      element = value_elements.filter(".components_onlypistonpush");
+      if (element.length) {
+        import_data["minecraft:onlypistonpush"] = element
+          .find(".components-onlypistonpush")
+          .is(":checked");
+      }
+      element = value_elements.filter(".components_friction");
+      if (element.length) {
+        import_data["minecraft:friction"] = Number(element.find(".components-friction").val());
+      }
+      element = value_elements.filter(".components_flammable");
+      if (element.length) {
+        let flammable = new Object();
+        flammable["flame_odds"] = parseInt(element.find(".components-flammable-flame-odds").val());
+        flammable["burn_odds"] = parseInt(element.find(".components-flammable-burn-odds").val());
+        import_data["minecraft:flammable"] = flammable;
+      }
+      element = value_elements.filter(".components_event_on_fall_on");
+      if (element.length) {
+        let content = new Object();
+        content["event"] = element.find(".components-event-on-fall-on-event").val();
+        let val = element.find(".components-event-on-fall-on-condition").val();
+        if (val != "") content["condition"] = val;
+        val = element.find(".components-event-on-fall-on-target").val();
+        if (val != "default") content["target"] = val;
+        import_data["minecraft:on_fall_on"] = content;
+      }
+      element = value_elements.filter(".components_event_on_interact");
+      if (element.length) {
+        let content = new Object();
+        content["event"] = element.find(".components-event-on-interact-event").val();
+        let val = element.find(".components-event-on-interact-condition").val();
+        if (val != "") content["condition"] = val;
+        val = element.find(".components-event-on-interact-target").val();
+        if (val != "default") content["target"] = val;
+        import_data["minecraft:on_interact"] = content;
+      }
+      element = value_elements.filter(".components_event_on_placed");
+      if (element.length) {
+        let content = new Object();
+        content["event"] = element.find(".components-event-on-placed-event").val();
+        content["condition"] = element.find(".components-event-on-placed-condition").val();
+        let val = element.find(".components-event-on-placed-target").val();
+        if (val != "default") content["target"] = val;
+        import_data["minecraft:on_placed"] = content;
+      }
+      element = value_elements.filter(".components_event_on_player_placing");
+      if (element.length) {
+        let content = new Object();
+        content["event"] = element.find(".components-event-on-player-placing-event").val();
+        let val = element.find(".components-event-on-player-placing-condition").val();
+        if (val != "") content["condition"] = val;
+        val = element.find(".components-event-on-player-placing-target").val();
+        if (val != "default") content["target"] = val;
+        import_data["minecraft:on_player_placing"] = content;
+      }
+      element = value_elements.filter(".components_event_on_step_on");
+      if (element.length) {
+        let content = new Object();
+        content["event"] = element.find(".components-event-on-step-on-event").val();
+        let val = element.find(".components-event-on-step-on-condition").val();
+        if (val != "") content["condition"] = val;
+        val = element.find(".components-event-on-step-on-target").val();
+        if (val != "default") content["target"] = val;
+        import_data["minecraft:on_step_on"] = content;
+      }
+      element = value_elements.filter(".components_event_on_step_off");
+      if (element.length) {
+        let content = new Object();
+        content["event"] = element.find(".components-event-on-step-off-event").val();
+        let val = element.find(".components-event-on-step-off-condition").val();
+        if (val != "") content["condition"] = val;
+        val = element.find(".components-event-on-step-off-target").val();
+        if (val != "default") content["target"] = val;
+        import_data["minecraft:on_step_off"] = content;
+      }
+      element = value_elements.filter(".components_event_on_player_destroyed");
+      if (element.length) {
+        let content = new Object();
+        content["event"] = element.find(".components-event-on-player-destroyed-event").val();
+        let val = element.find(".components-event-on-player-destroyed-condition").val();
+        if (val != "") content["condition"] = val;
+        val = element.find(".components-event-on-player-destroyed-target").val();
+        if (val != "default") content["target"] = val;
+        import_data["minecraft:on_player_destroyed"] = content;
+      }
+      element = value_elements.filter(".components_event_ticking");
+      if (element.length) {
+        import_data["minecraft:ticking"] = new Object();
+        let content = new Object();
+        content["event"] = element.find(".components-event-ticking-event").val();
+        let val = element.find(".components-event-ticking-condition").val();
+        if (val != "") content["condition"] = val;
+        val = element.find(".components-event-ticking-target").val();
+        if (val != "default") content["target"] = val;
+        import_data["minecraft:ticking"]["on_tick"] = content;
+        import_data["minecraft:ticking"]["range"] = [
+          Number(element.find(".components-event-ticking-range-x").val()),
+          Number(element.find(".components-event-ticking-range-z").val()),
+        ];
+        import_data["minecraft:ticking"]["looping"] = element
+          .find(".components-event-ticking-looping")
+          .is(":checked");
+      }
+      element = value_elements.filter(".components_event_random_ticking");
+      if (element.length) {
+        import_data["minecraft:random_ticking"] = new Object();
+        let content = new Object();
+        content["event"] = element.find(".components-event-random-ticking-event").val();
+        let val = element.find(".components-event-random-ticking-condition").val();
+        if (val != "") content["condition"] = val;
+        val = element.find(".components-event-random-ticking-target").val();
+        if (val != "default") content["target"] = val;
+        import_data["minecraft:random_ticking"]["on_tick"] = content;
+      }
+      break;
+    case "1.16.0":
+      element = value_elements.filter(".components_loot");
+      if (element.length) {
+        import_data["minecraft:loot"] = element.find(".components-loot").val();
+      }
+      element = value_elements.filter(".components_destroy_time");
+      if (element.length) {
+        import_data["minecraft:destroy_time"] = Number(
+          element.find(".components-destroy-time").val()
+        );
+      }
+      element = value_elements.filter(".components_explosion_resistance");
+      if (element.length) {
+        import_data["minecraft:explosion_resistance"] = Number(
+          element.find(".components-explosion-resistance").val()
+        );
+      }
+      element = value_elements.filter(".components_friction");
+      if (element.length) {
+        import_data["minecraft:friction"] = Number(element.find(".components-friction").val());
+      }
+      element = value_elements.filter(".components_flammable");
+      if (element.length) {
+        let flammable = new Object();
+        flammable["flame_odds"] = parseInt(element.find(".components-flammable-flame-odds").val());
+        flammable["burn_odds"] = parseInt(element.find(".components-flammable-burn-odds").val());
+        import_data["minecraft:flammable"] = flammable;
+      }
+      element = value_elements.filter(".components_map_color");
+      if (element.length) {
+        import_data["minecraft:map_color"] = element.find(".components-map-color").val();
+      }
+      element = value_elements.filter(".components_block_light_absorption");
+      if (element.length) {
+        import_data["minecraft:block_light_absorption"] = parseInt(
+          element.find(".components-block-light-absorption").val()
+        );
+      }
+      element = value_elements.filter(".components_block_light_emission");
+      if (element.length) {
+        import_data["minecraft:block_light_emission"] = Number(
+          element.find(".components-block-light-emission").val()
+        );
+      }
+      break;
+    case "1.12.0":
+      element = value_elements.filter(".components_loot");
+      if (element.length) {
+        import_data["minecraft:loot"] = new Object();
+        import_data["minecraft:loot"]["table"] = element.find(".components-loot").val();
+      }
+      element = value_elements.filter(".components_destroy_time");
+      if (element.length) {
+        import_data["minecraft:destroy_time"] = new Object();
+        import_data["minecraft:destroy_time"]["value"] = Number(
+          element.find(".components-destroy-time").val()
+        );
+      }
+      element = value_elements.filter(".components_explosion_resistance");
+      if (element.length) {
+        import_data["minecraft:explosion_resistance"] = new Object();
+        import_data["minecraft:explosion_resistance"]["value"] = Number(
+          element.find(".components-explosion-resistance").val()
+        );
+      }
+      element = value_elements.filter(".components_friction");
+      if (element.length) {
+        import_data["minecraft:friction"] = new Object();
+        import_data["minecraft:friction"]["value"] = Number(
+          element.find(".components-friction").val()
+        );
+      }
+      element = value_elements.filter(".components_flammable");
+      if (element.length) {
+        import_data["minecraft:flammable"] = new Object();
+        import_data["minecraft:flammable"]["flame_odds"] = parseInt(
+          element.find(".components-flammable-flame-odds").val()
+        );
+        import_data["minecraft:flammable"]["burn_odds"] = parseInt(
+          element.find(".components-flammable-burn-odds").val()
+        );
+      }
+      element = value_elements.filter(".components_map_color");
+      if (element.length) {
+        import_data["minecraft:map_color"] = new Object();
+        import_data["minecraft:map_color"]["color"] = element.find(".components-map-color").val();
+      }
+      element = value_elements.filter(".components_block_light_absorption");
+      if (element.length) {
+        import_data["minecraft:block_light_absorption"] = new Object();
+        import_data["minecraft:block_light_absorption"]["value"] = parseInt(
+          element.find(".components-block-light-absorption").val()
+        );
+      }
+      element = value_elements.filter(".components_block_light_emission");
+      if (element.length) {
+        import_data["minecraft:block_light_emission"] = new Object();
+        import_data["minecraft:block_light_emission"]["emission"] = Number(
+          element.find(".components-block-light-emission").val()
+        );
+      }
+      break;
+    default:
+      break;
+  }
+ }
