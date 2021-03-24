@@ -164,7 +164,8 @@ ul.more-info {
   margin: 0;
   background-color: var(--color-header);
 }
-summary.more-info-icon::marker {
+summary.more-info-icon::marker,
+summary.more-info-icon::-webkit-details-marker {
   display: none;
   list-style: none;
 }
