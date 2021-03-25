@@ -2333,13 +2333,81 @@
         <div class="value-label">
           <p>ブロックプロパティ</p>
         </div>
+        <div class="value-input type-array-modal">
+          <div class="array-list">
+            <div class="array-data type-modal">
+              <label>
+                <div class="array-num">0</div>
+                <input type="button" value="編集" class="modal-open">
+              </label>
+              <div class="modal hide">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <div class="modal-title">ブロックプロパティ</div>
+                      <label class="modal-close-btn">
+                        <input type="button" value="閉じる" class="modal-close invisible-Control">
+                        <div class="close-btn-icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                          </svg>
+                        </div>
+                      </label>
+                    </div>
+                    <div class="modal-body">
+                      <div class="value-element" title="-----------------">
+                        <div class="value-label">
+                          <p>プロパティ名</p>
+                        </div>
+                        <label class="value-input">
+                          <input type="text" name="event-responses-set-block-state" class="event-responses-set-block-state" list="blockState-name-list">
+                        </label>
+                      </div>
+                      <div class="value-element" title="-----------------">
+                        <div class="value-label">
+                          <p>設定値(式)</p>
+                        </div>
+                        <label class="value-input">
+                          <input type="text" name="event-responses-set-block-value" class="event-responses-set-block-value">
+                        </label>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <label><input type="button" value="Close" class="modal-close"></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="array-list-control" title="タグ入力欄を追加します。">
+            <label class="add-array">
+              <input type="button" class="add-array-element invisible-Control">
+              <div class="add-array-label">
+                <div class="add-array-element-text">+ 追加</div>
+              </div>
+            </label>
+            <label class="remove-array" title="タグ入力欄を消します。">
+              <input type="button" class="remove-array-element invisible-Control">
+              <div class="remove-array-label">
+                <div class="remove-array-element-text">- 削除</div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="value-element event_responses_set_block" title="-----------------">
+        <div class="value-label">
+          <p>ブロック設置</p>
+        </div>
         <label class="value-input">
-          <input type="text" name="event-responses-set-block-property" class="event-responses-set-block-property">
+          <input type="text" name="event-responses-set-block" class="event-responses-set-block">
         </label>
       </div>
       <div class="value-element event_responses_set_block_at_pos" title="-----------------">
         <div class="value-label">
-          <p>ブロック設置</p>
+          <p>ブロック設置(座標指定)</p>
         </div>
         <div class="value-input type-modal">
           <label><input type="button" value="編集" class="modal-open"></label>
@@ -2347,7 +2415,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <div class="modal-title">ブロック設置</div>
+                  <div class="modal-title">ブロック(座標指定)</div>
                   <label class="modal-close-btn">
                     <input type="button" value="閉じる" class="modal-close invisible-Control">
                     <div class="close-btn-icon">
@@ -2359,46 +2427,32 @@
                   </label>
                 </div>
                 <div class="modal-body">
-                  <div class="value-element switchable-content" title="-----------------">
-                    <div class="value-label">
-                      <p>モード</p>
-                    </div>
-                    <label class="value-input">
-                      <select name="event-responses-set-block-switch" class="event-responses-set-block-switch">
-                        <option value="val_normal">通常</option>
-                        <option value="val_position">座標指定</option>
-                      </select>
-                    </label>
-                  </div>
-                  <div class="switchable-element val_normal"></div>
-                  <div class="switchable-element val_position hide">
-                    <div class="value-element" title="-----------------">
-                      <div class="value-label">
-                        <p>座標</p>
-                      </div>
-                      <div class="value-input type-3D">
-                        <label>
-                          <span>X=</span>
-                          <input type="number" name="" class="event-responses-set-block-position-x" value="0" step="1">
-                        </label>
-                        <label>
-                          <span>Y=</span>
-                          <input type="number" name="" class="event-responses-set-block-position-y" value="0" step="1">
-                        </label>
-                        <label>
-                          <span>Z=</span>
-                          <input type="number" name="" class="event-responses-set-block-position-z" value="0" step="1">
-                        </label>
-                      </div>
-                    </div>
-                  </div>
                   <div class="value-element" title="-----------------">
                     <div class="value-label">
                       <p>ブロック</p>
                     </div>
                     <label class="value-input">
-                      <input type="text" name="event-responses-set-block-id" class="event-responses-set-block-id">
+                      <input type="text" name="event-responses-set-block-at-pos-id" class="event-responses-set-block-at-pos-id">
                     </label>
+                  </div>
+                  <div class="value-element" title="-----------------">
+                    <div class="value-label">
+                      <p>座標</p>
+                    </div>
+                    <div class="value-input type-3D">
+                      <label>
+                        <span>X=</span>
+                        <input type="number" name="" class="event-responses-set-block-at-pos-position-x" value="0" step="1">
+                      </label>
+                      <label>
+                        <span>Y=</span>
+                        <input type="number" name="" class="event-responses-set-block-at-pos-position-y" value="0" step="1">
+                      </label>
+                      <label>
+                        <span>Z=</span>
+                        <input type="number" name="" class="event-responses-set-block-at-pos-position-z" value="0" step="1">
+                      </label>
+                    </div>
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -2963,7 +3017,7 @@
                       <p>ターゲット</p>
                     </div>
                     <div class="value-input">
-                      <select name="event-responses-teleport" class="event-responses-teleport">
+                      <select name="event-responses-teleport-target" class="event-responses-teleport-target">
                         <option value="default">default</option>
                         <option value="self">self</option>
                         <option value="holder">holder</option>
@@ -3261,6 +3315,19 @@
                                         </div>
                                       </label>
                                     </div>
+                                    <div class="value-element event_responses_set_block" title="-----------------">
+                                      <label class="value-checkbox">
+                                        <input type="checkbox" name="event_responses_set_block" class="element-control-switch invisible-Control">
+                                        <div class="checkbox-body">
+                                          <div class="checkbox-body-box">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                              <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                          </div>
+                                          <p class="checkbox-body-text">ブロック設置</p>
+                                        </div>
+                                      </label>
+                                    </div>
                                     <div class="value-element event_responses_set_block_at_pos" title="-----------------">
                                       <label class="value-checkbox">
                                         <input type="checkbox" name="event_responses_set_block_at_pos" class="element-control-switch invisible-Control">
@@ -3270,7 +3337,7 @@
                                               <polyline points="20 6 9 17 4 12"></polyline>
                                             </svg>
                                           </div>
-                                          <p class="checkbox-body-text">ブロック設置</p>
+                                          <p class="checkbox-body-text">ブロック設置(座標指定)</p>
                                         </div>
                                       </label>
                                     </div>
@@ -3582,6 +3649,19 @@
                                         </div>
                                       </label>
                                     </div>
+                                    <div class="value-element event_responses_set_block" title="-----------------">
+                                      <label class="value-checkbox">
+                                        <input type="checkbox" name="event_responses_set_block" class="element-control-switch invisible-Control">
+                                        <div class="checkbox-body">
+                                          <div class="checkbox-body-box">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                              <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                          </div>
+                                          <p class="checkbox-body-text">ブロック設置</p>
+                                        </div>
+                                      </label>
+                                    </div>
                                     <div class="value-element event_responses_set_block_at_pos" title="-----------------">
                                       <label class="value-checkbox">
                                         <input type="checkbox" name="event_responses_set_block_at_pos" class="element-control-switch invisible-Control">
@@ -3591,7 +3671,7 @@
                                               <polyline points="20 6 9 17 4 12"></polyline>
                                             </svg>
                                           </div>
-                                          <p class="checkbox-body-text">ブロック設置</p>
+                                          <p class="checkbox-body-text">ブロック設置(座標指定)</p>
                                         </div>
                                       </label>
                                     </div>
@@ -3860,6 +3940,19 @@
                           </div>
                         </label>
                       </div>
+                      <div class="value-element event_responses_set_block" title="-----------------">
+                        <label class="value-checkbox">
+                          <input type="checkbox" name="event_responses_set_block" class="element-control-switch invisible-Control">
+                          <div class="checkbox-body">
+                            <div class="checkbox-body-box">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="checkbox-body-checkMark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                              </svg>
+                            </div>
+                            <p class="checkbox-body-text">ブロック設置</p>
+                          </div>
+                        </label>
+                      </div>
                       <div class="value-element event_responses_set_block_at_pos" title="-----------------">
                         <label class="value-checkbox">
                           <input type="checkbox" name="event_responses_set_block_at_pos" class="element-control-switch invisible-Control">
@@ -3869,7 +3962,7 @@
                                 <polyline points="20 6 9 17 4 12"></polyline>
                               </svg>
                             </div>
-                            <p class="checkbox-body-text">ブロック設置</p>
+                            <p class="checkbox-body-text">ブロック設置(座標指定)</p>
                           </div>
                         </label>
                       </div>
