@@ -7,6 +7,72 @@ var is_can_issue = true;
 var help_page_num = 0;
 var format_json = new Object();
 
+class JSONReplace {
+  constructor() {
+    this.replace_point = new Object();
+  }
+  /**
+   *
+   * @param {*} data
+   * @returns {string}
+   */
+  register(data) {
+    let key = null;
+    if (Array.isArray(data)) {
+      if (
+        (Math.max.apply(
+          null,
+          data.map((val) => String(val).length)
+        ) >= 5 &&
+          data.length >= 6) ||
+        data.join(",").length >= 80 ||
+        data.length == 0
+      ) {
+        key = data;
+      } else {
+        key = getUuid_v4();
+        this.replace_point[`"${key}"`] = data;
+      }
+    } else {
+      key = data;
+    }
+    return key;
+  }
+  replaceAll(/**@type {String} */ string_json) {
+    const keys = Object.keys(this.replace_point);
+    for (let index = 0; index < keys.length; index++) {
+      const key = keys[index];
+      string_json = string_json.replace(
+        key,
+        JSON.stringify(this.replace_point[key])
+          .split(/^\[/)
+          .join("[ ")
+          .split(/,/)
+          .join(", ")
+          .split(/\]$/)
+          .join(" ]")
+      );
+    }
+    return string_json;
+  }
+}
+
+// UUID生成
+function getUuid_v4() {
+  let chars = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".split("");
+  for (let i = 0, len = chars.length; i < len; i++) {
+    switch (chars[i]) {
+      case "x":
+        chars[i] = Math.floor(Math.random() * 16).toString(16);
+        break;
+      case "y":
+        chars[i] = (Math.floor(Math.random() * 4) + 8).toString(16);
+        break;
+    }
+  }
+  return chars.join("");
+}
+
 onChangedJSON();
 /** ページ離脱時に警告表示 */
 $(window).bind("beforeunload", function () {
@@ -277,6 +343,7 @@ $(document).on("click", ".tab-children>input[type=radio]", (/** @type {jQuery.Ev
 /** tab追加 */
 $(document).on("click", ".add-tab-element", (/** @type {jQuery.Event} */ event) => {
   addTabElement($(event.target).closest(".tabpanel"));
+  onChangedJSON();
 });
 /**
  * tab 追加
@@ -327,10 +394,12 @@ $(document).on("click", ".remove-tab-element", (/** @type {jQuery.Event} */ even
       .prop("checked", index == 0);
     child.eq(index).find(".tab-number").text(index);
   }
+  onChangedJSON();
 });
 /** 配列制御 追加 */
 $(document).on("click", "input.add-array-element", (/** @type {jQuery.Event} */ event) => {
   addArrayElement($(event.target).closest(".value-input"));
+  onChangedJSON();
 });
 /** 配列制御追加
  * @param {jQuery} value_input
@@ -393,9 +462,10 @@ function addArrayElement(/** @type {jQuery} */ value_input) {
 }
 /** 配列制御 削除 */
 $(document).on("click", "input.remove-array-element", (/** @type {jQuery.Event} */ event) => {
-  const list = $(event.target).closest(".value-input").find(".array-list");
+  const list = $(event.target).closest(".value-input").find(".array-list .array-data");
   if (list.length <= 1) return;
-  list.find(".array-data:last-child").remove();
+  list.filter(".array-data:last-child").remove();
+  onChangedJSON();
 });
 /** モーダル開く */
 $(document).on("click", ".modal-open", (/** @type {jQuery.Event} */ event) => {
@@ -433,6 +503,7 @@ $("#issue-control").on("click", function () {
 /** event 追加 */
 $("#event-add").on("click", () => {
   addEvent();
+  onChangedJSON();
 });
 /**
  * イベント追加
@@ -443,10 +514,12 @@ function addEvent() {
 /** event 削除 */
 $(document).on("click", "input.event-delete", (/** @type {jQuery.Event} */ event) => {
   $(event.target).closest(".status-block-content").remove();
+  onChangedJSON();
 });
 /** blockState 追加 */
 $("#blockState-add").on("click", () => {
   addBlockState();
+  onChangedJSON();
 });
 /**
  * BlockState追加
@@ -457,6 +530,7 @@ function addBlockState() {
 /** blockState 削除 */
 $(document).on("click", "input.blockState-delete", (/** @type {jQuery.Event} */ event) => {
   $(event.target).closest(".status-block-content").remove();
+  onChangedJSON();
 });
 
 /* ------------------------- page 入出力 ------------------------- */
@@ -547,6 +621,7 @@ $(document).on("change", ".components-map-color-pick", (/** @type {jQuery.Event}
     .closest(".type-color")
     .find(".components-map-color")
     .val(/** @type {string} */ ($(event.target).val()));
+  onChangedJSON();
 });
 /** 発光量変更 */
 $(document).on("change", ".components-block-light-emission", (
@@ -708,6 +783,7 @@ function checkJSONError() {
  * @return {string}
  */
 function getJSONData() {
+  const DataReplacer = new JSONReplace();
   let json_raw = {};
   json_raw["format_version"] = format_version;
   json_raw["minecraft:block"] = new Object();
@@ -771,7 +847,7 @@ function getJSONData() {
                 data_list = [bool, !bool];
                 break;
             }
-            properties[key] = data_list;
+            properties[key] = DataReplacer.register(data_list);
             // 画面 データリスト更新
             name_list.append($("<option>").attr("value", key));
           }
@@ -792,7 +868,8 @@ function getJSONData() {
   // components
   json_raw["minecraft:block"]["components"] = getComponents(
     $("#editor-main .editor-element-body").children(),
-    /** @type {string} */ (format_version)
+    /** @type {string} */ (format_version),
+    DataReplacer
   );
 
   // "events"
@@ -855,7 +932,7 @@ function getJSONData() {
           if (condition != "") {
             let data = new Object();
             data["condition"] = condition;
-            data["components"] = getComponents(body.children(), format_version);
+            data["components"] = getComponents(body.children(), format_version, DataReplacer);
             permutations.push(data);
           }
         }
@@ -867,15 +944,20 @@ function getJSONData() {
     default:
       break;
   }
-  return JSON.stringify(json_raw, null, "  ");
+  return DataReplacer.replaceAll(JSON.stringify(json_raw, null, "  "));
 }
 
 /**
  * @param {jQuery} value_elements
  * @param {string} version
+ * @param {JSONReplace} Replacer
  * @return {Object}
  */
-function getComponents(/** @type {jQuery} */ value_elements, /** @type {string} */ version) {
+function getComponents(
+  /** @type {jQuery} */ value_elements,
+  /** @type {string} */ version,
+  /**@type {JSONReplace} */ Replacer
+) {
   let components = new Object();
   switch (version) {
     case "1.16.100":
@@ -996,16 +1078,16 @@ function getComponents(/** @type {jQuery} */ value_elements, /** @type {string} 
             break;
           case "val_details":
             val = new Object();
-            val["origin"] = [
+            val["origin"] = Replacer.register([
               Number(element.find(".components-entity-collision-origin-x").val()),
               Number(element.find(".components-entity-collision-origin-y").val()),
               Number(element.find(".components-entity-collision-origin-z").val()),
-            ];
-            val["size"] = [
+            ]);
+            val["size"] = Replacer.register([
               Number(element.find(".components-entity-collision-size-x").val()),
               Number(element.find(".components-entity-collision-size-y").val()),
               Number(element.find(".components-entity-collision-size-z").val()),
-            ];
+            ]);
             break;
           default:
             break;
@@ -1021,16 +1103,16 @@ function getComponents(/** @type {jQuery} */ value_elements, /** @type {string} 
             break;
           case "val_details":
             val = new Object();
-            val["origin"] = [
+            val["origin"] = Replacer.register([
               Number(element.find(".components-pick-collision-origin-x").val()),
               Number(element.find(".components-pick-collision-origin-y").val()),
               Number(element.find(".components-pick-collision-origin-z").val()),
-            ];
-            val["size"] = [
+            ]);
+            val["size"] = Replacer.register([
               Number(element.find(".components-pick-collision-size-x").val()),
               Number(element.find(".components-pick-collision-size-y").val()),
               Number(element.find(".components-pick-collision-size-z").val()),
-            ];
+            ]);
             break;
           default:
             break;
@@ -1039,11 +1121,11 @@ function getComponents(/** @type {jQuery} */ value_elements, /** @type {string} 
       }
       element = value_elements.filter(".components_rotation");
       if (element.length) {
-        components["minecraft:rotation"] = [
+        components["minecraft:rotation"] = Replacer.register([
           parseInt(element.find(".components-rotation-x").val(), 10),
           parseInt(element.find(".components-rotation-y").val(), 10),
           parseInt(element.find(".components-rotation-z").val(), 10),
-        ];
+        ]);
       }
       element = value_elements.filter(".components_breathability");
       if (element.length) {
@@ -1186,10 +1268,10 @@ function getComponents(/** @type {jQuery} */ value_elements, /** @type {string} 
         val = element.find(".components-event-ticking-target").val();
         if (val != "default") content["target"] = val;
         components["minecraft:ticking"]["on_tick"] = content;
-        components["minecraft:ticking"]["range"] = [
+        components["minecraft:ticking"]["range"] = Replacer.register([
           Number(element.find(".components-event-ticking-range-x").val()),
           Number(element.find(".components-event-ticking-range-z").val()),
-        ];
+        ]);
         components["minecraft:ticking"]["looping"] = element
           .find(".components-event-ticking-looping")
           .is(":checked");
@@ -1326,9 +1408,13 @@ function getComponents(/** @type {jQuery} */ value_elements, /** @type {string} 
 
 /**
  * @param {jQuery} value_elements
+ * @param {JSONReplace} Replacer
  * @return {Object}
  *  */
-function getEventResponses(/** @type {jQuery} */ value_elements) {
+function getEventResponses(
+  /** @type {jQuery} */ value_elements,
+  /**@type {JSONReplace} */ Replacer
+) {
   let event_responses = new Object();
   let element = value_elements.filter(".event_responses_set_block_property");
   if (element.length) {
@@ -1365,11 +1451,11 @@ function getEventResponses(/** @type {jQuery} */ value_elements) {
     } catch (error) {
       content["block_type"] = block_type;
     }
-    content["block_offset"] = [
+    content["block_offset"] = Replacer.register([
       Number(element.find(".event-responses-set-block-at-pos-position-x").val()),
       Number(element.find(".event-responses-set-block-at-pos-position-y").val()),
       Number(element.find(".event-responses-set-block-at-pos-position-z").val()),
-    ];
+    ]);
     event_responses["set_block_at_pos"] = content;
   }
   element = value_elements.filter(".event_responses_spawn_loot");
@@ -1445,16 +1531,16 @@ function getEventResponses(/** @type {jQuery} */ value_elements) {
   element = value_elements.filter(".event_responses_teleport");
   if (element.length) {
     let content = new Object();
-    content["destination"] = [
+    content["destination"] = Replacer.register([
       Number(element.find(".event-responses-teleport-destination-x").val()),
       Number(element.find(".event-responses-teleport-destination-y").val()),
       Number(element.find(".event-responses-teleport-destination-z").val()),
-    ];
-    content["max_range"] = [
+    ]);
+    content["max_range"] = Replacer.register([
       Number(element.find(".event-responses-teleport-max-range-x").val()),
       Number(element.find(".event-responses-teleport-max-range-y").val()),
       Number(element.find(".event-responses-teleport-max-range-z").val()),
-    ];
+    ]);
     content["avoid_water"] = element.find(".event-responses-teleport-avoid_water").is(":checked");
     content["land_on_block"] = element
       .find(".event-responses-teleport-land-on-block")
@@ -1627,6 +1713,7 @@ function setJSONData(json_text = "") {
       description["register_to_creative-menu"]
     );
   }
+  // blockState
   if (description["properties"] != null) {
     const keys = Object.keys(description["properties"]);
     for (let index = 0; index < keys.length; index++) {
@@ -1659,9 +1746,8 @@ function setJSONData(json_text = "") {
       }
     }
   }
-  // blockState
 
-  // components
+  // Components
   setComponents(
     $("#editor-main>:last-child"),
     format_version,
