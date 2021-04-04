@@ -897,7 +897,7 @@ function getJSONData() {
               .children(".editor-element")
               .children(".editor-element-body")
               .children();
-            events[key] = getEventResponses(value_element);
+            events[key] = getEventResponses(value_element, DataReplacer);
             // 画面 データリスト更新
             name_list.append($("<option>").attr("value", key));
           }
@@ -991,14 +991,14 @@ function getComponents(
           for (let index_face = 0; index_face < face.length && index_face <= 8; index_face++) {
             allowed_faces.push(face.eq(index_face).val());
           }
-          condition["allowed_faces"] = allowed_faces;
+          condition["allowed_faces"] = Replacer.register(allowed_faces);
 
           const block = container.eq(index).find(".components-placement-filter-block-filter");
           let block_filter = new Array();
           for (let index_block = 0; index_block < block.length; index_block++) {
             block_filter.push(block.eq(index_block).val());
           }
-          condition["block_filter"] = block_filter;
+          condition["block_filter"] = Replacer.register(block_filter);
           condition_list.push(condition);
         }
         components["minecraft:placement_filter"]["conditions"] = condition_list;
@@ -1029,7 +1029,7 @@ function getComponents(
         for (let index = 0; index < tag_len; index++) {
           crafting_tags.push(tag.eq(index).val());
         }
-        crafting_table["crafting_tags"] = crafting_tags;
+        crafting_table["crafting_tags"] = Replacer.register(crafting_tags);
         crafting_table["custom_description"] = element
           .find(".components-crafting-table-custom-description")
           .val();
@@ -1487,7 +1487,7 @@ function getEventResponses(
   if (element.length) {
     let content = new Object();
     content["type"] = element.find(".event-responses-damage-type").val();
-    content["amount"] = element.find(".event-responses-damage-amount").val();
+    content["amount"] = parseInt(element.find(".event-responses-damage-amount").val(), 10);
     if (element.find(".event-responses-damage-target").val() != "default") {
       content["target"] = element.find(".event-responses-damage-target").val();
     }
@@ -1513,7 +1513,7 @@ function getEventResponses(
   if (element.length) {
     let content = new Object();
     content["effect"] = element.find(".event-responses-play-effect-id").val();
-    content["data"] = element.find(".event-responses-play-effect-data").val();
+    content["data"] = parseInt(element.find(".event-responses-play-effect-data").val(), 10);
     if (element.find(".event-responses-play-effect-target").val() != "default") {
       content["target"] = element.find(".event-responses-play-effect-target").val();
     }
@@ -1552,6 +1552,7 @@ function getEventResponses(
   }
   element = value_elements.filter(".event_responses_transform_item");
   if (element.length) {
+    event_responses["transform_item"] = new Object();
     event_responses["transform_item"]["transform"] = element
       .find(".event-responses-transform-item-id")
       .val();
@@ -1603,7 +1604,7 @@ function getEventResponses(
     let content = new Array();
     for (let index = 0; index < container_len; index++) {
       let data = getEventResponses(container.eq(index).children(".editor-element-body").children());
-      data["weight"] = Number(element.find(".event-responses-randomize-weight").val());
+      data["weight"] = Number(element.find(".event-responses-randomize-weight").eq(index).val());
       content.push(data);
     }
     event_responses["randomize"] = content;
