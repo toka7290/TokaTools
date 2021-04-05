@@ -271,14 +271,6 @@
                 <input type="text" name="block-name" id="description-block-name">
               </div>
             </div>
-            <div class="value-element description_properties" title="-----------------">
-              <div class="value-label">
-                <label for="description-goto-blockState">ブロック状態</label>
-              </div>
-              <div class="value-input">
-                <input type="button" value="管理画面に移動する" id="description-goto-blockState">
-              </div>
-            </div>
             <div class="value-element description_is_experimental unsupported" title="このチェックを有効にすると、試験的なゲームプレイでのみブロックが有効化されます。">
               <label class="value-checkbox">
                 <input type="checkbox" name="description-is-experimental" id="description-is-experimental" class="invisible-Control">
@@ -868,13 +860,13 @@
               <span>問題</span>
             </div>
             <div class="issue-status-num">
-              <div class="issue-status-warning">
-                <img src="img/warning.svg" alt="" width="19px" height="19px">
-                <span class="issue-warning-num">警告:0</span>
-              </div>
               <div class="issue-status-error">
                 <img src="img/error.svg" alt="" width="19px" height="19px">
                 <span class="issue-error-num">エラー:0</span>
+              </div>
+              <div class="issue-status-warning">
+                <img src="img/warning.svg" alt="" width="19px" height="19px">
+                <span class="issue-warning-num">警告:0</span>
               </div>
             </div>
           </label>
@@ -1424,15 +1416,15 @@
                       <div class="value-input type-3D">
                         <label>
                           <span>X=</span>
-                          <input type="number" name="" class="components-entity-collision-origin-x" value="0" step="1">
+                          <input type="number" name="" class="components-entity-collision-origin-x" value="0" step="1" min="-8" max="8">
                         </label>
                         <label>
                           <span>Y=</span>
-                          <input type="number" name="" class="components-entity-collision-origin-y" value="0" step="1">
+                          <input type="number" name="" class="components-entity-collision-origin-y" value="0" step="1" min="0" max="16">
                         </label>
                         <label>
                           <span>Z=</span>
-                          <input type="number" name="" class="components-entity-collision-origin-z" value="0" step="1">
+                          <input type="number" name="" class="components-entity-collision-origin-z" value="0" step="1" min="-8" max="8">
                         </label>
                       </div>
                     </div>
@@ -1443,15 +1435,15 @@
                       <div class="value-input type-3D">
                         <label>
                           <span>X=</span>
-                          <input type="number" name="" class="components-entity-collision-size-x" value="0" step="1">
+                          <input type="number" name="" class="components-entity-collision-size-x" value="0" step="1" min="0" max="16">
                         </label>
                         <label>
                           <span>Y=</span>
-                          <input type="number" name="" class="components-entity-collision-size-y" value="0" step="1">
+                          <input type="number" name="" class="components-entity-collision-size-y" value="0" step="1" min="0" max="16">
                         </label>
                         <label>
                           <span>Z=</span>
-                          <input type="number" name="" class="components-entity-collision-size-z" value="0" step="1">
+                          <input type="number" name="" class="components-entity-collision-size-z" value="0" step="1" min="0" max="16">
                         </label>
                       </div>
                     </div>
@@ -1521,15 +1513,15 @@
                       <div class="value-input type-3D">
                         <label>
                           <span>X=</span>
-                          <input type="number" name="" class="components-pick-collision-origin-x" value="0" step="1">
+                          <input type="number" name="" class="components-pick-collision-origin-x" value="0" step="1" min="-8" max="8">
                         </label>
                         <label>
                           <span>Y=</span>
-                          <input type="number" name="" class="components-pick-collision-origin-y" value="0" step="1">
+                          <input type="number" name="" class="components-pick-collision-origin-y" value="0" step="1" min="0" max="16">
                         </label>
                         <label>
                           <span>Z=</span>
-                          <input type="number" name="" class="components-pick-collision-origin-z" value="0" step="1">
+                          <input type="number" name="" class="components-pick-collision-origin-z" value="0" step="1" min="-8" max="8">
                         </label>
                       </div>
                     </div>
@@ -1540,15 +1532,15 @@
                       <div class="value-input type-3D">
                         <label>
                           <span>X=</span>
-                          <input type="number" name="" class="components-pick-collision-size-x" value="0" step="1">
+                          <input type="number" name="" class="components-pick-collision-size-x" value="0" step="1" min="0" max="16">
                         </label>
                         <label>
                           <span>Y=</span>
-                          <input type="number" name="" class="components-pick-collision-size-y" value="0" step="1">
+                          <input type="number" name="" class="components-pick-collision-size-y" value="0" step="1" min="0" max="16">
                         </label>
                         <label>
                           <span>Z=</span>
-                          <input type="number" name="" class="components-pick-collision-size-z" value="0" step="1">
+                          <input type="number" name="" class="components-pick-collision-size-z" value="0" step="1" min="0" max="16">
                         </label>
                       </div>
                     </div>

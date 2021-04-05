@@ -69,6 +69,56 @@ class JSONReplace {
     return string_json;
   }
 }
+class Issue {
+  constructor() {
+    this.error_list = new Array();
+    this.warning_list = new Array();
+    $("ul.issue-list li").remove();
+    $(".stat-warning,.stat-error").removeClass("stat-warning stat-error");
+  }
+  setIssueList() {
+    $("span.issue-error-num").text("エラー:" + this.error_list.length);
+    $("span.issue-warning-num").text("警告:" + this.warning_list.length);
+    if (this.warning_list.length <= 0 && this.error_list.length <= 0) {
+      $("ul.issue-list").append("<li>問題はありません</li>");
+    } else {
+      this.error_list.forEach((val) => {
+        $("ul.issue-list").append(
+          $("<li>").append(
+            $("<img>").attr({
+              src: "img/error.svg",
+              alt: "",
+              width: "19px",
+              height: "19px",
+            }),
+            $("<p>").text(val[0])
+          )
+        );
+        val[1].addClass("stat-error");
+      });
+      this.warning_list.forEach((val) => {
+        $("ul.issue-list").append(
+          $("<li>").append(
+            $("<img>").attr({
+              src: "img/warning.svg",
+              alt: "",
+              width: "19px",
+              height: "19px",
+            }),
+            $("<p>").text(val[0])
+          )
+        );
+        val[1].addClass("stat-warning");
+      });
+    }
+  }
+  addWarning(issue_comment, issue_element) {
+    this.warning_list.push([issue_comment, issue_element]);
+  }
+  addError(issue_comment, issue_element) {
+    this.error_list.push([issue_comment, issue_element]);
+  }
+}
 
 // UUID生成
 function getUuid_v4() {
@@ -716,61 +766,8 @@ function onChangedFlammable() {
 /** イシューチェック */
 function checkIssue() {
   // イシュー削除
-  $("ul.issue-list li").remove();
-  $(".stat-warning,.stat-error").removeClass("stat-warning stat-error");
-  const error_num = checkJSONError();
-  const warning_num = checkJSONWarning();
-  $("span.issue-warning-num").text("警告:" + warning_num);
-  $("span.issue-error-num").text("エラー:" + error_num);
-  if (warning_num <= 0 && error_num <= 0) {
-    $("ul.issue-list").append("<li>問題はありません</li>");
-  }
-}
-/** イシュー更新
- * @param {string} type
- * @param {string} issue_comment
- * @param {jQuery} issue_element
- */
-function addIssue(type, issue_comment, issue_element) {
-  let content = $("<li>");
-  if (type == "warning") {
-    content.append(
-      $("<img>").attr({
-        src: "img/warning.svg",
-        alt: "",
-        width: "19px",
-        height: "19px",
-      }),
-      $("<p>").text(issue_comment)
-    );
-    issue_element.addClass("stat-warning");
-  } else if (type == "error") {
-    content.append(
-      $("<img>").attr({
-        src: "img/error.svg",
-        alt: "",
-        width: "19px",
-        height: "19px",
-      }),
-      $("<p>").text(issue_comment)
-    );
-    issue_element.addClass("stat-error");
-  }
-  $("ul.issue-list").append(content);
-}
-/** 警告検査
- * @return {number}
- */
-function checkJSONWarning() {
-  let warning_num = 0;
-  return warning_num;
-}
-/** エラー検査
- * @return {number}
- *  */
-function checkJSONError() {
-  let error_num = 0;
-  // ID
+  const issue_control = new Issue();
+  // Description:identifier
   const block_name = $("#description-block-name");
   const block_ID = block_name.val().split(/:/);
   let message = "";
@@ -792,11 +789,317 @@ function checkJSONError() {
       '[Description:identifier] 名前空間が空です。名前空間を入力してください。ブロックIDは"名前空間:ブロックID"を入力してください。';
   }
   if (message != "") {
-    addIssue("error", message, block_name);
-    error_num++;
+    issue_control.addError(message, block_name);
   }
-  return error_num;
+  // Description:properties  blockState
+  switch (format_version) {
+    case "1.16.100":
+      const status_block_contents = $(".blockState.status-block-content");
+      const status_block_contents_len = status_block_contents.length;
+      for (let index = 0; index < status_block_contents_len; index++) {
+        const body = status_block_contents.eq(index);
+        const key = /** @type {string} */ (body.find(".blockState-name").val());
+        if (key == "") {
+          issue_control.addWarning(
+            `[Description:properties:${index}] プロパティ名が設定されていません。`,
+            body.find(".blockState-name")
+          );
+        } else {
+          const type = body.find(".blockState-type").val();
+          switch (type) {
+            case "val_Integer":
+            case "val_String":
+              {
+                const array_data = body.find(
+                  `.${type}>.value-element input.blockState-integer.type-array-integer,.${type}>.value-element input.blockState-string.type-array-string`
+                );
+                const array_data_len = array_data.length;
+                for (let num = 0; num < array_data_len; num++) {
+                  if (array_data.eq(num).val() == "") {
+                    issue_control.addWarning(
+                      `[Description:properties:${key}:${num}] 空のプロパティがあります。`,
+                      array_data.eq(num)
+                    );
+                  }
+                }
+              }
+              break;
+            case "val_Boolean":
+            default:
+              break;
+          }
+        }
+      }
+      break;
+    case "1.16.0":
+    case "1.12.0":
+    default:
+      break;
+  }
+  // Components
+  checkComponents(issue_control, "Components", $("#editor-main .editor-element-body").children());
+
+  // "events"
+  switch (format_version) {
+    case "1.16.100":
+      const status_block_contents = $(".event.status-block-content");
+      const status_block_contents_len = status_block_contents.length;
+      for (let index = 0; index < status_block_contents_len; index++) {
+        const body = /** @type {jQuery} */ (status_block_contents.eq(index));
+        const key = /** @type {string} */ (body.find(".event-name").val());
+        if (key == "") {
+          issue_control.addError(`[Event:${index}] イベント名が空です。`, body.find(".event-name"));
+        } else {
+          checkEventResponses(
+            issue_control,
+            `Event:${key}`,
+            body.children(".editor-element").children(".editor-element-body").children()
+          );
+        }
+      }
+      break;
+    case "1.16.0":
+    case "1.12.0":
+    default:
+      break;
+  }
+  // "permutations"
+  switch (format_version) {
+    case "1.16.100":
+      const conditions = $(".permutations_condition");
+      const conditions_len = conditions.length;
+      if (
+        (() => {
+          // 名前アリ 1つ以上
+          for (let index = 0; index < conditions_len; index++) {
+            if ("" != conditions.eq(index).val()) return true;
+          }
+          return false;
+        })()
+      ) {
+        let permutations = new Array();
+        const container = $(".permutations.block-tab-container");
+        for (let index = 0; index < conditions_len; index++) {
+          const body = /** @type {jQuery} */ (container.eq(index).find(".editor-element-body"));
+          const condition = /** @type {string} */ (conditions.eq(index).val());
+          if (condition != "") {
+            let data = new Object();
+            data["condition"] = condition;
+            data["components"] = getComponents(body.children(), format_version, DataReplacer);
+            permutations.push(data);
+          }
+        }
+        json_raw["minecraft:block"]["permutations"] = permutations;
+      }
+      break;
+    case "1.16.0":
+    case "1.12.0":
+    default:
+      break;
+  }
+
+  issue_control.setIssueList();
 }
+
+/**
+ * @param {Issue} issue_control
+ * @param {string} level
+ * @param {JQuery} value_elements
+ */
+function checkComponents(issue_control, level, value_elements) {
+  /** @type {jQuery} */
+  let element;
+  switch (format_version) {
+    case "1.16.100":
+      element = value_elements.filter(".components_tag");
+      if (element.length) {
+        const tag = element.find(".components-tag");
+        const tag_len = tag.length;
+        for (let index = 0; index < tag_len; index++) {
+          if (tag.eq(index).val() == "") {
+            issue_control.addWarning(`[${level}:tag:${index}] タグが空です。`, tag.eq(index));
+          }
+        }
+      }
+      element = value_elements.filter(".components_placement_filter");
+      if (element.length) {
+        const container = element.find(".tab-container");
+        const container_len = container.length;
+        for (let index = 0; index < container_len; index++) {
+          const block = container.eq(index).find(".components-placement-filter-block-filter");
+          for (let index_block = 0; index_block < block.length; index_block++) {
+            block.eq(index_block).val();
+            if (block.eq(index_block).val() == "")
+              issue_control.addError(
+                `[${level}:minecraft:placement_filter:${index}:${index_block}] ブロックが指定されていません。`,
+                block.eq(index_block)
+              );
+          }
+        }
+      }
+      element = value_elements.filter(".components_map_color");
+      if (element.length) {
+        const input = element.find(".components-map-color");
+        const value = input.val();
+        if (value == "")
+          issue_control.addError(`[${level}:minecraft:map_color] 色が入力されていません。`, input);
+        else if (!/^#[0-9a-fA-F]{3,6}/.test(value))
+          issue_control.addError(
+            `[${level}:minecraft:map_color] 正しい16進数カラーコードではありません。`,
+            input
+          );
+      }
+      element = value_elements.filter(".components_crafting_table");
+      if (element.length) {
+        const tag = element.find(".components-crafting-table-crafting-tags");
+        const tag_len = tag.length;
+        for (let index = 0; index < tag_len; index++) {
+          if (tag.eq(index).val() == "")
+            issue_control.addWarning(
+              `[${level}:minecraft:crafting_table:crafting_tags:${index}] クラフティングタグが空です。`,
+              tag.eq(index)
+            );
+        }
+      }
+      element = value_elements.filter(".components_geometry");
+      if (element.length && element.find(".components-geometry-switch").val() == "val_geometry") {
+        if (element.find(".components-geometry").val() == "")
+          issue_control.addWarning(
+            `[${level}:minecraft:geometry] ジオメトリが空です。`,
+            element.find(".components-geometry")
+          );
+      }
+      element = value_elements.filter(".components_material_instances");
+      if (element.length) {
+        const face = element.find(".components-material-instances-face");
+        const face_len = face.length;
+        const instances_switch = element.find(".components-material-instances-switch");
+        for (let index = 0; index < face_len; index++) {
+          if (instances_switch.eq(index).val() == "val_definition") {
+            let data = element.find(".components-material-instances-texture").eq(index);
+            if (data.val() == "")
+              issue_control.addError(
+                `[${level}:minecraft:material_instances:${face
+                  .eq(index)
+                  .val()}:texture] テクスチャが空です。`,
+                data
+              );
+          }
+        }
+      }
+      element = value_elements.filter(".components_rotation");
+      if (element.length) {
+        ["x", "y", "z"].forEach((val) => {
+          let data = element.find(`.components-rotation-${val}`);
+          if (parseInt(data.val()) % 90 != 0)
+            issue_control.addWarning(
+              `[${level}:minecraft:rotation:${val}] 角度は90の倍数のみ有効です。その他の値は丸められます。`,
+              data
+            );
+        });
+      }
+      element = value_elements.filter(".components_event_on_fall_on");
+      if (element.length) {
+        let data = element.find(".components-event-on-fall-on-event");
+        if (data.val() == "")
+          issue_control.addError(
+            `[${level}:minecraft:on_fall_on:event] 呼び出すイベントが指定されていません。`,
+            data
+          );
+      }
+      element = value_elements.filter(".components_event_on_interact");
+      if (element.length) {
+        let data = element.find(".components-event-on-interact-event");
+        if (data.val() == "")
+          issue_control.addError(
+            `[${level}:minecraft:on_interact:event] 呼び出すイベントが指定されていません。`,
+            data
+          );
+      }
+      element = value_elements.filter(".components_event_on_placed");
+      if (element.length) {
+        let data = element.find(".components-event-on-placed-event");
+        if (data.val() == "")
+          issue_control.addError(
+            `[${level}:minecraft:on_placed:event] 呼び出すイベントが指定されていません。`,
+            data
+          );
+      }
+      element = value_elements.filter(".components_event_on_player_placing");
+      if (element.length) {
+        let data = element.find(".components-event-on-player-placing-event");
+        if (data.val() == "")
+          issue_control.addError(
+            `[${level}:minecraft:on_player_placing:event] 呼び出すイベントが指定されていません。`,
+            data
+          );
+      }
+      element = value_elements.filter(".components_event_on_step_on");
+      if (element.length) {
+        let data = element.find(".components-event-on-step-on-event");
+        if (data.val() == "")
+          issue_control.addError(
+            `[${level}:minecraft:on_step_on:event] 呼び出すイベントが指定されていません。`,
+            data
+          );
+      }
+      element = value_elements.filter(".components_event_on_step_off");
+      if (element.length) {
+        let data = element.find(".components-event-on-step-off-event");
+        if (data.val() == "")
+          issue_control.addError(
+            `[${level}:minecraft:on_step_off:event] 呼び出すイベントが指定されていません。`,
+            data
+          );
+      }
+      element = value_elements.filter(".components_event_on_player_destroyed");
+      if (element.length) {
+        let data = element.find(".components-event-on-player-destroyed-event");
+        if (data.val() == "")
+          issue_control.addError(
+            `[${level}:minecraft:on_player_destroyed:event] 呼び出すイベントが指定されていません。`,
+            data
+          );
+      }
+      element = value_elements.filter(".components_event_ticking");
+      if (element.length) {
+        let data = element.find(".components-event-ticking-event");
+        if (data.val() == "")
+          issue_control.addError(
+            `[${level}:minecraft:ticking:on_tick:event] 呼び出すイベントが指定されていません。`,
+            data
+          );
+      }
+      element = value_elements.filter(".components_event_random_ticking");
+      if (element.length) {
+        let data = element.find(".components-event-random-ticking-event");
+        if (data.val() == "")
+          issue_control.addError(
+            `[${level}:minecraft:random_ticking:on_tick:event] 呼び出すイベントが指定されていません。`,
+            data
+          );
+      }
+      break;
+    case "1.16.0":
+    case "1.12.0":
+    default:
+      element = value_elements.filter(".components_map_color");
+      if (element.length) {
+        const input = element.find(".components-map-color");
+        const value = input.val();
+        if (value == "")
+          issue_control.addError(`[${level}:minecraft:map_color] 色が入力されていません。`, input);
+        else if (!/^#[0-9a-fA-F]{3,6}/.test(value))
+          issue_control.addError(
+            `[${level}:minecraft:map_color] 正しい16進数カラーコードではありません。`,
+            input
+          );
+      }
+      break;
+  }
+}
+
+function checkEventResponses(issue_control, level, value_elements) {}
 
 /** json 出力
  * @return {string}
@@ -1698,7 +2001,7 @@ function getErrorText(json = "", message = "") {
         : json.substring(0, parseInt(splitText[positionIndex + 1], 10)).match(/\n/g).length + 1;
     const prevLineIndex = getBeginningOfLineIndex(line - 1);
     const LineLastIndex = getBeginningOfLineIndex(line + 1) - 1;
-    messageText += `\n${line - 1}~${line}行で問題が発生しました。\n${json.substring(
+    messageText += `\n${line - 1}~${line}行目で問題が発生しました。\n${json.substring(
       prevLineIndex,
       LineLastIndex
     )}`;
@@ -1710,7 +2013,7 @@ function getErrorText(json = "", message = "") {
 function setJSONData(json_text = "") {
   let json_data;
   try {
-    json_data = JSON.parse(json_text);
+    json_data = JSON.parse(json_text.replace(/\/\/.*|\/\*[^]*\*\//gi, ""));
   } catch (e) {
     window.alert(getErrorText(json_text, e.message));
     console.error("error:" + e);
