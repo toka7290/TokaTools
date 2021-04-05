@@ -461,6 +461,7 @@ div.editor.drag-lock {
   position: relative;
   display: block;
   background: var(--color-textAlt);
+  box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
 }
 .editor-switcher.unsupported + #editor-main {
   grid-column: 2;
@@ -474,10 +475,14 @@ div.editor.drag-lock {
 .switch-element-body.open {
   grid-template-columns: 0.5rem 2.5rem auto;
 }
+.switch-element-body:hover {
+  cursor: pointer;
+}
 .switcher-select-mark {
   width: 0.3rem;
   align-self: center;
   height: 2rem;
+  transition: 1s cubic-bezier(0.02, 0.92, 0.12, 1.01);
 }
 .switcher-icon {
   width: 2rem;
@@ -491,6 +496,9 @@ div.editor.drag-lock {
 }
 .switch-element-body.open > .switcher-editor-name {
   display: block;
+}
+.switch-element-body:hover > .switcher-select-mark {
+  height: 3rem;
 }
 .switch-element > input[type="radio"]:checked + .switch-element-body > .switcher-select-mark {
   background-color: var(--color-input-focus);
@@ -568,6 +576,7 @@ input.remove-array-element:not(:disabled):focus + .remove-array-label {
   top: 0;
   padding: 1rem 0;
   background-color: var(--color-textAlt);
+  box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
 }
 .status-block-header {
   display: grid;
@@ -594,6 +603,7 @@ input.remove-array-element:not(:disabled):focus + .remove-array-label {
 .status-block-body {
   overflow: auto;
   position: relative;
+  min-height: 0.5rem;
 }
 
 .block-tabPanel {
@@ -607,6 +617,7 @@ input.remove-array-element:not(:disabled):focus + .remove-array-label {
 .block-tab-controls {
   padding: 1rem 0;
   background-color: var(--color-textAlt);
+  box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
 }
 .block-tab-header {
   display: grid;
@@ -643,6 +654,7 @@ input.remove-array-element:not(:disabled):focus + .remove-array-label {
 }
 .block-tab-contents {
   overflow-y: auto;
+  min-height: 0.5rem;
 }
 .block-tab-container {
   /* 選択以外非表示 */
