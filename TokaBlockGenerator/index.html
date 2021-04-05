@@ -1291,26 +1291,57 @@
                           </select>
                         </label>
                       </div>
-                      <div class="value-element" title="-----------------">
+                      <div class="value-element switchable-content" title="-----------------">
                         <div class="value-label">
-                          <p>テクスチャ</p>
+                          <p>指定方法</p>
                         </div>
                         <label class="value-input">
-                          <input type="text" name="components-material-instances-texture" class="components-material-instances-texture">
-                        </label>
-                      </div>
-                      <div class="value-element" title="-----------------">
-                        <div class="value-label">
-                          <p>マテリアル</p>
-                        </div>
-                        <label class="value-input">
-                          <select name="components-material-instances-material" class="components-material-instances-material">
-                            <option value="opaque">不透明</option>
-                            <option value="alpha_test">透過</option>
-                            <option value="blend">半透過</option>
-                            <option value="double_sided">double_sided</option>
+                          <select name="components-material-instances-switch" class="components-material-instances-switch">
+                            <option value="val_definition">定義</option>
+                            <option value="val_refer">面参照</option>
                           </select>
                         </label>
+                      </div>
+                      <div class="switchable-element val_definition">
+                        <div class="value-element" title="-----------------">
+                          <div class="value-label">
+                            <p>テクスチャ</p>
+                          </div>
+                          <label class="value-input">
+                            <input type="text" name="components-material-instances-texture" class="components-material-instances-texture">
+                          </label>
+                        </div>
+                        <div class="value-element" title="-----------------">
+                          <div class="value-label">
+                            <p>マテリアル</p>
+                          </div>
+                          <label class="value-input">
+                            <select name="components-material-instances-material" class="components-material-instances-material">
+                              <option value="opaque">不透明</option>
+                              <option value="alpha_test">透過</option>
+                              <option value="blend">半透過</option>
+                              <option value="double_sided">double_sided</option>
+                            </select>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="switchable-element val_refer hide">
+                        <div class="value-element" title="-----------------">
+                          <div class="value-label">
+                            <p>参照面</p>
+                          </div>
+                          <label class="value-input">
+                            <select name="components-material-instances-refer-face" class="components-material-instances-refer-face">
+                              <option value="*">全面</option>
+                              <option value="up">上</option>
+                              <option value="down">下</option>
+                              <option value="north">北</option>
+                              <option value="south">南</option>
+                              <option value="east">東</option>
+                              <option value="west">西</option>
+                            </select>
+                          </label>
+                        </div>
                       </div>
                     </div>
                     <div class="modal-footer">

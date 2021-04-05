@@ -328,7 +328,13 @@ function changeElement(control_switch) {
 }
 /** value-input switchable */
 $(document).on("click", ".switchable-content select", (/** @type {jQuery.Event} */ event) => {
-  const select_elem = $(event.target);
+  changeSwitchable($(event.target));
+});
+/**
+ *
+ * @param {JQuery} select_elem
+ */
+function changeSwitchable(select_elem) {
   const switchable_element = select_elem
     .closest(".switchable-content")
     .nextAll(`.switchable-element`);
@@ -340,7 +346,7 @@ $(document).on("click", ".switchable-content select", (/** @type {jQuery.Event} 
         !switchable_element.eq(index).hasClass(/** @type {string}*/ (select_elem.val()))
       );
   }
-});
+}
 /** tab変更 */
 $(document).on("click", ".tab-children>input[type=radio]", (/** @type {jQuery.Event} */ event) => {
   const target = $(event.target);
@@ -646,6 +652,9 @@ $(document).on("change", ".components-block-light-emission", (
 /* ------------------------- json 処理 ------------------------- */
 /** フォーマットバージョン変更 */
 $("#format-version").on("change", function () {
+  onChangedFormatVersion();
+});
+function onChangedFormatVersion() {
   format_version = $("#format-version").val();
   if (!Object.keys(format_json).length) setFormatJson();
   for (const format_key in format_json) {
@@ -654,7 +663,7 @@ $("#format-version").on("change", function () {
       !format_json[format_key].includes(format_version)
     );
   }
-});
+}
 $(window).on("load", () => {
   setFormatJson();
 });
@@ -969,9 +978,11 @@ function getComponents(
   /**@type {JSONReplace} */ Replacer
 ) {
   let components = new Object();
+  /** @type {jQuery} */
+  let element;
   switch (version) {
     case "1.16.100":
-      let element = value_elements.filter(".components_loot");
+      element = value_elements.filter(".components_loot");
       if (element.length) {
         components["minecraft:loot"] = element.find(".components-loot").val();
       }
@@ -1068,22 +1079,32 @@ function getComponents(
       element = value_elements.filter(".components_material_instances");
       if (element.length) {
         let data = new Object();
-
         const face = element.find(".components-material-instances-face");
         const face_len = face.length;
+        const instances_switch = element.find(".components-material-instances-switch");
         for (let index = 0; index < face_len; index++) {
-          let instance = new Object();
-          instance["texture"] = element
-            .find(".components-material-instances-texture")
-            .eq(index)
-            .val();
-          instance["render_method"] = element
-            .find(".components-material-instances-material")
-            .eq(index)
-            .val();
-          data[face.eq(index).val()] = instance;
+          switch (instances_switch.eq(index).val()) {
+            case "val_refer":
+              data[face.eq(index).val()] = element
+                .find(".components-material-instances-refer-face")
+                .eq(index)
+                .val();
+              break;
+            case "val_definition":
+            default:
+              let instance = new Object();
+              instance["texture"] = element
+                .find(".components-material-instances-texture")
+                .eq(index)
+                .val();
+              instance["render_method"] = element
+                .find(".components-material-instances-material")
+                .eq(index)
+                .val();
+              data[face.eq(index).val()] = instance;
+              break;
+          }
         }
-
         components["minecraft:material_instances"] = data;
       }
       element = value_elements.filter(".components_entity_collision");
@@ -1721,6 +1742,7 @@ function setJSONData(json_text = "") {
     }
   }
   $("#format-version").val(format_version);
+  onChangedFormatVersion();
 
   const description = json_data["minecraft:block"]["description"];
   if (description["identifier"] != null) {
@@ -1729,10 +1751,10 @@ function setJSONData(json_text = "") {
   if (description["is_experimental"] != null) {
     $("#description-is-experimental").prop("checked", description["is_experimental"]);
   }
-  if (description["register_to_creative-menu"] != null) {
+  if (description["register_to_creative_menu"] != null) {
     $("#description-register-to-creative-menu").prop(
       "checked",
-      description["register_to_creative-menu"]
+      description["register_to_creative_menu"]
     );
   }
   // blockState
@@ -1743,9 +1765,10 @@ function setJSONData(json_text = "") {
       const block_content = $(".blockState.status-block-content").eq(index);
       block_content.find(".blockState-name").val(keys[index]);
       const states = description["properties"][keys[index]];
+      const type_switch = block_content.find(".blockState-type");
       switch (typeof states[0]) {
         case "number":
-          block_content.find(".blockState-type").val("val_Integer");
+          type_switch.val("val_Integer");
           for (let states_index = 0; states_index < states.length; states_index++) {
             if (states_index != 0)
               addArrayElement(block_content.find(".switchable-element.val_Integer .value-input"));
@@ -1753,7 +1776,7 @@ function setJSONData(json_text = "") {
           }
           break;
         case "string":
-          block_content.find(".blockState-type").val("val_String");
+          type_switch.val("val_String");
           for (let states_index = 0; states_index < states.length; states_index++) {
             if (states_index != 0)
               addArrayElement(block_content.find(".switchable-element.val_String .value-input"));
@@ -1762,10 +1785,11 @@ function setJSONData(json_text = "") {
           break;
         case "boolean":
         default:
-          block_content.find(".blockState-type").val("val_Boolean");
+          type_switch.val("val_Boolean");
           block_content.find(".blockState-boolean").prop("checked", states[0]);
           break;
       }
+      changeSwitchable(type_switch);
     }
   }
 
@@ -1818,10 +1842,14 @@ function setComponents(element_scope, version, import_data = new Object()) {
     .closestOpposite(".editor-element-footer.element-control .modal-body")
     .children();
   const value_elements = element_scope.closestOpposite(".editor-element-body");
+  /**
+   * @type {boolean}
+   */
+  let is_exist;
 
   switch (version) {
     case "1.16.100":
-      let is_exist = import_data["minecraft:loot"] != null;
+      is_exist = import_data["minecraft:loot"] != null;
       changeElement(
         /** @type {jQuery} */ (element_control
           .filter(".components_loot")
@@ -1896,7 +1924,6 @@ function setComponents(element_scope, version, import_data = new Object()) {
               if (block_index != 0)
                 addArrayElement(inner_element.find(".value-input.type-array-string"));
               let filter = data[block_index];
-              console.log(filter);
               if (typeof filter == "object") {
                 filter = JSON.stringify(filter);
               }
@@ -1990,13 +2017,15 @@ function setComponents(element_scope, version, import_data = new Object()) {
       );
       if (is_exist) {
         const inner_element = value_elements.children(".components_geometry");
+        const geometry_switch = inner_element.find(".components-geometry-switch");
         if (import_data["minecraft:geometry"] != null) {
           // geometryある
-          inner_element.find(".components-geometry-switch").val("val_geometry");
+          geometry_switch.val("val_geometry");
           inner_element.find(".components-geometry").val(import_data["minecraft:geometry"]);
         } else {
-          inner_element.find(".components-geometry-switch").val("val_cube");
+          geometry_switch.val("val_cube");
         }
+        changeSwitchable(geometry_switch);
       }
       is_exist = import_data["minecraft:material_instances"] != null;
       changeElement(
@@ -2011,21 +2040,32 @@ function setComponents(element_scope, version, import_data = new Object()) {
         for (let index = 0; index < key.length; index++) {
           if (index != 0) addArrayElement(inner_element.closestOpposite(".value-input"));
           const key_name = key[index];
+          const data = import_data["minecraft:material_instances"][key_name];
           inner_element.find(".components-material-instances-face").eq(index).val(key_name);
-          let json_content = import_data["minecraft:material_instances"][key_name]["texture"];
-          if (json_content != null) {
-            inner_element
-              .find(".components-material-instances-texture")
-              .eq(index)
-              .val(json_content);
+          const instances_switch = inner_element
+            .find(".components-material-instances-switch")
+            .eq(index);
+          if (typeof data == "object") {
+            instances_switch.val("val_definition");
+            let json_content = data["texture"];
+            if (json_content != null) {
+              inner_element
+                .find(".components-material-instances-texture")
+                .eq(index)
+                .val(json_content);
+            }
+            json_content = data["render_method"];
+            if (json_content != null) {
+              inner_element
+                .find(".components-material-instances-material")
+                .eq(index)
+                .val(json_content);
+            }
+          } else if (typeof data == "string") {
+            instances_switch.val("val_refer");
+            inner_element.find(".components-material-instances-refer-face").eq(index).val(data);
           }
-          json_content = import_data["minecraft:material_instances"][key_name]["render_method"];
-          if (json_content != null) {
-            inner_element
-              .find(".components-material-instances-material")
-              .eq(index)
-              .val(json_content);
-          }
+          changeSwitchable(instances_switch);
         }
       }
       is_exist = import_data["minecraft:entity_collision"] != null;
@@ -2038,11 +2078,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       if (is_exist) {
         const json_inner = import_data["minecraft:entity_collision"];
         const element_inner = value_elements.children(".components_entity_collision");
+        const collision_switch = element_inner.find(".components-entity-collision-switch");
         if (typeof json_inner == "boolean") {
-          element_inner.find(".components-entity-collision-switch").val("val_simple");
+          collision_switch.val("val_simple");
           element_inner.find(".components-entity-collision-simple").prop("checked", json_inner);
         } else {
-          element_inner.find(".components-entity-collision-switch").val("val_details");
+          collision_switch.val("val_details");
           let json_content = json_inner["origin"];
           if (json_content != null) {
             element_inner.find(".components-entity-collision-origin-x").val(json_content[0]);
@@ -2056,6 +2097,7 @@ function setComponents(element_scope, version, import_data = new Object()) {
             element_inner.find(".components-entity-collision-size-z").val(json_content[2]);
           }
         }
+        changeSwitchable(collision_switch);
       }
       is_exist = import_data["minecraft:pick_collision"] != null;
       changeElement(
@@ -2067,11 +2109,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       if (is_exist) {
         const json_inner = import_data["minecraft:pick_collision"];
         const element_inner = value_elements.children(".components_pick_collision");
+        const collision_switch = element_inner.find(".components-pick-collision-switch");
         if (typeof json_inner == "boolean") {
-          element_inner.find(".components-pick-collision-switch").val("val_simple");
+          collision_switch.val("val_simple");
           element_inner.find(".components-pick-collision-simple").prop("checked", json_inner);
         } else {
-          element_inner.find(".components-pick-collision-switch").val("val_details");
+          collision_switch.val("val_details");
           let json_content = json_inner["origin"];
           if (json_content != null) {
             element_inner.find(".components-pick-collision-origin-x").val(json_content[0]);
@@ -2085,6 +2128,7 @@ function setComponents(element_scope, version, import_data = new Object()) {
             element_inner.find(".components-pick-collision-size-z").val(json_content[2]);
           }
         }
+        changeSwitchable(collision_switch);
       }
       is_exist = import_data["minecraft:rotation"] != null;
       changeElement(
@@ -2728,11 +2772,7 @@ function setEventResponses(element_scope, json_data) {
       value_elements
         .children(".event_responses_set_block")
         .find(".event-responses-set-block")
-        .val(
-          typeof block_type == "object"
-            ? JSON.stringify(block_type).replace(/^\{|\}$/g, "")
-            : block_type
-        );
+        .val(typeof block_type == "object" ? JSON.stringify(block_type) : block_type);
     }
   }
   is_exist = json_data["set_block_at_pos"] != null;
@@ -2749,11 +2789,7 @@ function setEventResponses(element_scope, json_data) {
     if (block_type != null) {
       inner_element
         .find(".event-responses-set-block-at-pos-id")
-        .val(
-          typeof block_type == "object"
-            ? JSON.stringify(block_type).replace(/^\{|\}$/g, "")
-            : block_type
-        );
+        .val(typeof block_type == "object" ? JSON.stringify(block_type) : block_type);
     }
     if (inner_json["block_offset"] != null) {
       inner_element
