@@ -19,6 +19,7 @@ class JSONReplace {
   register(data) {
     let key = null;
     if (Array.isArray(data)) {
+      // 配列
       if (
         (Math.max.apply(
           null,
@@ -26,14 +27,21 @@ class JSONReplace {
         ) >= 5 &&
           data.length >= 6) ||
         data.join(",").length >= 80 ||
+        data.some((val) => typeof val == "object") ||
         data.length == 0
       ) {
+        // 5文字以上、6要素以上。80文字以上。オブジェクトアリ。空
         key = data;
       } else {
         key = getUuid_v4();
         this.replace_point[`"${key}"`] = data;
       }
+    } else if (typeof data == "string") {
+      // 文字列
+      key = getUuid_v4();
+      this.replace_point[`"${key}"`] = data.replace(/\\[^n\\]|\\$/g, "");
     } else {
+      // それ以外
       key = data;
     }
     return key;
@@ -42,15 +50,20 @@ class JSONReplace {
     const keys = Object.keys(this.replace_point);
     for (let index = 0; index < keys.length; index++) {
       const key = keys[index];
+      const data = this.replace_point[key];
       string_json = string_json.replace(
         key,
-        JSON.stringify(this.replace_point[key])
-          .split(/^\[/)
-          .join("[ ")
-          .split(/,/)
-          .join(", ")
-          .split(/\]$/)
-          .join(" ]")
+        (() => {
+          if (Array.isArray(data))
+            return JSON.stringify(data)
+              .split(/^\[/)
+              .join("[ ")
+              .split(/,/)
+              .join(", ")
+              .split(/\]$/)
+              .join(" ]");
+          else if (typeof data == "string") return `"${data}"`;
+        })()
       );
     }
     return string_json;
@@ -475,10 +488,7 @@ $(document).on("click", ".modal-open", (/** @type {jQuery.Event} */ event) => {
 /** モーダル閉じる */
 $(document).on("click", ".modal", (/** @type {jQuery.Event} */ event) => {
   const click_element = $(event.target);
-  // console.log(click_element.children(".modal-dialog").length,
-  // !click_element.closest(".modal").find(".modal").hasClass("hide"));
   if (click_element.children(".modal-dialog").length) {
-    // console.log(click_element.closest(".type-modal").children(".modal"))
     click_element.closest(".type-modal").children(".modal").addClass("hide");
   }
   event.stopPropagation();
@@ -967,7 +977,9 @@ function getComponents(
       }
       element = value_elements.filter(".components_display_name");
       if (element.length) {
-        components["minecraft:display_name"] = element.find(".components-display-name").val();
+        components["minecraft:display_name"] = Replacer.register(
+          element.find(".components-display-name").val()
+        );
       }
       element = value_elements.filter(".components_tag");
       if (element.length) {
@@ -996,7 +1008,12 @@ function getComponents(
           const block = container.eq(index).find(".components-placement-filter-block-filter");
           let block_filter = new Array();
           for (let index_block = 0; index_block < block.length; index_block++) {
-            block_filter.push(block.eq(index_block).val());
+            let value = block.eq(index_block).val();
+            try {
+              block_filter.push(JSON.parse(value));
+            } catch {
+              block_filter.push(value);
+            }
           }
           condition["block_filter"] = Replacer.register(block_filter);
           condition_list.push(condition);
@@ -1030,9 +1047,9 @@ function getComponents(
           crafting_tags.push(tag.eq(index).val());
         }
         crafting_table["crafting_tags"] = Replacer.register(crafting_tags);
-        crafting_table["custom_description"] = element
-          .find(".components-crafting-table-custom-description")
-          .val();
+        crafting_table["custom_description"] = Replacer.register(
+          element.find(".components-crafting-table-custom-description").val()
+        );
         components["minecraft:crafting_table"] = crafting_table;
       }
       element = value_elements.filter(".components_geometry");
@@ -1213,8 +1230,9 @@ function getComponents(
       if (element.length) {
         let content = new Object();
         content["event"] = element.find(".components-event-on-placed-event").val();
-        content["condition"] = element.find(".components-event-on-placed-condition").val();
-        let val = element.find(".components-event-on-placed-target").val();
+        let val = element.find(".components-event-on-placed-condition").val();
+        if (val != "") content["condition"] = val;
+        val = element.find(".components-event-on-placed-target").val();
         if (val != "default") content["target"] = val;
         components["minecraft:on_placed"] = content;
       }
@@ -1591,9 +1609,10 @@ function getEventResponses(
     const container_len = container.length;
     let content = new Array();
     for (let index = 0; index < container_len; index++) {
-      content.push(
-        getEventResponses(container.eq(index).children(".editor-element-body").children())
+      const child = getEventResponses(
+        container.eq(index).children(".editor-element-body").children()
       );
+      if (Object.keys(child).length != 0) content.push(child);
     }
     event_responses["sequence"] = content;
   }
@@ -1604,8 +1623,10 @@ function getEventResponses(
     let content = new Array();
     for (let index = 0; index < container_len; index++) {
       let data = getEventResponses(container.eq(index).children(".editor-element-body").children());
-      data["weight"] = Number(element.find(".event-responses-randomize-weight").eq(index).val());
-      content.push(data);
+      if (Object.keys(data).length != 0) {
+        data["weight"] = Number(element.find(".event-responses-randomize-weight").eq(index).val());
+        content.push(data);
+      }
     }
     event_responses["randomize"] = content;
   }
@@ -1857,27 +1878,32 @@ function setComponents(element_scope, version, import_data = new Object()) {
         const inner_json = import_data["minecraft:placement_filter"]["conditions"];
         const inner_element = value_elements.children(".components_placement_filter");
         for (let index = 0; index < inner_json.length; index++) {
-          const condition = inner_json[index];
-          if (condition["allowed_faces"] != null) {
-            for (
-              let condition_index = 0;
-              condition_index < condition["allowed_faces"].length;
-              condition_index++
-            ) {
-              if (condition_index != 0) addTabElement(inner_element.find(".tabpanel"));
-              const inner_condition = condition[condition_index];
-              if (inner_condition["allowed_faces"] != null) {
-                inner_element
-                  .find(".components-placement-filter-allowed-faces")
-                  .eq(condition_index)
-                  .val(inner_condition["allowed_faces"]);
+          if (index != 0) addTabElement(inner_element.find(".tabpanel"));
+          let data = inner_json[index]["allowed_faces"];
+          if (data != null) {
+            for (let faces_index = 0; faces_index < data.length; faces_index++) {
+              if (faces_index != 0)
+                addArrayElement(inner_element.find(".value-input.type-array-select"));
+              inner_element
+                .find(".components-placement-filter-allowed-faces")
+                .eq(faces_index)
+                .val(data[faces_index]);
+            }
+          }
+          data = inner_json[index]["block_filter"];
+          if (data != null) {
+            for (let block_index = 0; block_index < data.length; block_index++) {
+              if (block_index != 0)
+                addArrayElement(inner_element.find(".value-input.type-array-string"));
+              let filter = data[block_index];
+              console.log(filter);
+              if (typeof filter == "object") {
+                filter = JSON.stringify(filter);
               }
-              if (inner_condition["block_filter"] != null) {
-                inner_element
-                  .find(".components-placement-filter-block-filter")
-                  .eq(condition_index)
-                  .val(inner_condition["block_filter"]);
-              }
+              inner_element
+                .find(".components-placement-filter-block-filter")
+                .eq(block_index)
+                .val(filter);
             }
           }
         }
