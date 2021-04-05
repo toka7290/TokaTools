@@ -1452,7 +1452,7 @@ function getEventResponses(
     let content = new Object();
     const block_type = element.find(".event-responses-set-block").val();
     try {
-      if (block_type != "") content["block_type"] = JSON.parse(`{${block_type}}`);
+      if (block_type != "") content["block_type"] = JSON.parse(block_type);
       else content["block_type"] = "";
     } catch (error) {
       content["block_type"] = block_type;
@@ -1464,7 +1464,7 @@ function getEventResponses(
     let content = new Object();
     const block_type = element.find(".event-responses-set-block-at-pos-id").val();
     try {
-      if (block_type != "") content["block_type"] = JSON.parse(`{${block_type}}`);
+      if (block_type != "") content["block_type"] = JSON.parse(block_type);
       else content["block_type"] = "";
     } catch (error) {
       content["block_type"] = block_type;
