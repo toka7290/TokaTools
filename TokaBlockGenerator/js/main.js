@@ -601,16 +601,16 @@ $(document).on("click", "input.blockState-delete", (/** @type {jQuery.Event} */ 
 
 /* ------------------------- page 入出力 ------------------------- */
 /** シェア */
-$("#page-share").on("click", function () {
-  const data = {
-    title: "とかさんの Block Generator",
-    text: "とかさんの Block Generator -block jsonを簡単に作成・編集-",
-    url: "https://toka7290.github.io/TokaBlockGenerator/",
-  };
-  if (navigator.share) {
-    navigator.share(data);
-  }
-});
+if (navigator.share) {
+  $("#page-share").addClass("supported");
+  $("#page-share").on("click", async () => {
+    await navigator.share({
+      title: "とかさんの Block Generator",
+      text: "とかさんの Block Generator -block jsonを簡単に作成・編集-",
+      url: "https://toka7290.github.io/TokaBlockGenerator/",
+    });
+  });
+}
 /** 外部インポート */
 $("#input-file").on("change", function () {
   importJsonFile();
@@ -863,33 +863,23 @@ function checkIssue() {
     default:
       break;
   }
-  // "permutations"
+  // permutations
   switch (format_version) {
     case "1.16.100":
       const conditions = $(".permutations_condition");
       const conditions_len = conditions.length;
-      if (
-        (() => {
-          // 名前アリ 1つ以上
-          for (let index = 0; index < conditions_len; index++) {
-            if ("" != conditions.eq(index).val()) return true;
-          }
-          return false;
-        })()
-      ) {
-        let permutations = new Array();
-        const container = $(".permutations.block-tab-container");
-        for (let index = 0; index < conditions_len; index++) {
-          const body = /** @type {jQuery} */ (container.eq(index).find(".editor-element-body"));
-          const condition = /** @type {string} */ (conditions.eq(index).val());
-          if (condition != "") {
-            let data = new Object();
-            data["condition"] = condition;
-            data["components"] = getComponents(body.children(), format_version, DataReplacer);
-            permutations.push(data);
-          }
+      const container = $(".permutations.block-tab-container");
+      for (let index = 0; index < conditions_len; index++) {
+        const body = /** @type {jQuery} */ (container.eq(index).find(".editor-element-body"));
+        const condition = /** @type {string} */ (conditions.eq(index).val());
+        if (condition == "") {
+          issue_control.addError(
+            `[Permutations:${index}:condition] 式が入力されていません。`,
+            conditions.eq(index)
+          );
+        } else {
+          checkComponents(issue_control, `Permutations:${index}:Components`, body.children());
         }
-        json_raw["minecraft:block"]["permutations"] = permutations;
       }
       break;
     case "1.16.0":
@@ -1099,7 +1089,140 @@ function checkComponents(issue_control, level, value_elements) {
   }
 }
 
-function checkEventResponses(issue_control, level, value_elements) {}
+/**
+ *
+ * @param {Issue} issue_control
+ * @param {string} level
+ * @param {JQuery} value_elements
+ */
+function checkEventResponses(issue_control, level, value_elements) {
+  let element = value_elements.filter(".event_responses_set_block_property");
+  if (element.length) {
+    const element_states = element.find(".event-responses-set-block-state");
+    const element_value = element.find(".event-responses-set-block-value");
+    for (let index = 0; index < element_states.length; index++) {
+      const state = element_states.eq(index);
+      if (state.val() == "")
+        issue_control.addError(
+          `[${level}:set_block_property:${index}] プロパティ名が入力されていません。`,
+          state
+        );
+      const data = element_value.eq(index);
+      if (data.val() == "")
+        issue_control.addError(
+          `[${level}:set_block_property:${state.val()}] 値が入力されていません。`,
+          data
+        );
+    }
+  }
+  element = value_elements.filter(".event_responses_set_block");
+  if (element.length) {
+    const block_type = element.find(".event-responses-set-block");
+    if (block_type.val() == "") {
+      issue_control.addError(
+        `[${level}:set_block:block_type] ブロックが指定されていません。`,
+        block_type
+      );
+    }
+  }
+  element = value_elements.filter(".event_responses_set_block_at_pos");
+  if (element.length) {
+    const block_type = element.find(".event-responses-set-block-at-pos-id");
+    if (block_type.val() == "") {
+      issue_control.addError(
+        `[${level}:set_block_at_pos:block_type] ブロックが指定されていません。`,
+        block_type
+      );
+    }
+  }
+  element = value_elements.filter(".event_responses_add_mob_effect");
+  if (element.length) {
+    const data = element.find(".event-responses-add-mob-effect-id");
+    if (data.val() == "")
+      issue_control.addError(
+        `[${level}:add_mob_effect:effect] エフェクト名が指定されていません。`,
+        data
+      );
+  }
+  element = value_elements.filter(".event_responses_remove_mob_effect");
+  if (element.length) {
+    const data = element.find(".event-responses-remove-mob-effect-id");
+    if (data.val() == "")
+      issue_control.addError(
+        `[${level}:remove_mob_effect:effect] エフェクト名が指定されていません。`,
+        data
+      );
+  }
+  element = value_elements.filter(".event_responses_play_effect");
+  if (element.length) {
+    const data = element.find(".event-responses-play-effect-id");
+    if (data.val() == "")
+      issue_control.addError(
+        `[${level}:play_effect:effect] パーティクル名が指定されていません。`,
+        data
+      );
+  }
+  element = value_elements.filter(".event_responses_play_sound");
+  if (element.length) {
+    const data = element.find(".event-responses-play-sound-id");
+    if (data.val() == "")
+      issue_control.addError(`[${level}:play_sound:sound] サウンド名が指定されていません。`, data);
+  }
+  element = value_elements.filter(".event_responses_transform_item");
+  if (element.length) {
+    const data = element.find(".event-responses-transform-item-id");
+    if (data.val() == "")
+      issue_control.addError(
+        `[${level}:transform_item:transform] アイテム名が指定されていません。`,
+        data
+      );
+  }
+  element = value_elements.filter(".event_responses_trigger");
+  if (element.length) {
+    const data = element.find(".event-responses-trigger-event");
+    if (data.val() == "")
+      issue_control.addError(`[${level}:trigger:event] イベント名が指定されていません。`, data);
+    const reg = new RegExp(`^Event:${data.val()}`);
+    if (reg.test(level)) issue_control.addError(`[${level}:trigger:event] 循環参照です。`, data);
+  }
+  element = value_elements.filter(".event_responses_run_command");
+  if (element.length) {
+    const command = element.find(".event-responses-run-command");
+    const command_len = command.length;
+    for (let index = 0; index < command_len; index++) {
+      const data = command.eq(index);
+      if (data.val() == "")
+        issue_control.addError(
+          `[${level}:run_command:command] コマンドが入力されていません。`,
+          data
+        );
+    }
+  }
+  element = value_elements.filter(".event_responses_sequence");
+  if (element.length) {
+    const container = element.closestOpposite(".tab-contents").children(".tab-container");
+    const container_len = container.length;
+    for (let index = 0; index < container_len; index++) {
+      checkEventResponses(
+        issue_control,
+        `${level}:sequence:${index}`,
+        container.eq(index).children(".editor-element-body").children()
+      );
+    }
+  }
+  element = value_elements.filter(".event_responses_randomize");
+  if (element.length) {
+    const container = element.closestOpposite(".tab-contents").children(".tab-container");
+    const container_len = container.length;
+    for (let index = 0; index < container_len; index++) {
+      checkEventResponses(
+        issue_control,
+        `${level}:randomize:${index}`,
+        container.eq(index).children(".editor-element-body").children()
+      );
+    }
+  }
+}
 
 /** json 出力
  * @return {string}

@@ -287,8 +287,7 @@ div.help-content p {
   color: var(--color-help-content-text);
 }
 div.header-menu-alt img,
-div.about-external-link img,
-div#page-share img {
+div.about-external-link img {
   width: 2rem;
   height: 2rem;
   pointer-events: none;
@@ -405,10 +404,14 @@ div.copyright {
 div#page-share {
   display: none;
 }
+div#page-share.supported {
+  display: inline-block;
+}
 div.about-external-link {
   display: block;
 }
-div.about-external-link a {
+div.about-external-link a,
+div.about-external-link div {
   display: inline-block;
   line-height: 0;
   padding: 0.5rem;
@@ -418,7 +421,8 @@ div.about-external-link a {
 }
 div.about-external-link a:hover,
 div.about-external-link a:focus,
-div#page-share:hover {
+div.about-external-link div:hover,
+div.about-external-link div:focus {
   transition: 0.5s;
   background-color: var(--color-header-hover);
 }
@@ -1153,6 +1157,7 @@ div.preview-control-bar {
 input:focus + label.control-text {
   cursor: pointer;
   background-color: var(--color-toolbar-hover);
+  color: var(--color-text);
 }
 
 div.code-preview pre {
@@ -1194,6 +1199,7 @@ div.issue {
 input#issue-control:focus + label.issue-status-bar {
   cursor: pointer;
   background-color: var(--color-toolbar-hover);
+  color: var(--color-text);
 }
 .issue-status-label {
   display: flex;
