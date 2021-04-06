@@ -423,6 +423,7 @@ div.about-external-link a:hover,
 div.about-external-link a:focus,
 div.about-external-link div:hover,
 div.about-external-link div:focus {
+  cursor: pointer;
   transition: 0.5s;
   background-color: var(--color-header-hover);
 }
@@ -1206,7 +1207,8 @@ input#issue-control:focus + label.issue-status-bar {
 }
 div.issue-status-label svg {
   width: 1.5rem;
-  transition: 0.5s;
+  transition-property: transform;
+  transition-duration: 0.5s;
   vertical-align: middle;
 }
 div.issue-status-label svg.open {
@@ -1296,6 +1298,7 @@ ul.issue-list li p {
   margin: 0;
   padding: 2px;
 }
+
 .stat-warning,
 .stat-warning:focus {
   /* input issue */
