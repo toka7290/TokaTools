@@ -325,8 +325,8 @@ function addBlockTabElement(blockTabPanel) {
 /** block tab削除 */
 $(document).on("click", ".remove-block-tab-element", (/** @type {jQuery.Event} */ event) => {
   const target = $(event.target);
-  const tabpanel = target.closest(".block-tabPanel");
-  let child = tabpanel.find(".block-tab-body > .block-tab-children");
+  const tab_panel = target.closest(".block-tabPanel");
+  let child = tab_panel.find(".block-tab-body > .block-tab-children");
   let child_len = child.length;
   // 0以下終了
   if (child_len <= 0) return;
@@ -338,10 +338,10 @@ $(document).on("click", ".remove-block-tab-element", (/** @type {jQuery.Event} *
       break;
     }
   }
-  tabpanel.find(".block-tab-container").eq(checked_index).remove();
+  tab_panel.find(".block-tab-container").eq(checked_index).remove();
   child.eq(checked_index).remove();
-  tabpanel.find(".block-tab-container:first-child").addClass("selected");
-  child = tabpanel.find(".block-tab-body > .block-tab-children");
+  tab_panel.find(".block-tab-container:first-child").addClass("selected");
+  child = tab_panel.find(".block-tab-body > .block-tab-children");
   child_len = child.length;
   for (let index = 0; index < child_len; index++) {
     child
@@ -415,22 +415,22 @@ $(document).on("click", ".add-tab-element", (/** @type {jQuery.Event} */ event) 
 });
 /**
  * tab 追加
- * @param {jQuery} tabpanel
+ * @param {jQuery} tab_panel
  */
-function addTabElement(/** @type {jQuery} */ tabpanel) {
-  const body = tabpanel.children(".tab-navigation").children(".tab-body");
+function addTabElement(/** @type {jQuery} */ tab_panel) {
+  const body = tab_panel.children(".tab-navigation").children(".tab-body");
   const child = body.children(":first-child").clone();
   child.find("input[type=radio]").prop("checked", false);
   child.find(".tab-number").text(body.children().length);
   body.append(child);
-  const tab_contents = tabpanel.children(".tab-contents");
+  const tab_contents = tab_panel.children(".tab-contents");
   tab_contents.append(tab_contents.children("div:first-child").clone().removeClass("selected"));
 }
 /** tab削除 */
 $(document).on("click", ".remove-tab-element", (/** @type {jQuery.Event} */ event) => {
   const target = $(event.target);
-  const tabpanel = target.closest(".tabpanel");
-  let child = tabpanel.children(".tab-navigation").find(".tab-body > .tab-children");
+  const tab_panel = target.closest(".tabpanel");
+  let child = tab_panel.children(".tab-navigation").find(".tab-body > .tab-children");
   let child_len = child.length;
   // 1以下終了
   if (child_len <= 1) return;
@@ -453,7 +453,7 @@ $(document).on("click", ".remove-tab-element", (/** @type {jQuery.Event} */ even
     .children(".tab-contents")
     .children(".tab-container:first-child")
     .addClass("selected");
-  child = tabpanel.children(".tab-navigation").find(".tab-body > .tab-children");
+  child = tab_panel.children(".tab-navigation").find(".tab-body > .tab-children");
   child_len = child.length;
   for (let index = 0; index < child_len; index++) {
     child
