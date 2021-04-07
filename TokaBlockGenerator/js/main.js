@@ -719,7 +719,7 @@ $(window).on("load", () => {
 /** format.json を取得 */
 function setFormatJson() {
   let request = new XMLHttpRequest();
-  request.open("GET", "../json/format.json");
+  request.open("GET", "json/format.json");
   request.responseType = "json";
   request.send();
   request.onload = function () {
