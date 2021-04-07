@@ -6,11 +6,12 @@
   --color_background_2: #e2e8f0;
   --color_background_2_alt: #e2e8f0;
   --color_accent: #fa8b00;
+  --color_accent_secondary: #ffc67f;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --color_text: #ffffff;
-    --color_text-2: #808080;
+    --color_tag: #cecece;
     --color_background: #000000;
     --color_background_2: #2f3235;
     --color_background_2_alt: #e2e8f0;
@@ -82,6 +83,11 @@ header > * {
   max-width: 50vw;
   width: 20rem;
   height: auto;
+  pointer-events: none;
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }
 .content > div {
   margin-top: 10rem;
@@ -98,12 +104,81 @@ div.content {
   overflow: initial;
   grid-column: 2;
 }
-.searcher {
-  margin: 1rem auto;
-  max-width: 760px;
+.tag-filter {
+  padding: 1rem 0.5rem;
 }
-.tagfilter {
-  padding: 0;
+.filter_element {
+  display: inline-block;
+  margin: 0.5rem;
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+input.invisible-Control {
+  /* 不可視ボタン */
+  width: 0;
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  opacity: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
+  pointer-events: none;
+}
+.checkbox-body {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+}
+.checkbox-body-text {
+  margin: 0 0 0 0.5rem;
+  min-width: 8rem;
+}
+input:disabled + .checkbox-body:hover {
+  cursor: auto;
+}
+.checkbox-body-box {
+  /* はこ */
+  display: grid;
+  border: 3px solid var(--color_accent_secondary);
+  background-color: var(--color_background);
+  border-radius: 6px;
+  width: 1.5rem;
+  height: 1.5rem;
+  place-items: center;
+}
+input:not(:disabled):focus + .checkbox-body .checkbox-body-box,
+input:not(:checked) + .checkbox-body:hover .checkbox-body-box {
+  /* フォーカス時に枠色変更 */
+  border-color: var(--color_accent_secondary);
+}
+input:not(:disabled):checked + .checkbox-body > .checkbox-body-box {
+  /* チェック時の色 */
+  background-color: var(--color_accent);
+}
+.checkbox-body-checkMark {
+  /* チェックマーク */
+  display: block;
+  color: var(--color_background);
+  text-align: center;
+}
+input:not(:disabled):not(:checked):focus + .checkbox-body .checkbox-body-checkMark,
+input:not(:disabled):not(:checked) + .checkbox-body:hover .checkbox-body-checkMark {
+  /* フォーカス、ホバー時に色変更 */
+  color: var(--color_text-2);
+}
+.tag {
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }
 .tag span {
   display: inline-block;
@@ -145,6 +220,11 @@ div.content {
 }
 .tool-description-img {
   height: 2.5rem;
+  pointer-events: none;
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }
 .tool-description-header {
   margin: 0.5rem 0;
@@ -185,6 +265,11 @@ footer {
 }
 .footer_title img {
   width: 4rem;
+  pointer-events: none;
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }
 .footer_title h2 {
   font-size: large;
@@ -215,15 +300,10 @@ footer {
   transition-duration: 0.5s;
   transition-property: opacity;
 }
-@media (prefers-color-scheme: dark) {
-  .footer_menu ul.footer_menu_info a {
-    background-color: var(--color_background_2_alt);
-    border-radius: 0.5rem;
-  }
-}
 .footer_menu ul.footer_menu_info a:hover {
   opacity: 0.5;
 }
-.footer_menu ul.footer_menu_info img {
+.footer_menu ul.footer_menu_info svg {
   width: 2rem;
+  color: var(--color_text);
 }

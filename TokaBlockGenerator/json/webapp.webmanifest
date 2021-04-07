@@ -1,11 +1,11 @@
 {
-  "name": "とかさんのBlockGenerator",
+  "name": "とかさんの Block Generator",
   "short_name": "BlockGenerator",
   "description": "Minecraft Bedrock Edition 向けのアドオン作成補助ツールです。block jsonを簡単に作ることができます。",
   "display": "standalone",
   "icons": [
     {
-      "src": "https://toka7290.github.io/TokaTools/TokaBlockGenerator/img/icon_256.png",
+      "src": "/img/icon_256.png",
       "sizes": "256x256",
       "purpose": "any maskable"
     },
@@ -18,7 +18,38 @@
       "sizes": "2000x2000"
     }
   ],
-  "start_url": "/TokaTools/TokaBlockGenerator/index.html",
+  "scope": "/",
+  "start_url": "./../",
   "theme_color": "#60ad5e",
-  "background_color": "#e8f5e9"
+  "background_color": "#e8f5e9",
+  "orientation": "any",
+  "categories": ["tools", "minecraft", "addon", "block"],
+  "iarc_rating_id": "8a50fa4e-e4ef-4cff-8c7c-ae5dc1bf900b",
+  "screenshots": [
+    {
+      "src": "/img/screen/BlockGenerator_desktop.webp",
+      "sizes": "1280x720",
+      "type": "image/webp"
+    },
+    {
+      "src": "/img/screen/BlockGenerator_phone.webp",
+      "sizes": "1280x720",
+      "type": "image/webp"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "新しく作る",
+      "short_name": "新規作成",
+      "description": "新しく画面をひらきます",
+      "url": "/",
+      "icons": [{ "src": "/img/icon_256.png", "sizes": "256x256" }]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "/json/webapp.webmanifest"
+    }
+  ]
 }
