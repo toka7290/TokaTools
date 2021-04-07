@@ -18,7 +18,7 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@toka7290">
     <!-- css -->
-    <!-- <link rel="preload" href="./css/style.min.css" as="style"> -->
+    <link rel="preload" href="./css/style.min.css" as="style">
     <link rel="stylesheet" href="css/color.min.css" media="all" async>
     <link rel="stylesheet" href="css/style.min.css" media="all" async>
     <link rel="stylesheet" href="css/prism.min.css" media="all" async defer>
@@ -50,9 +50,6 @@
         "operatingSystem": "Any. It is a Web Application"
       }
     </script>
-    <!-- lib -->
-    <script src="lib/jquery-3.6.0.min.js"></script>
-    <script src="lib/prism.js"></script>
   </head>
 
   <body>
@@ -846,6 +843,7 @@
               <code class="language-json"></code>
             </pre>
             <label>
+              <svg aria-label="buffer" class="accessibility-label"></svg>
               <textarea name="code-buffer" id="code-buffer" tabindex="-1"></textarea>
             </label>
           </div>
@@ -881,11 +879,10 @@
       <p><a href="microsoft-edge:https://toka7290.github.io/TokaTools/TokaBlockGenerator/" target="_blank" rel="noopener noreferrer">Edge</a>,Chrome,Firefox,Safariをご利用ください</p>
     </div>
     <!-- sw -->
-    <!-- 
-      <script>
+    <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener("load", function () {
-          navigator.serviceWorker.register('/TokaTools/TokaBlockGenerator/serviceworker.js', { scope: '/TokaTools/TokaBlockGenerator/' })
+          navigator.serviceWorker.register('serviceworker.js')
             .then(function (registration) {
               // registration worked
               registration.onupdatefound = function () {
@@ -893,7 +890,7 @@
               }
             }).catch(function (error) {
               // registration failed
-              console.error("serviceWorker failed");
+              console.error("serviceWorker failed:" + error);
             });
         });
       }
@@ -902,14 +899,12 @@
         e.preventDefault();
         deferredPrompt = e;
       });
-    </script> -->
+    </script>
     <!-- lib -->
-    <!-- 
-      <script src="lib/jquery-3.6.0.min.js" defer></script>
+    <script src="lib/jquery-3.6.0.min.js" defer></script>
     <script src="lib/prism.js" defer></script>
-   -->
     <!-- js -->
-    <script src="js/main.js" defer></script>
+    <script src="js/main.min.js" defer></script>
     <!-- template -->
     <template id="value-elements-component">
       <div class="value-element components_loot" title="このブロックが破壊された時に落とすアイテムが記述されたルートテーブルを指定します。">

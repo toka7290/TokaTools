@@ -19,7 +19,7 @@
     }
   ],
   "scope": "/",
-  "start_url": "/TokaTools/TokaBlockGenerator/index.html",
+  "start_url": "./../",
   "theme_color": "#60ad5e",
   "background_color": "#e8f5e9",
   "orientation": "any",
