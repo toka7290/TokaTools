@@ -75,22 +75,24 @@ self.addEventListener("fetch", (event) => {
       // 必要なので、リクエストは clone しないといけない
       let fetchRequest = event.request.clone();
 
-      return fetch(fetchRequest).then((response) => {
-        if (!response || response.status !== 200 || response.type !== "basic") {
+      return fetch(fetchRequest).then((requestResponse) => {
+        if (
+          !requestResponse ||
+          requestResponse.status !== 200 ||
+          requestResponse.type !== "basic"
+        ) {
           // キャッシュする必要のないタイプのレスポンスならそのまま返す
-          return response;
+        } else {
+          // 重要：レスポンスを clone する。レスポンスは Stream で
+          // ブラウザ用とキャッシュ用の2回必要。なので clone して
+          // 2つの Stream があるようにする
+          let responseToCache = requestResponse.clone();
+
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
         }
-
-        // 重要：レスポンスを clone する。レスポンスは Stream で
-        // ブラウザ用とキャッシュ用の2回必要。なので clone して
-        // 2つの Stream があるようにする
-        let responseToCache = response.clone();
-
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseToCache);
-        });
-
-        return response;
+        return requestResponse;
       });
     })
   );
