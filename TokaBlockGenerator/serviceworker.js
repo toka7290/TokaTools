@@ -7,6 +7,8 @@ var urlsToCache = [
   "css/phone.min.css",
   "css/color.min.css",
   "css/prism.min.css",
+  "img/screen/BlockGenerator_desktop.webp",
+  "img/screen/BlockGenerator_phone.webp",
   "img/close.svg",
   "img/error.svg",
   "img/github.svg",
