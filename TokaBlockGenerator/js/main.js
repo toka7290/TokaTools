@@ -136,7 +136,6 @@ function getUuid_v4() {
   return chars.join("");
 }
 
-onChangedJSON();
 /** ページ離脱時に警告表示 */
 $(window).bind("beforeunload", function () {
   if (isChanged) {
@@ -733,7 +732,7 @@ function onChangedJSON() {
   onChangedFlammable();
 
   if (is_can_issue) checkIssue();
-  setDelayIssue();
+  setDelayIssue(checkIssue);
   const json_code = getJSONData();
   $("pre.language-json code.language-json").remove();
   $("pre.language-json").append($("<code>").addClass("language-json").text(json_code));
@@ -742,14 +741,14 @@ function onChangedJSON() {
 }
 /** 高頻度更新防止
  * */
-function setDelayIssue() {
+function setDelayIssue(/**@type {function} */ func) {
   is_can_issue = false;
   if (typeof timeoutID === "number") {
     window.clearTimeout(timeoutID);
   }
   timeoutID = window.setTimeout(function () {
     is_can_issue = true;
-    checkIssue();
+    func();
   }, 500);
 }
 /** 燃焼コンポーネント変更 */
@@ -801,7 +800,7 @@ function checkIssue() {
         const key = /** @type {string} */ (body.find(".blockState-name").val());
         if (key == "") {
           issue_control.addWarning(
-            `[Description:properties:${index}] プロパティ名が設定されていません。`,
+            `[BlockState:${index}] プロパティ名が設定されていません。`,
             body.find(".blockState-name")
           );
         } else {
@@ -817,7 +816,7 @@ function checkIssue() {
                 for (let num = 0; num < array_data_len; num++) {
                   if (array_data.eq(num).val() == "") {
                     issue_control.addWarning(
-                      `[Description:properties:${key}:${num}] 空のプロパティがあります。`,
+                      `[BlockState:${key}:${num}] 空のプロパティがあります。`,
                       array_data.eq(num)
                     );
                   }
@@ -921,7 +920,7 @@ function checkComponents(issue_control, level, value_elements) {
             block.eq(index_block).val();
             if (block.eq(index_block).val() == "")
               issue_control.addError(
-                `[${level}:minecraft:placement_filter:${index}:${index_block}] ブロックが指定されていません。`,
+                `[${level}:minecraft:placement_filter:tab${index}:block_filter:${index_block}] ブロックが指定されていません。`,
                 block.eq(index_block)
               );
           }
@@ -1180,10 +1179,11 @@ function checkEventResponses(issue_control, level, value_elements) {
   element = value_elements.filter(".event_responses_trigger");
   if (element.length) {
     const data = element.find(".event-responses-trigger-event");
+    const reg = new RegExp(`^Event:${data.val()}`);
     if (data.val() == "")
       issue_control.addError(`[${level}:trigger:event] イベント名が指定されていません。`, data);
-    const reg = new RegExp(`^Event:${data.val()}`);
-    if (reg.test(level)) issue_control.addError(`[${level}:trigger:event] 循環参照です。`, data);
+    else if (reg.test(level))
+      issue_control.addError(`[${level}:trigger:event] 循環参照です。`, data);
   }
   element = value_elements.filter(".event_responses_run_command");
   if (element.length) {
