@@ -5,7 +5,7 @@
   "display": "standalone",
   "icons": [
     {
-      "src": "/img/icon_256.png",
+      "src": "https://toka7290.github.io/TokaTools/TokaBlockGenerator/img/icon_256.png",
       "sizes": "256x256",
       "purpose": "any maskable"
     },
@@ -27,12 +27,12 @@
   "iarc_rating_id": "8a50fa4e-e4ef-4cff-8c7c-ae5dc1bf900b",
   "screenshots": [
     {
-      "src": "/img/screen/BlockGenerator_desktop.webp",
+      "src": "https://toka7290.github.io/TokaTools/TokaBlockGenerator/img/screen/BlockGenerator_desktop.webp",
       "sizes": "1280x720",
       "type": "image/webp"
     },
     {
-      "src": "/img/screen/BlockGenerator_phone.webp",
+      "src": "https://toka7290.github.io/TokaTools/TokaBlockGenerator/img/screen/BlockGenerator_phone.webp",
       "sizes": "1280x720",
       "type": "image/webp"
     }
@@ -43,7 +43,12 @@
       "short_name": "新規作成",
       "description": "新しく画面をひらきます",
       "url": "/",
-      "icons": [{ "src": "/img/icon_256.png", "sizes": "256x256" }]
+      "icons": [
+        {
+          "src": "https://toka7290.github.io/TokaTools/TokaBlockGenerator/img/icon_256.png",
+          "sizes": "256x256"
+        }
+      ]
     }
   ],
   "related_applications": [

@@ -23,6 +23,7 @@ var urlsToCache = [
   "img/twitter.svg",
   "img/warning.svg",
   "js/main.min.js",
+  "json/format.json",
   "json/webapp.webmanifest",
   "lib/prism.js",
   "lib/jquery-3.6.0.min.js",
