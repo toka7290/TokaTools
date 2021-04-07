@@ -1,4 +1,4 @@
-const CACHE_VERSION = "20210407";
+const CACHE_VERSION = "2021040719";
 const CACHE_NAME = `${registration.scope}!${CACHE_VERSION}`;
 
 var urlsToCache = [
@@ -15,6 +15,7 @@ var urlsToCache = [
   "img/help.svg",
   "img/homepage.svg",
   "img/icon.webp",
+  "img/icon.svg",
   "img/icon_256.png",
   "img/icon_512.png",
   "img/icon_2000.png",
