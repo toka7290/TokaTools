@@ -42,7 +42,7 @@
       "name": "新しく作る",
       "short_name": "新規作成",
       "description": "新しく画面をひらきます",
-      "url": "/",
+      "url": "https://toka7290.github.io/TokaTools/TokaBlockGenerator/",
       "icons": [
         {
           "src": "https://toka7290.github.io/TokaTools/TokaBlockGenerator/img/icon_256.png",
