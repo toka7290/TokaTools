@@ -20,9 +20,9 @@
   ],
   "scope": "/TokaTools/TokaBlockGenerator/",
   "start_url": "./../",
-  "theme_color": "#60ad5e",
-  "background_color": "#e8f5e9",
-  "orientation": "any",
+  "theme_color": "#3870A9",
+  "background_color": "#E7F2F9",
+  "orientation": "natural",
   "categories": ["tools", "minecraft", "addon", "block"],
   "iarc_rating_id": "8a50fa4e-e4ef-4cff-8c7c-ae5dc1bf900b",
   "screenshots": [
