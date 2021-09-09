@@ -6,5 +6,6 @@
         "onlypistonpush",
         "preventsjumping",
         "unwalkable"
-    ]
+    ],
+    "svg.preview.background": "transparent"
 }

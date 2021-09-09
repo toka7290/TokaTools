@@ -233,6 +233,10 @@ input:not(:disabled):not(:checked) + .checkbox-body:hover .checkbox-body-checkMa
   color: var(--color_text);
   margin: 0;
 }
+.tool-description-header .title .sub_title {
+  display: block;
+  font-size: medium;
+}
 .tool-description-header .tag {
   margin: 0;
   font-size: 0.8rem;

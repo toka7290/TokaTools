@@ -233,11 +233,7 @@ function switchHelp() {
 $("div#show-preview").on("click", function () {
   const showPreview = $("div#show-preview");
   $("div.preview").slideToggle();
-  if (showPreview.hasClass("active")) {
-    showPreview.removeClass("active");
-  } else {
-    showPreview.addClass("active");
-  }
+  showPreview.toggleClass("active", !showPreview.hasClass("active"));
 });
 /** about開く */
 $("#open-about").on("click", function () {
@@ -275,14 +271,20 @@ $('input[name="editor-switch"]').on("click", function () {
   $("#editor-blockState").toggleClass("hide", hide[3]);
 });
 /** block tab変更 */
-$(document).on("click", ".block-tab-children>input[type=radio]", (
-  /** @type {jQuery.Event} */ event
-) => {
-  const target = $(event.target);
-  const tabNumber = Number(target.next(".tab-number").text());
-  target.closest(".block-tabPanel").find(".block-tab-container").removeClass("selected");
-  target.closest(".block-tabPanel").find(".block-tab-container").eq(tabNumber).addClass("selected");
-});
+$(document).on(
+  "click",
+  ".block-tab-children>input[type=radio]",
+  (/** @type {jQuery.Event} */ event) => {
+    const target = $(event.target);
+    const tabNumber = Number(target.next(".tab-number").text());
+    target.closest(".block-tabPanel").find(".block-tab-container").removeClass("selected");
+    target
+      .closest(".block-tabPanel")
+      .find(".block-tab-container")
+      .eq(tabNumber)
+      .addClass("selected");
+  }
+);
 /** block tab追加 */
 $(document).on("click", ".add-block-tab-element", (/** @type {jQuery.Event} */ event) => {
   addBlockTabElement($(event.target).closest(".block-tabPanel"));
@@ -474,9 +476,9 @@ $(document).on("click", "input.add-array-element", (/** @type {jQuery.Event} */ 
  */
 function addArrayElement(/** @type {jQuery} */ value_input) {
   const array_list = value_input.find(".array-list");
-  const class_name = /** @type {string} */ (array_list
-    .find(".array-data:last-child>input")
-    .attr("name"));
+  const class_name = /** @type {string} */ (
+    array_list.find(".array-data:last-child>input").attr("name")
+  );
   if (value_input.hasClass("type-array-modal")) {
     array_list.append(
       $("<div>")
@@ -634,13 +636,14 @@ $(document).on("dragenter dragover", function (/** @type {jQuery.Event} */ event
   event.preventDefault();
   $(".file-drop-zone").removeClass("hide");
 });
-$(".file-drop-zone,.file-drop-zone-textarea").on("dragleave", function (
-  /** @type {Event} */ event
-) {
-  event.stopPropagation();
-  event.preventDefault();
-  $(".file-drop-zone").addClass("hide");
-});
+$(".file-drop-zone,.file-drop-zone-textarea").on(
+  "dragleave",
+  function (/** @type {Event} */ event) {
+    event.stopPropagation();
+    event.preventDefault();
+    $(".file-drop-zone").addClass("hide");
+  }
+);
 $(document).on("drop", function (/** @type {jQuery.Event} */ _event) {
   isChanged = true;
   $(".file-drop-zone").addClass("hide");
@@ -689,14 +692,16 @@ $(document).on("change", ".components-map-color-pick", (/** @type {jQuery.Event}
   onChangedJSON();
 });
 /** 発光量変更 */
-$(document).on("change", ".components-block-light-emission", (
-  /** @type {jQuery.Event} */ event
-) => {
-  const target = $(event.target);
-  target
-    .next(".components-block-light-emission-eq")
-    .text(`= ${`  ${Math.round(parseFloat(target.val()) * 15)}`.slice(-2)}`);
-});
+$(document).on(
+  "change",
+  ".components-block-light-emission",
+  (/** @type {jQuery.Event} */ event) => {
+    const target = $(event.target);
+    target
+      .next(".components-block-light-emission-eq")
+      .text(`= ${`  ${Math.round(parseFloat(target.val()) * 15)}`.slice(-2)}`);
+  }
+);
 
 /* ------------------------- json 処理 ------------------------- */
 /** フォーマットバージョン変更 */
@@ -1888,9 +1893,9 @@ function getEventResponses(
     const element_states = element.find(".event-responses-set-block-state");
     const element_value = element.find(".event-responses-set-block-value");
     for (let index = 0; index < element_states.length; index++) {
-      states[
-        /** @type {string} */ (element_states.eq(index).val())
-      ] = /** @type {string} */ (element_value.eq(index).val());
+      states[/** @type {string} */ (element_states.eq(index).val())] = /** @type {string} */ (
+        element_value.eq(index).val()
+      );
     }
     event_responses["set_block_property"] = states;
   }
@@ -2277,10 +2282,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
     case "1.16.100":
       is_exist = import_data["minecraft:loot"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_loot")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_loot")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -2290,10 +2297,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:display_name"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_display_name")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_display_name")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -2301,18 +2310,22 @@ function setComponents(element_scope, version, import_data = new Object()) {
           .find(".components-display-name")
           .val(import_data["minecraft:display_name"]);
       }
-      const tags = /** @type {Array<string>} */ ((() => {
-        return import_data != undefined
-          ? Object.keys(import_data).filter((val) => {
-              return val.match(/^tag:/g) != null;
-            })
-          : [];
-      })());
+      const tags = /** @type {Array<string>} */ (
+        (() => {
+          return import_data != undefined
+            ? Object.keys(import_data).filter((val) => {
+                return val.match(/^tag:/g) != null;
+              })
+            : [];
+        })()
+      );
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_tag")
-          .find(".element-control-switch")
-          .prop("checked", tags.length))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_tag")
+            .find(".element-control-switch")
+            .prop("checked", tags.length)
+        )
       );
       if (tags.length) {
         const inner_element = value_elements.children(".components_tag");
@@ -2323,10 +2336,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:placement_filter"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_placement_filter")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_placement_filter")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         const inner_json = import_data["minecraft:placement_filter"]["conditions"];
@@ -2363,10 +2378,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:preventsjumping"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_preventsjumping")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_preventsjumping")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -2376,10 +2393,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:unwalkable"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_unwalkable")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_unwalkable")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -2389,10 +2408,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:map_color"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_map_color")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_map_color")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -2402,10 +2423,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:crafting_table"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_crafting_table")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_crafting_table")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         const inner_element = value_elements.children(".components_crafting_table");
@@ -2436,10 +2459,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       is_exist =
         import_data["minecraft:geometry"] != null || import_data["minecraft:unit_cube"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_geometry")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_geometry")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         const inner_element = value_elements.children(".components_geometry");
@@ -2455,10 +2480,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:material_instances"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_material_instances")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_material_instances")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         const inner_element = value_elements.children(".components_material_instances");
@@ -2496,10 +2523,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:entity_collision"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_entity_collision")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_entity_collision")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         const json_inner = import_data["minecraft:entity_collision"];
@@ -2527,10 +2556,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:pick_collision"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_pick_collision")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_pick_collision")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         const json_inner = import_data["minecraft:pick_collision"];
@@ -2558,10 +2589,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:rotation"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_rotation")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_rotation")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -2579,10 +2612,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:breathability"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_breathability")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_breathability")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -2592,10 +2627,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:block_light_absorption"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_block_light_absorption")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_block_light_absorption")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -2605,10 +2642,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:block_light_emission"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_block_light_emission")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_block_light_emission")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -2618,10 +2657,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:destroy_time"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_destroy_time")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_destroy_time")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -2631,10 +2672,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:explosion_resistance"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_explosion_resistance")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_explosion_resistance")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -2644,10 +2687,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:breakonpush"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_breakonpush")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_breakonpush")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -2657,10 +2702,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:immovable"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_immovable")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_immovable")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -2670,10 +2717,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:onlypistonpush"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_onlypistonpush")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_onlypistonpush")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -2683,10 +2732,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:friction"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_friction")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_friction")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -2696,10 +2747,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:flammable"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_flammable")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_flammable")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         const inner_json = import_data["minecraft:flammable"];
@@ -2713,10 +2766,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:on_fall_on"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_event_on_fall_on")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_event_on_fall_on")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         const inner_json = import_data["minecraft:on_fall_on"];
@@ -2733,10 +2788,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:on_interact"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_event_on_interact")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_event_on_interact")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         const inner_json = import_data["minecraft:on_interact"];
@@ -2755,10 +2812,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:on_placed"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_event_on_placed")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_event_on_placed")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         const inner_json = import_data["minecraft:on_placed"];
@@ -2775,10 +2834,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:on_player_placing"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_event_on_player_placing")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_event_on_player_placing")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         const inner_json = import_data["minecraft:on_player_placing"];
@@ -2799,10 +2860,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:on_step_on"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_event_on_step_on")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_event_on_step_on")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         const inner_json = import_data["minecraft:on_step_on"];
@@ -2819,10 +2882,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:on_step_off"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_event_on_step_off")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_event_on_step_off")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         const inner_json = import_data["minecraft:on_step_off"];
@@ -2841,10 +2906,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:on_player_destroyed"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_event_on_player_destroyed")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_event_on_player_destroyed")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         const inner_json = import_data["minecraft:on_player_destroyed"];
@@ -2867,10 +2934,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:ticking"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_event_ticking")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_event_ticking")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         const inner_json = import_data["minecraft:ticking"];
@@ -2902,10 +2971,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:random_ticking"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_event_random_ticking")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_event_random_ticking")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         const inner_json = import_data["minecraft:random_ticking"];
@@ -2932,10 +3003,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
     case "1.16.0":
       is_exist = import_data["minecraft:loot"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_loot")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_loot")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -2945,10 +3018,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:map_color"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_map_color")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_map_color")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -2958,10 +3033,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:block_light_absorption"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_block_light_absorption")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_block_light_absorption")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -2971,10 +3048,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:block_light_emission"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_block_light_emission")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_block_light_emission")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -2984,10 +3063,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:destroy_time"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_destroy_time")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_destroy_time")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -2997,10 +3078,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:explosion_resistance"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_explosion_resistance")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_explosion_resistance")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -3010,10 +3093,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:friction"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_friction")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_friction")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -3023,10 +3108,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:flammable"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_flammable")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_flammable")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         const inner_json = import_data["minecraft:flammable"];
@@ -3042,10 +3129,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
     case "1.12.0":
       is_exist = import_data["minecraft:loot"]["table"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_loot")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_loot")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -3055,10 +3144,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:map_color"]["color"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_map_color")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_map_color")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -3068,10 +3159,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:block_light_absorption"]["value"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_block_light_absorption")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_block_light_absorption")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -3081,10 +3174,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:block_light_emission"]["emission"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_block_light_emission")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_block_light_emission")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -3094,10 +3189,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:destroy_time"]["value"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_destroy_time")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_destroy_time")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -3107,10 +3204,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:explosion_resistance"]["value"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_explosion_resistance")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_explosion_resistance")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -3120,10 +3219,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:friction"]["value"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_friction")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_friction")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         value_elements
@@ -3133,10 +3234,12 @@ function setComponents(element_scope, version, import_data = new Object()) {
       }
       is_exist = import_data["minecraft:flammable"] != null;
       changeElement(
-        /** @type {jQuery} */ (element_control
-          .filter(".components_flammable")
-          .find(".element-control-switch")
-          .prop("checked", is_exist))
+        /** @type {jQuery} */ (
+          element_control
+            .filter(".components_flammable")
+            .find(".element-control-switch")
+            .prop("checked", is_exist)
+        )
       );
       if (is_exist) {
         const inner_json = import_data["minecraft:flammable"];
@@ -3166,10 +3269,12 @@ function setEventResponses(element_scope, json_data) {
 
   let is_exist = json_data["set_block_property"] != null;
   changeElement(
-    /** @type {jQuery} */ (element_control
-      .filter(".event_responses_set_block_property")
-      .find(".element-control-switch")
-      .prop("checked", is_exist))
+    /** @type {jQuery} */ (
+      element_control
+        .filter(".event_responses_set_block_property")
+        .find(".element-control-switch")
+        .prop("checked", is_exist)
+    )
   );
   if (is_exist) {
     const inner_element = value_elements.children(".event_responses_set_block_property");
@@ -3187,10 +3292,12 @@ function setEventResponses(element_scope, json_data) {
   }
   is_exist = json_data["set_block"] != null;
   changeElement(
-    /** @type {jQuery} */ (element_control
-      .filter(".event_responses_set_block")
-      .find(".element-control-switch")
-      .prop("checked", is_exist))
+    /** @type {jQuery} */ (
+      element_control
+        .filter(".event_responses_set_block")
+        .find(".element-control-switch")
+        .prop("checked", is_exist)
+    )
   );
   if (is_exist) {
     const block_type = json_data["set_block"]["block_type"];
@@ -3203,10 +3310,12 @@ function setEventResponses(element_scope, json_data) {
   }
   is_exist = json_data["set_block_at_pos"] != null;
   changeElement(
-    /** @type {jQuery} */ (element_control
-      .filter(".event_responses_set_block_at_pos")
-      .find(".element-control-switch")
-      .prop("checked", is_exist))
+    /** @type {jQuery} */ (
+      element_control
+        .filter(".event_responses_set_block_at_pos")
+        .find(".element-control-switch")
+        .prop("checked", is_exist)
+    )
   );
   if (is_exist) {
     const inner_element = value_elements.children(".event_responses_set_block_at_pos");
@@ -3231,10 +3340,12 @@ function setEventResponses(element_scope, json_data) {
   }
   is_exist = json_data["spawn_loot"] != null;
   changeElement(
-    /** @type {jQuery} */ (element_control
-      .filter(".event_responses_spawn_loot")
-      .find(".element-control-switch")
-      .prop("checked", is_exist))
+    /** @type {jQuery} */ (
+      element_control
+        .filter(".event_responses_spawn_loot")
+        .find(".element-control-switch")
+        .prop("checked", is_exist)
+    )
   );
   if (is_exist) {
     if (json_data["spawn_loot"]["table"] != null)
@@ -3245,10 +3356,12 @@ function setEventResponses(element_scope, json_data) {
   }
   is_exist = json_data["add_mob_effect"] != null;
   changeElement(
-    /** @type {jQuery} */ (element_control
-      .filter(".event_responses_add_mob_effect")
-      .find(".element-control-switch")
-      .prop("checked", is_exist))
+    /** @type {jQuery} */ (
+      element_control
+        .filter(".event_responses_add_mob_effect")
+        .find(".element-control-switch")
+        .prop("checked", is_exist)
+    )
   );
   if (is_exist) {
     const inner_json = json_data["add_mob_effect"];
@@ -3264,10 +3377,12 @@ function setEventResponses(element_scope, json_data) {
   }
   is_exist = json_data["remove_mob_effect"] != null;
   changeElement(
-    /** @type {jQuery} */ (element_control
-      .filter(".event_responses_remove_mob_effect")
-      .find(".element-control-switch")
-      .prop("checked", is_exist))
+    /** @type {jQuery} */ (
+      element_control
+        .filter(".event_responses_remove_mob_effect")
+        .find(".element-control-switch")
+        .prop("checked", is_exist)
+    )
   );
   if (is_exist) {
     const inner_json = json_data["remove_mob_effect"];
@@ -3279,10 +3394,12 @@ function setEventResponses(element_scope, json_data) {
   }
   is_exist = json_data["damage"] != null;
   changeElement(
-    /** @type {jQuery} */ (element_control
-      .filter(".event_responses_damage")
-      .find(".element-control-switch")
-      .prop("checked", is_exist))
+    /** @type {jQuery} */ (
+      element_control
+        .filter(".event_responses_damage")
+        .find(".element-control-switch")
+        .prop("checked", is_exist)
+    )
   );
   if (is_exist) {
     const inner_json = json_data["damage"];
@@ -3296,10 +3413,12 @@ function setEventResponses(element_scope, json_data) {
   }
   is_exist = json_data["decrement_stack"] != null;
   changeElement(
-    /** @type {jQuery} */ (element_control
-      .filter(".event_responses_decrement_stack")
-      .find(".element-control-switch")
-      .prop("checked", is_exist))
+    /** @type {jQuery} */ (
+      element_control
+        .filter(".event_responses_decrement_stack")
+        .find(".element-control-switch")
+        .prop("checked", is_exist)
+    )
   );
   if (is_exist) {
     const inner_json = json_data["decrement_stack"];
@@ -3311,10 +3430,12 @@ function setEventResponses(element_scope, json_data) {
   }
   is_exist = json_data["die"] != null;
   changeElement(
-    /** @type {jQuery} */ (element_control
-      .filter(".event_responses_die")
-      .find(".element-control-switch")
-      .prop("checked", is_exist))
+    /** @type {jQuery} */ (
+      element_control
+        .filter(".event_responses_die")
+        .find(".element-control-switch")
+        .prop("checked", is_exist)
+    )
   );
   if (is_exist) {
     const inner_json = json_data["die"];
@@ -3326,10 +3447,12 @@ function setEventResponses(element_scope, json_data) {
   }
   is_exist = json_data["play_effect"] != null;
   changeElement(
-    /** @type {jQuery} */ (element_control
-      .filter(".event_responses_play_effect")
-      .find(".element-control-switch")
-      .prop("checked", is_exist))
+    /** @type {jQuery} */ (
+      element_control
+        .filter(".event_responses_play_effect")
+        .find(".element-control-switch")
+        .prop("checked", is_exist)
+    )
   );
   if (is_exist) {
     const inner_json = json_data["play_effect"];
@@ -3343,10 +3466,12 @@ function setEventResponses(element_scope, json_data) {
   }
   is_exist = json_data["play_sound"] != null;
   changeElement(
-    /** @type {jQuery} */ (element_control
-      .filter(".event_responses_play_sound")
-      .find(".element-control-switch")
-      .prop("checked", is_exist))
+    /** @type {jQuery} */ (
+      element_control
+        .filter(".event_responses_play_sound")
+        .find(".element-control-switch")
+        .prop("checked", is_exist)
+    )
   );
   if (is_exist) {
     const inner_json = json_data["play_sound"];
@@ -3358,10 +3483,12 @@ function setEventResponses(element_scope, json_data) {
   }
   is_exist = json_data["teleport"] != null;
   changeElement(
-    /** @type {jQuery} */ (element_control
-      .filter(".event_responses_teleport")
-      .find(".element-control-switch")
-      .prop("checked", is_exist))
+    /** @type {jQuery} */ (
+      element_control
+        .filter(".event_responses_teleport")
+        .find(".element-control-switch")
+        .prop("checked", is_exist)
+    )
   );
   if (is_exist) {
     const inner_json = json_data["teleport"];
@@ -3393,10 +3520,12 @@ function setEventResponses(element_scope, json_data) {
   }
   is_exist = json_data["transform_item"] != null;
   changeElement(
-    /** @type {jQuery} */ (element_control
-      .filter(".event_responses_transform_item")
-      .find(".element-control-switch")
-      .prop("checked", is_exist))
+    /** @type {jQuery} */ (
+      element_control
+        .filter(".event_responses_transform_item")
+        .find(".element-control-switch")
+        .prop("checked", is_exist)
+    )
   );
   if (is_exist) {
     const inner_json = json_data["transform_item"];
@@ -3408,10 +3537,12 @@ function setEventResponses(element_scope, json_data) {
   }
   is_exist = json_data["trigger"] != null;
   changeElement(
-    /** @type {jQuery} */ (element_control
-      .filter(".event_responses_trigger")
-      .find(".element-control-switch")
-      .prop("checked", is_exist))
+    /** @type {jQuery} */ (
+      element_control
+        .filter(".event_responses_trigger")
+        .find(".element-control-switch")
+        .prop("checked", is_exist)
+    )
   );
   if (is_exist) {
     const inner_json = json_data["trigger"];
@@ -3425,10 +3556,12 @@ function setEventResponses(element_scope, json_data) {
   }
   is_exist = json_data["run_command"] != null;
   changeElement(
-    /** @type {jQuery} */ (element_control
-      .filter(".event_responses_run_command")
-      .find(".element-control-switch")
-      .prop("checked", is_exist))
+    /** @type {jQuery} */ (
+      element_control
+        .filter(".event_responses_run_command")
+        .find(".element-control-switch")
+        .prop("checked", is_exist)
+    )
   );
   if (is_exist) {
     const inner_json = json_data["run_command"];
@@ -3444,17 +3577,21 @@ function setEventResponses(element_scope, json_data) {
       inner_element.find(".event-responses-run-command-target").val(inner_json["target"]);
   }
   changeElement(
-    /** @type {jQuery} */ (element_control
-      .filter(".event_responses_swing")
-      .find(".element-control-switch")
-      .prop("checked", json_data["swing"] != null))
+    /** @type {jQuery} */ (
+      element_control
+        .filter(".event_responses_swing")
+        .find(".element-control-switch")
+        .prop("checked", json_data["swing"] != null)
+    )
   );
   is_exist = json_data["sequence"] != null;
   changeElement(
-    /** @type {jQuery} */ (element_control
-      .filter(".event_responses_sequence")
-      .find(".element-control-switch")
-      .prop("checked", is_exist))
+    /** @type {jQuery} */ (
+      element_control
+        .filter(".event_responses_sequence")
+        .find(".element-control-switch")
+        .prop("checked", is_exist)
+    )
   );
   if (is_exist) {
     const inner_json = json_data["sequence"];
@@ -3467,10 +3604,12 @@ function setEventResponses(element_scope, json_data) {
   }
   is_exist = json_data["randomize"] != null;
   changeElement(
-    /** @type {jQuery} */ (element_control
-      .filter(".event_responses_randomize")
-      .find(".element-control-switch")
-      .prop("checked", is_exist))
+    /** @type {jQuery} */ (
+      element_control
+        .filter(".event_responses_randomize")
+        .find(".element-control-switch")
+        .prop("checked", is_exist)
+    )
   );
   if (is_exist) {
     const inner_json = json_data["randomize"];
